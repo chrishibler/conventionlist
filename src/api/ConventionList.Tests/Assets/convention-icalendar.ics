@@ -1,0 +1,1286 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+X-WR-CALNAME: Upcoming Events
+PRODID:GIGPRESS 2.0 WORDPRESS PLUGIN
+CALSCALE:GREGORIAN
+X-WR-TIMEZONE:Etc/GMT
+METHOD:PUBLISH
+BEGIN:VTIMEZONE
+TZID:GMT
+BEGIN:STANDARD
+DTSTART:20071028T010000
+TZOFFSETTO:+0000
+TZOFFSETFROM:+0000
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+SUMMARY:Anime Convention at Anime Milwaukee
+DESCRIPTION:Location: Wisconsin. 
+LOCATION:Anime Milwaukee\, Milwaukee\, WI\, US
+UID:20230203-25057-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230203
+DTEND;VALUE=DATE;TZID=GMT:20230206
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Anime Convention at My Hero Convention: TX Smash
+DESCRIPTION:Location: Texas. 
+LOCATION:My Hero Convention: TX Smash\, Irving\, TX\, US
+UID:20230203-25058-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230203
+DTEND;VALUE=DATE;TZID=GMT:20230206
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Collectibles Convention at North Dallas Toy Show
+DESCRIPTION:Location: Texas. 
+LOCATION:North Dallas Toy Show\, Dallas\, TX\, US
+UID:20230204-25059-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230204
+DTEND;VALUE=DATE;TZID=GMT:20230204
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Comic Book Convention at Old Time Comic Show
+DESCRIPTION:Location: Florida. 
+LOCATION:Old Time Comic Show\, Charlotte Harbor Event and Conference Center\, Punta Gorda\, US
+UID:20230204-25060-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230204
+DTEND;VALUE=DATE;TZID=GMT:20230204
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Comic Book Convention at Charlotte MiniCon
+DESCRIPTION:Location: North Carolina. 
+LOCATION:Charlotte MiniCon\, Grady Cole Center\, Charlotte\, US
+UID:20230204-25102-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230204
+DTEND;VALUE=DATE;TZID=GMT:20230204
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Comic Book Convention at California Comic Convention
+DESCRIPTION:Location: California. 
+LOCATION:California Comic Convention\, The Westin South Coast Plaza\, Costa Mesa\, Costa Mesa\, US
+UID:20230204-25024-brian@conventionscene.com
+URL:https://www.conventionscene.com/2022/12/29/california-comic-convention-2023-calcomiccon-february-2023/
+DTSTART;VALUE=DATE;TZID=GMT:20230204
+DTEND;VALUE=DATE;TZID=GMT:20230206
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Gaming Convention at Anime Gaming Expo
+DESCRIPTION:Location: California. 
+LOCATION:Anime Gaming Expo\, Fresno\, CA\, US
+UID:20230204-25061-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230204
+DTEND;VALUE=DATE;TZID=GMT:20230206
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Comic Book Convention at CalComicCon
+DESCRIPTION:Location: California. 
+LOCATION:CalComicCon\, Yorba Linda Community Center\, Yorba Linda\, US
+UID:20230204-25062-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230204
+DTEND;VALUE=DATE;TZID=GMT:20230206
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Anime Convention at Little Rock Anime Festival
+DESCRIPTION:Location: Arkansas. 
+LOCATION:Little Rock Anime Festival\, Little Rock\, AR\, US
+UID:20230204-25063-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230204
+DTEND;VALUE=DATE;TZID=GMT:20230206
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Gaming Convention at Tezal-Con
+DESCRIPTION:Location: Alabama. 
+LOCATION:Tezal-Con\, Daleville\, AL\, US
+UID:20230204-25064-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230204
+DTEND;VALUE=DATE;TZID=GMT:20230206
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Comic Book Convention at Shoff Promotions Comic Book and Non-Sports Card Show
+DESCRIPTION:Location: Virginia. 
+LOCATION:Shoff Promotions Comic Book and Non-Sports Card Show\, Annandale Fire Station\, Annandale\, US
+UID:20230205-25121-brian@conventionscene.com
+URL:https://www.conventionscene.com/2023/01/21/shoff-promotions-comic-book-show-february-2023/
+DTSTART;VALUE=DATE;TZID=GMT:20230205
+DTEND;VALUE=DATE;TZID=GMT:20230205
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Anime Convention at Kami-Con
+DESCRIPTION:Location: Alabama. 
+LOCATION:Kami-Con\, Birmingham\, AL\, US
+UID:20230210-25065-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230210
+DTEND;VALUE=DATE;TZID=GMT:20230213
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Gaming Convention at DualCon
+DESCRIPTION:Location: West Virginia. 
+LOCATION:DualCon\, Charleston Coliseum & Convention Center\, Charleston\, US
+UID:20230211-24928-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230211
+DTEND;VALUE=DATE;TZID=GMT:20230211
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Collectibles Convention at Jacksonville Record & CD Festival
+DESCRIPTION:Location: Florida. 
+LOCATION:Jacksonville Record & CD Festival\, Adam W. Herbert University Center\, Jacksonville\, US
+UID:20230211-25028-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230211
+DTEND;VALUE=DATE;TZID=GMT:20230211
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Anime Convention at MissouriCon
+DESCRIPTION:Location: Missouri. 
+LOCATION:MissouriCon\, Holiday Inn St. Louis - Downtown Conv Ctr\, an IHG Hotel\, St. Louis\, US
+UID:20230211-25067-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230211
+DTEND;VALUE=DATE;TZID=GMT:20230211
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Comic Book Convention at StingrayCon
+DESCRIPTION:Location: Florida. 
+LOCATION:StingrayCon\, Jacksonville\, FL\, US
+UID:20230211-25068-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230211
+DTEND;VALUE=DATE;TZID=GMT:20230211
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Anime Convention at Savannah Animazing Con
+DESCRIPTION:Location: Georgia. 
+LOCATION:Savannah Animazing Con\, Savannah\, GA\, US
+UID:20230211-25066-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230211
+DTEND;VALUE=DATE;TZID=GMT:20230213
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Anime Convention at Brick City Anime Festival
+DESCRIPTION:Location: Florida. 
+LOCATION:Brick City Anime Festival\, World Equestrian Center\, Ocala\, US
+UID:20230211-25069-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230211
+DTEND;VALUE=DATE;TZID=GMT:20230213
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Science Fiction and Fantasy Convention at Capital Sci-Fi Con
+DESCRIPTION:Location: Scotland. 
+LOCATION:Capital Sci-Fi Con\, Edinburgh\, UK
+UID:20230211-25070-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230211
+DTEND;VALUE=DATE;TZID=GMT:20230213
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Comic Book Convention at Long Beach Comic Expo
+DESCRIPTION:Location: California. 
+LOCATION:Long Beach Comic Expo\, Long Beach Convention and Entertainment Center\, Long Beach\, US
+UID:20230211-25071-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230211
+DTEND;VALUE=DATE;TZID=GMT:20230213
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Comic Book Convention at Long Beach Comic Expo
+DESCRIPTION:Location: Missouri. 
+LOCATION:Long Beach Comic Expo\, Long Beach Convention and Entertainment Center\, Long Beach\, US
+UID:20230211-25072-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230211
+DTEND;VALUE=DATE;TZID=GMT:20230213
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Comic Book Convention at SWFL AnimeExpo - Anime Convention
+DESCRIPTION:Location: Florida. 
+LOCATION:SWFL AnimeExpo - Anime Convention\, Crowne Plaza Fort Myers at Bell Tower Shops\, an IHG Hotel\, Fort Myers\, US
+UID:20230212-24960-brian@conventionscene.com
+URL:https://www.conventionscene.com/2022/06/10/swfl-animeexpo-anime-convention-february-2023/
+DTSTART;VALUE=DATE;TZID=GMT:20230212
+DTEND;VALUE=DATE;TZID=GMT:20230212
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Comic Book Convention at Comic Book Show and more
+DESCRIPTION:Location: Maryland. 
+LOCATION:Comic Book Show and more\, DoubleTree by Hilton Hotel Laurel\, Laurel\, US
+UID:20230212-25007-brian@conventionscene.com
+URL:https://www.conventionscene.com/2022/08/21/comic-book-show-and-more-february-2023/
+DTSTART;VALUE=DATE;TZID=GMT:20230212
+DTEND;VALUE=DATE;TZID=GMT:20230212
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Science Fiction and Fantasy Convention at Boskone
+DESCRIPTION:Location: Massachusetts. 
+LOCATION:Boskone\, Boston\, US
+UID:20230217-25073-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230217
+DTEND;VALUE=DATE;TZID=GMT:20230220
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Science Fiction and Fantasy Convention at Con Nooga
+DESCRIPTION:Location: Tennessee. 
+LOCATION:Con Nooga\, Chattanooga\, US
+UID:20230217-25074-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230217
+DTEND;VALUE=DATE;TZID=GMT:20230220
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Science Fiction and Fantasy Convention at Days of the Dead: Las Vegas
+DESCRIPTION:Location: Nevada. 
+LOCATION:Days of the Dead: Las Vegas\, Las Vegas\, NV\, US
+UID:20230217-25075-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230217
+DTEND;VALUE=DATE;TZID=GMT:20230220
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Comic Book Convention at Fan Expo Portland
+DESCRIPTION:Location: Oregon. 
+LOCATION:Fan Expo Portland\, Portland\, OR\, US
+UID:20230217-25076-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230217
+DTEND;VALUE=DATE;TZID=GMT:20230220
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Science Fiction and Fantasy Convention at Gallifrey One
+DESCRIPTION:Location: California. 
+LOCATION:Gallifrey One\, Los Angeles Airport Marriott\, Los Angeles\, US
+UID:20230217-25077-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230217
+DTEND;VALUE=DATE;TZID=GMT:20230220
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Anime Convention at Katsucon Anime Manga Festival
+DESCRIPTION:Location: Maryland. 
+LOCATION:Katsucon Anime Manga Festival\, National Harbor\, US
+UID:20230217-25078-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230217
+DTEND;VALUE=DATE;TZID=GMT:20230220
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Horror Convention at Mad Monster Party Carolina
+DESCRIPTION:Location: North Carolina. 
+LOCATION:Mad Monster Party Carolina\, Concord\, NC\, US
+UID:20230217-25079-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230217
+DTEND;VALUE=DATE;TZID=GMT:20230220
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Comic Book Convention at Beyond Comicon
+DESCRIPTION:Location: Florida. 
+LOCATION:Beyond Comicon\, Marjorie and William McDonald Center\, North Miami Beach\, US
+UID:20230218-24994-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230218
+DTEND;VALUE=DATE;TZID=GMT:20230218
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Comic Book Convention at San Diego Rocket Con
+DESCRIPTION:Location: California. 
+LOCATION:San Diego Rocket Con\, San Diego\, CA\, US
+UID:20230218-25080-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230218
+DTEND;VALUE=DATE;TZID=GMT:20230220
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Anime Convention at Anime STX
+DESCRIPTION:Location: Texas. 
+LOCATION:Anime STX\, San Antonio\, TX\, US
+UID:20230218-25081-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230218
+DTEND;VALUE=DATE;TZID=GMT:20230220
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Comic Book Convention at Fan Expo Vancouver
+DESCRIPTION:Location: Canada. 
+LOCATION:Fan Expo Vancouver\, Vancouver Convention Centre\, Vancouver\, CA
+UID:20230218-25082-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230218
+DTEND;VALUE=DATE;TZID=GMT:20230221
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Gaming Convention at PrezCon
+DESCRIPTION:Location: Virginia. 
+LOCATION:PrezCon\, Charlottesville\, VA\, US
+UID:20230220-25083-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230220
+DTEND;VALUE=DATE;TZID=GMT:20230227
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Comic Book Convention at The Great Lakes Comic-Con
+DESCRIPTION:Location: Michigan. 
+LOCATION:The Great Lakes Comic-Con\, Macomb Community College Sports And Expo Center\, Warren\, US
+UID:20230224-25003-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230224
+DTEND;VALUE=DATE;TZID=GMT:20230226
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Gaming Convention at LootFest
+DESCRIPTION:Location: Texas. 
+LOCATION:LootFest\, Fort Worth\, TX\, US
+UID:20230224-25084-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230224
+DTEND;VALUE=DATE;TZID=GMT:20230226
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Anime Convention at Anime Crossroads
+DESCRIPTION:Location: Indiana. 
+LOCATION:Anime Crossroads\, Indianapolis Marriott East\, Indianapolis\, US
+UID:20230224-25085-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230224
+DTEND;VALUE=DATE;TZID=GMT:20230227
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Anime Convention at ATL Comic Convention
+DESCRIPTION:Location: Georgia. 
+LOCATION:ATL Comic Convention\, Atlanta\, GA\, US
+UID:20230224-25086-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230224
+DTEND;VALUE=DATE;TZID=GMT:20230227
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Comic Book Convention at Pensacon
+DESCRIPTION:Location: Florida. 
+LOCATION:Pensacon\, Pensacola Bay Center\, Pensacola\, US
+UID:20230224-25087-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230224
+DTEND;VALUE=DATE;TZID=GMT:20230227
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Science Fiction and Fantasy Convention at Ret-Con
+DESCRIPTION:Location: North Carolina. 
+LOCATION:Ret-Con\, Cary\, NC\, US
+UID:20230224-25088-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230224
+DTEND;VALUE=DATE;TZID=GMT:20230227
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Comic Book Convention at Happy Valley Comic and Collectibles Convention
+DESCRIPTION:Location: Pennsylvania. 
+LOCATION:Happy Valley Comic and Collectibles Convention\, Nittany Valley Sports Centre (The Centre)\, State College\, US
+UID:20230225-25011-brian@conventionscene.com
+URL:https://www.conventionscene.com/2022/09/17/happy-valley-comic-and-collectibles-convention-february-2023/
+DTSTART;VALUE=DATE;TZID=GMT:20230225
+DTEND;VALUE=DATE;TZID=GMT:20230225
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Book Festival at Read It Write It Book and Writing Festival
+DESCRIPTION:Location: Florida. 
+LOCATION:Read It Write It Book and Writing Festival\, The Mall at Wellington Green\, Wellington\, US
+UID:20230225-25030-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230225
+DTEND;VALUE=DATE;TZID=GMT:20230225
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Anime Convention at Frankfort Anime-Fest
+DESCRIPTION:Location: Kentucky. 
+LOCATION:Frankfort Anime-Fest\, Frankfort\, KY\, US
+UID:20230225-25089-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230225
+DTEND;VALUE=DATE;TZID=GMT:20230225
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Comic Book Convention at Hero Hype Convention
+DESCRIPTION:Location: Florida. 
+LOCATION:Hero Hype Convention\, Miami\, FL\, US
+UID:20230225-25090-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230225
+DTEND;VALUE=DATE;TZID=GMT:20230225
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Comic Book Convention at Imagi-Con
+DESCRIPTION:Location: Alabama. 
+LOCATION:Imagi-Con\, Brundidge\, AL\, US
+UID:20230225-25091-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230225
+DTEND;VALUE=DATE;TZID=GMT:20230225
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Comic Book Convention at Alaska Comicon
+DESCRIPTION:Location: Alaska. 
+LOCATION:Alaska Comicon\, Fairbanks\, AK\, US
+UID:20230225-25092-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230225
+DTEND;VALUE=DATE;TZID=GMT:20230227
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Anime Convention at Arizona Matsuri
+DESCRIPTION:Location: Arizona. 
+LOCATION:Arizona Matsuri\, Phoenix\, AZ\, US
+UID:20230225-25093-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230225
+DTEND;VALUE=DATE;TZID=GMT:20230227
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Collectibles Convention at Collect-A-Con Orlando
+DESCRIPTION:Location: Florida. 
+LOCATION:Collect-A-Con Orlando\, Orlando\, FL\, US
+UID:20230225-25094-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230225
+DTEND;VALUE=DATE;TZID=GMT:20230227
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Anime Convention at Fanime Expo
+DESCRIPTION:Location: Texas. 
+LOCATION:Fanime Expo\, Pasadena\, TX\, US
+UID:20230225-25095-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230225
+DTEND;VALUE=DATE;TZID=GMT:20230227
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Comic Book Convention at Happy Valley Comic and Collectibles Convention
+DESCRIPTION:Location: Pennsylvania. 
+LOCATION:Happy Valley Comic and Collectibles Convention\, Nittany Valley Sports Centre (The Centre)\, State College\, US
+UID:20230225-25096-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230225
+DTEND;VALUE=DATE;TZID=GMT:20230227
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Anime Convention at Kawacon
+DESCRIPTION:Location: Texas. 
+LOCATION:Kawacon\, San Antonio\, TX\, US
+UID:20230225-25097-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230225
+DTEND;VALUE=DATE;TZID=GMT:20230227
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Comic Book Convention at StocktonCon
+DESCRIPTION:Location: California. 
+LOCATION:StocktonCon\, Stockton Arena\, Stockton\, US
+UID:20230225-25098-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230225
+DTEND;VALUE=DATE;TZID=GMT:20230227
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Comic Book Convention at Heroes\, Villains\, and Blerds
+DESCRIPTION:Location: Florida. 
+LOCATION:Heroes\, Villains\, and Blerds\, Winter Park\, FL\, US
+UID:20230226-25099-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230226
+DTEND;VALUE=DATE;TZID=GMT:20230226
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Comic Book Convention at LexingtonCon - Comic & Toy Convention
+DESCRIPTION:Location: Kentucky. 
+LOCATION:LexingtonCon - Comic & Toy Convention\, Clarion Hotel Conference Center - North\, Lexington\, US
+UID:20230226-25100-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230226
+DTEND;VALUE=DATE;TZID=GMT:20230226
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Comic Book Convention at Shoff Promotions Comic Book and Non-Sports Card Show
+DESCRIPTION:Location: Virginia. 
+LOCATION:Shoff Promotions Comic Book and Non-Sports Card Show\, Annandale Fire Station\, Annandale\, US
+UID:20230226-25122-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230226
+DTEND;VALUE=DATE;TZID=GMT:20230226
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Gaming Convention at Intercon
+DESCRIPTION:Location: Rhode Island. 
+LOCATION:Intercon\, Warwick\, RI\, US
+UID:20230302-25103-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230302
+DTEND;VALUE=DATE;TZID=GMT:20230306
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Gaming Convention at SaltCON
+DESCRIPTION:Location: Utah. 
+LOCATION:SaltCON\, Davis Conference Center\, Layton\, US
+UID:20230302-25104-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230302
+DTEND;VALUE=DATE;TZID=GMT:20230306
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Science Fiction and Fantasy Convention at VancouFur
+DESCRIPTION:Location: Canada. 
+LOCATION:VancouFur\, Vancouver\, BC\, CA
+UID:20230302-25105-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230302
+DTEND;VALUE=DATE;TZID=GMT:20230306
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Science Fiction and Fantasy Convention at AggieCon
+DESCRIPTION:Location: Texas. 
+LOCATION:AggieCon\, Bryan\, TX\, US
+UID:20230303-25106-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230303
+DTEND;VALUE=DATE;TZID=GMT:20230306
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Comic Book Convention at Astronomicon
+DESCRIPTION:Location: Michigan. 
+LOCATION:Astronomicon\, Sterling Heights\, MI\, US
+UID:20230303-25107-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230303
+DTEND;VALUE=DATE;TZID=GMT:20230306
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Gaming Convention at CincyCon
+DESCRIPTION:Location: Ohio. 
+LOCATION:CincyCon\, Hamilton\, OH\, US
+UID:20230303-25108-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230303
+DTEND;VALUE=DATE;TZID=GMT:20230306
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Science Fiction and Fantasy Convention at CoastCon
+DESCRIPTION:Location: Mississippi. 
+LOCATION:CoastCon\, Mississippi Coast Coliseum and Convention Center\, Biloxi\, US
+UID:20230303-25109-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230303
+DTEND;VALUE=DATE;TZID=GMT:20230306
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Science Fiction and Fantasy Convention at Escapade Con
+DESCRIPTION:Location: California. 
+LOCATION:Escapade Con\, Los Angeles\, CA\, US
+UID:20230303-25110-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230303
+DTEND;VALUE=DATE;TZID=GMT:20230306
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Comic Book Convention at Middle East Film and Comic Con
+DESCRIPTION:Location: United Arab Emirates. 
+LOCATION:Middle East Film and Comic Con\, Dubai International Marine Club\, Dubai\, AE
+UID:20230303-25111-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230303
+DTEND;VALUE=DATE;TZID=GMT:20230306
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Collectibles Convention at Sunrise Comic Con
+DESCRIPTION:Location: Florida. 
+LOCATION:Sunrise Comic Con\, City of Sunrise Leisure Services Department\, Sunrise\, US
+UID:20230304-24993-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230304
+DTEND;VALUE=DATE;TZID=GMT:20230304
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Science Fiction and Fantasy Convention at Cardboard Con
+DESCRIPTION:Location: Georgia. 
+LOCATION:Cardboard Con\, Atlanta\, GA\, US
+UID:20230304-25112-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230304
+DTEND;VALUE=DATE;TZID=GMT:20230304
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Comic Book Convention at Fairfax Comic Con
+DESCRIPTION:Location: Virginia. 
+LOCATION:Fairfax Comic Con\, Dulles Expo Center\, Chantilly\, US
+UID:20230304-25113-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230304
+DTEND;VALUE=DATE;TZID=GMT:20230304
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Collectibles Convention at North Dallas Toy Show
+DESCRIPTION:Location: Texas. 
+LOCATION:North Dallas Toy Show\, Dallas\, TX\, US
+UID:20230304-25114-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230304
+DTEND;VALUE=DATE;TZID=GMT:20230304
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Horror Convention at Not Just Another Horror Con
+DESCRIPTION:Location: Arkansas. 
+LOCATION:Not Just Another Horror Con\, Little Rock\, AR\, US
+UID:20230304-25115-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230304
+DTEND;VALUE=DATE;TZID=GMT:20230304
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Comic Book Convention at Sunrise Comic Con
+DESCRIPTION:Location: Florida. 
+LOCATION:Sunrise Comic Con\, Sunrise\, FL\, US
+UID:20230304-25116-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230304
+DTEND;VALUE=DATE;TZID=GMT:20230304
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Science Fiction and Fantasy Convention at AlienCon
+DESCRIPTION:Location: California. 
+LOCATION:AlienCon\, Pasadena\, CA\, US
+UID:20230304-25117-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230304
+DTEND;VALUE=DATE;TZID=GMT:20230306
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Comic Book Convention at Capitola Comic-Con
+DESCRIPTION:Location: California. 
+LOCATION:Capitola Comic-Con\, Santa Cruz\, CA\, US
+UID:20230304-25118-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230304
+DTEND;VALUE=DATE;TZID=GMT:20230306
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Comic Book Convention at PeoriaCon
+DESCRIPTION:Location: Illinois. 
+LOCATION:PeoriaCon\, Peoria\, IL\, US
+UID:20230304-25119-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230304
+DTEND;VALUE=DATE;TZID=GMT:20230306
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Comic Book Convention at Buckeye Comic Con
+DESCRIPTION:Location: Ohio. 
+LOCATION:Buckeye Comic Con\, Courtyard by Marriott Columbus West/Hilliard\, Columbus\, US
+UID:20230305-25130-brian@conventionscene.com
+URL:https://www.conventionscene.com/2023/02/03/buckeye-comic-con-march-2023/
+DTSTART;VALUE=DATE;TZID=GMT:20230305
+DTEND;VALUE=DATE;TZID=GMT:20230305
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Comic Book Convention at NorthEast Comic Con and Collectibles Extravaganza
+DESCRIPTION:Location: Massachusetts. 
+LOCATION:NorthEast Comic Con and Collectibles Extravaganza\, Boxboro Regency\, Boxborough\, US
+UID:20230310-25101-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230310
+DTEND;VALUE=DATE;TZID=GMT:20230313
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Comic Book Convention at Shoff Promotions Frederick Maryland Comic Con
+DESCRIPTION:Location: Maryland. 
+LOCATION:Shoff Promotions Frederick Maryland Comic Con\, Clarion Inn Frederick Event Center\, Frederick\, US
+UID:20230319-25125-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230319
+DTEND;VALUE=DATE;TZID=GMT:20230319
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Gaming Convention at PAX East
+DESCRIPTION:Location: Massachusetts. 
+LOCATION:PAX East\, Boston Convention and Exhibition Center\, Boston\, US
+UID:20230323-24086-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230323
+DTEND;VALUE=DATE;TZID=GMT:20230327
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Anime Convention at Manga-Comic-Convention
+DESCRIPTION:Location: Germany. 
+LOCATION:Manga-Comic-Convention\, Leipzig\, DE
+UID:20230323-24087-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230323
+DTEND;VALUE=DATE;TZID=GMT:20230327
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Comic Book Convention at KingKon IV
+DESCRIPTION:Location: New Jersey. 
+LOCATION:KingKon IV\, APA Hotel Woodbridge\, Iselin\, US
+UID:20230325-25031-brian@conventionscene.com
+URL:https://www.conventionscene.com/2023/01/01/kingkon-iv-march-2023/
+DTSTART;VALUE=DATE;TZID=GMT:20230325
+DTEND;VALUE=DATE;TZID=GMT:20230327
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Comic Book Convention at Shoff Promotions Comic Book and Non-Sports Card Show
+DESCRIPTION:Location: Virginia. 
+LOCATION:Shoff Promotions Comic Book and Non-Sports Card Show\, Annandale Fire Station\, Annandale\, US
+UID:20230326-25123-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230326
+DTEND;VALUE=DATE;TZID=GMT:20230326
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Anime Convention at CabbageCon: An Avatar fan convention
+DESCRIPTION:Location: Canada. 
+LOCATION:CabbageCon: An Avatar fan convention\, Crowne Plaza Columbus North- Worthington\, an IHG Hotel\, Columbus\, CA
+UID:20230330-24886-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230330
+DTEND;VALUE=DATE;TZID=GMT:20230330
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Collectibles Convention at St Tammany Collectors Con
+DESCRIPTION:Location: Louisiana. 
+LOCATION:St Tammany Collectors Con\, Castine Center\, Mandeville\, US
+UID:20230401-24948-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230401
+DTEND;VALUE=DATE;TZID=GMT:20230403
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Anime Convention at Anime Boston
+DESCRIPTION:Location: Massachusetts. 
+LOCATION:Anime Boston\, Boston\, US
+UID:20230407-24085-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230407
+DTEND;VALUE=DATE;TZID=GMT:20230410
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Collectibles Convention at Collectorabilia
+DESCRIPTION:Location: Wisconsin. 
+LOCATION:Collectorabilia\, Resch Expo\, Ashwaubenon\, US
+UID:20230408-25000-brian@conventionscene.com
+URL:https://www.conventionscene.com/2022/08/14/collectorabilia-april-2023/
+DTSTART;VALUE=DATE;TZID=GMT:20230408
+DTEND;VALUE=DATE;TZID=GMT:20230408
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Comic Book Convention at Little Giant Comics Old School Comic Show
+DESCRIPTION:Location: New Hampshire. 
+LOCATION:Little Giant Comics Old School Comic Show\, Douglas N. Everett Arena\, Concord\, US
+UID:20230415-25120-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230415
+DTEND;VALUE=DATE;TZID=GMT:20230415
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Anime Convention at Anime St. Louis
+DESCRIPTION:Location: Missouri. 
+LOCATION:Anime St. Louis\, St. Charles\, MO\, US
+UID:20230421-24084-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230421
+DTEND;VALUE=DATE;TZID=GMT:20230424
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Comic Book Convention at Wicked Comic Con
+DESCRIPTION:Location: Massachusetts. 
+LOCATION:Wicked Comic Con\, Boston\, MA\, US
+UID:20230422-24896-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230422
+DTEND;VALUE=DATE;TZID=GMT:20230424
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Comic Book Convention at Shoff Promotions Comic Book and Non-Sports Card Show
+DESCRIPTION:Location: Virginia. 
+LOCATION:Shoff Promotions Comic Book and Non-Sports Card Show\, Annandale Fire Station\, Annandale\, US
+UID:20230423-25126-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230423
+DTEND;VALUE=DATE;TZID=GMT:20230423
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Comic Book Convention at Metropol Con Berlin 2023 - A multimedia Event for Science-Fiction\, Fantasy
+DESCRIPTION:Location: Germany. 
+LOCATION:Metropol Con Berlin 2023 - A multimedia Event for Science-Fiction\, Fantasy\, silent green Kulturquartier\, Gerichtstraße 35\, DE
+UID:20230428-24899-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230428
+DTEND;VALUE=DATE;TZID=GMT:20230428
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Gaming Convention at OzCon
+DESCRIPTION:Location: Missouri. 
+LOCATION:OzCon\, Missouri State University-West Plains\, University/Community Programs\, West Plains\, US
+UID:20230428-24983-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230428
+DTEND;VALUE=DATE;TZID=GMT:20230501
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Comic Book Convention at Contropolis Pennsylvania
+DESCRIPTION:Location: Pennsylvania. 
+LOCATION:Contropolis Pennsylvania\, The Greater Philadelphia Expo Center\, Oaks\, US
+UID:20230505-25017-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230505
+DTEND;VALUE=DATE;TZID=GMT:20230508
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Anime Convention at Metrotham Con
+DESCRIPTION:Location: Tennessee. 
+LOCATION:Metrotham Con\, Chattanooga Convention Center\, Chattanooga\, US
+UID:20230512-24981-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230512
+DTEND;VALUE=DATE;TZID=GMT:20230515
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Comic Book Convention at Shoff Promotions Comic Book and Non-Sports Card Show
+DESCRIPTION:Location: Virginia. 
+LOCATION:Shoff Promotions Comic Book and Non-Sports Card Show\, Annandale Fire Station\, Annandale\, US
+UID:20230520-25124-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230520
+DTEND;VALUE=DATE;TZID=GMT:20230520
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Comic Book Convention at Comic Con Revolution
+DESCRIPTION:Location: California. 
+LOCATION:Comic Con Revolution\, Ontario Convention Center\, Ontario\, US
+UID:20230520-25026-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230520
+DTEND;VALUE=DATE;TZID=GMT:20230522
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Horror Convention at Horror on Main
+DESCRIPTION:Location: Maryland. 
+LOCATION:Horror on Main\, Delta Hotels Baltimore Hunt Valley\, Hunt Valley\, US
+UID:20230526-24968-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230526
+DTEND;VALUE=DATE;TZID=GMT:20230526
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Comic Book Convention at Contropolis Massachusetts
+DESCRIPTION:Location: Massachusetts. 
+LOCATION:Contropolis Massachusetts\, Royal Plaza Trade Center\, Marlborough\, US
+UID:20230616-25018-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230616
+DTEND;VALUE=DATE;TZID=GMT:20230619
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Comic Book Convention at Akron-Summit Comic Con
+DESCRIPTION:Location: Ohio. 
+LOCATION:Akron-Summit Comic Con\, Summit County Fairgrounds\, Tallmadge\, US
+UID:20230625-25129-brian@conventionscene.com
+URL:https://www.conventionscene.com/2023/02/02/akron-summit-comic-con-june-2023/
+DTSTART;VALUE=DATE;TZID=GMT:20230625
+DTEND;VALUE=DATE;TZID=GMT:20230625
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Comic Book Convention at Hershey Comic Con 2023
+DESCRIPTION:Location: Pennsylvania. 
+LOCATION:Hershey Comic Con 2023\, Holiday Inn Harrisburg (Hershey Area) I-81\, an IHG Hotel\, Grantville\, US
+UID:20230701-25027-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230701
+DTEND;VALUE=DATE;TZID=GMT:20230703
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Comic Book Convention at BentonvilleCon - Comic & Pop Culture Event
+DESCRIPTION:Location: Arkansas. 
+LOCATION:BentonvilleCon - Comic & Pop Culture Event\, Four Points by Sheraton Bentonville\, Bentonville\, US
+UID:20230703-25013-brian@conventionscene.com
+URL:https://www.conventionscene.com/2022/09/17/bentonvillecon-comic-pop-culture-event-june-2023/
+DTSTART;VALUE=DATE;TZID=GMT:20230703
+DTEND;VALUE=DATE;TZID=GMT:20230703
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Comic Book Convention at Contropolis New Jersey
+DESCRIPTION:Location: New Jersey. 
+LOCATION:Contropolis New Jersey\, Meadowlands Exposition Center\, Secaucus\, US
+UID:20230708-25019-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230708
+DTEND;VALUE=DATE;TZID=GMT:20230710
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Comic Book Convention at Shoff Promotions Comic Book and Non-Sports Card Show
+DESCRIPTION:Location: Virginia. 
+LOCATION:Shoff Promotions Comic Book and Non-Sports Card Show\, Annandale Fire Station\, Annandale\, US
+UID:20230709-25127-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230709
+DTEND;VALUE=DATE;TZID=GMT:20230709
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Comic Book Convention at Buckeye Comic Con
+DESCRIPTION:Location: Ohio. 
+LOCATION:Buckeye Comic Con\, Courtyard by Marriott Columbus West/Hilliard\, Columbus\, US
+UID:20230716-25132-brian@conventionscene.com
+URL:https://www.conventionscene.com/2023/02/03/buckeye-comic-con-july-2023/
+DTSTART;VALUE=DATE;TZID=GMT:20230716
+DTEND;VALUE=DATE;TZID=GMT:20230716
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Collectibles Convention at West Texas Comic Con
+DESCRIPTION:Location: Texas. 
+LOCATION:West Texas Comic Con\, MCM Eleganté Hotel & Suites\, Lubbock\, US
+UID:20230716-24929-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230716
+DTEND;VALUE=DATE;TZID=GMT:20230718
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Gaming Convention at World Boardgame Championships
+DESCRIPTION:Location: Pennsylvania. 
+LOCATION:World Boardgame Championships\, Champion\, PA\, US
+UID:20230722-16832-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230722
+DTEND;VALUE=DATE;TZID=GMT:20230731
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Anime Convention at Rhode Island Anime Expo
+DESCRIPTION:Location: Rhode Island. 
+LOCATION:Rhode Island Anime Expo\, Rhode Island Convention Center\, Providence\, US
+UID:20230729-25020-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230729
+DTEND;VALUE=DATE;TZID=GMT:20230731
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Gaming Convention at Gen Con Indy
+DESCRIPTION:Location: Indiana. 
+LOCATION:Gen Con Indy\, Indiana Convention Center\, Indianapolis\, US
+UID:20230803-24083-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230803
+DTEND;VALUE=DATE;TZID=GMT:20230807
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Comic Book Convention at Shoff Promotions Comic Book and Non-Sports Card Show
+DESCRIPTION:Location: Virginia. 
+LOCATION:Shoff Promotions Comic Book and Non-Sports Card Show\, Annandale Fire Station\, Annandale\, US
+UID:20230813-25128-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230813
+DTEND;VALUE=DATE;TZID=GMT:20230813
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Comic Book Convention at Colorado Springs Comic Con
+DESCRIPTION:Location: Colorado. 
+LOCATION:Colorado Springs Comic Con\, The Broadmoor World Arena\, Colorado Springs\, US
+UID:20230825-25021-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230825
+DTEND;VALUE=DATE;TZID=GMT:20230828
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Horror Convention at Terror Con
+DESCRIPTION:Location: Massachusetts. 
+LOCATION:Terror Con\, Royal Plaza Trade Center\, Marlborough\, US
+UID:20230915-25022-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20230915
+DTEND;VALUE=DATE;TZID=GMT:20230918
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Comic Book Convention at Rhode Island Comic Con
+DESCRIPTION:Location: Rhode Island. 
+LOCATION:Rhode Island Comic Con\, Amica Mutual Pavilion\, Providence\, US
+UID:20231103-25023-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20231103
+DTEND;VALUE=DATE;TZID=GMT:20231106
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Comic Book Convention at Buckeye Comic Con
+DESCRIPTION:Location: Ohio. 
+LOCATION:Buckeye Comic Con\, Courtyard by Marriott Columbus West/Hilliard\, Columbus\, US
+UID:20231119-25131-brian@conventionscene.com
+URL:https://www.conventionscene.com/2023/02/03/buckeye-comic-con-november-2023/
+DTSTART;VALUE=DATE;TZID=GMT:20231119
+DTEND;VALUE=DATE;TZID=GMT:20231119
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Comic Book Convention at Comic Book show and more
+DESCRIPTION:Location: Maryland. 
+LOCATION:Comic Book show and more\, DoubleTree by Hilton Hotel Laurel\, Laurel\, US
+UID:20231204-25009-brian@conventionscene.com
+URL:https://www.conventionscene.com/2022/08/21/comic-book-show-and-more-december-2022/
+DTSTART;VALUE=DATE;TZID=GMT:20231204
+DTEND;VALUE=DATE;TZID=GMT:20231204
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Gaming Convention at PAX East
+DESCRIPTION:Location: Massachusetts. 
+LOCATION:PAX East\, Boston Convention and Exhibition Center\, Boston\, US
+UID:20240321-24089-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20240321
+DTEND;VALUE=DATE;TZID=GMT:20240325
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Anime Convention at Anime Boston
+DESCRIPTION:Location: Massachusetts. 
+LOCATION:Anime Boston\, Boston\, US
+UID:20240329-24088-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20240329
+DTEND;VALUE=DATE;TZID=GMT:20240401
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Comic Book Convention at Wicked Comic Con
+DESCRIPTION:Location: Massachusetts. 
+LOCATION:Wicked Comic Con\, Boston\, MA\, US
+UID:20240420-25015-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20240420
+DTEND;VALUE=DATE;TZID=GMT:20240422
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Gaming Convention at World Boardgame Championships
+DESCRIPTION:Location: Pennsylvania. 
+LOCATION:World Boardgame Championships\, Champion\, PA\, US
+UID:20240720-16833-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20240720
+DTEND;VALUE=DATE;TZID=GMT:20240729
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Anime Convention at San Japan
+DESCRIPTION:Location: Texas. 
+LOCATION:San Japan\, San Antonio Marriott Rivercenter\, San Antonio\, US
+UID:20240830-24090-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20240830
+DTEND;VALUE=DATE;TZID=GMT:20240902
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Gaming Convention at PAX East
+DESCRIPTION:Location: Massachusetts. 
+LOCATION:PAX East\, Boston Convention and Exhibition Center\, Boston\, US
+UID:20250508-24092-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20250508
+DTEND;VALUE=DATE;TZID=GMT:20250512
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Anime Convention at Anime Boston
+DESCRIPTION:Location: Massachusetts. 
+LOCATION:Anime Boston\, Boston\, US
+UID:20250523-24091-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20250523
+DTEND;VALUE=DATE;TZID=GMT:20250526
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Gaming Convention at World Boardgame Championships
+DESCRIPTION:Location: Pennsylvania. 
+LOCATION:World Boardgame Championships\, Champion\, PA\, US
+UID:20250726-16834-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20250726
+DTEND;VALUE=DATE;TZID=GMT:20250804
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Gaming Convention at PAX East
+DESCRIPTION:Location: Massachusetts. 
+LOCATION:PAX East\, Boston Convention and Exhibition Center\, Boston\, US
+UID:20260326-24093-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20260326
+DTEND;VALUE=DATE;TZID=GMT:20260330
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Anime Convention at Anime Boston
+DESCRIPTION:Location: Massachusetts. 
+LOCATION:Anime Boston\, Boston\, US
+UID:20260403-24094-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20260403
+DTEND;VALUE=DATE;TZID=GMT:20260406
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Gaming Convention at World Boardgame Championships
+DESCRIPTION:Location: Pennsylvania. 
+LOCATION:World Boardgame Championships\, Champion\, PA\, US
+UID:20260725-16835-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20260725
+DTEND;VALUE=DATE;TZID=GMT:20260803
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Gaming Convention at PAX East
+DESCRIPTION:Location: Massachusetts. 
+LOCATION:PAX East\, Boston Convention and Exhibition Center\, Boston\, US
+UID:20270422-24095-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20270422
+DTEND;VALUE=DATE;TZID=GMT:20270426
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Gaming Convention at World Boardgame Championships
+DESCRIPTION:Location: Pennsylvania. 
+LOCATION:World Boardgame Championships\, Champion\, PA\, US
+UID:20270724-16836-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20270724
+DTEND;VALUE=DATE;TZID=GMT:20270802
+DTSTAMP:20230203T053152Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Gaming Convention at PAX East
+DESCRIPTION:Location: Massachusetts. 
+LOCATION:PAX East\, Boston Convention and Exhibition Center\, Boston\, US
+UID:20280330-24096-brian@conventionscene.com
+URL:http://www.conventionscene.com/schedules/allupcomingevents/
+DTSTART;VALUE=DATE;TZID=GMT:20280330
+DTEND;VALUE=DATE;TZID=GMT:20280403
+DTSTAMP:20230203T053152Z
+END:VEVENT
+END:VCALENDAR
