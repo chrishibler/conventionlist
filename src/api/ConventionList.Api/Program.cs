@@ -2,10 +2,17 @@ using ConventionList.Api.Data;
 using Microsoft.EntityFrameworkCore;
 using ConventionList.Api.Extensions;
 using ConventionList.Api.Middleware;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 Host.CreateDefaultBuilder(args).UseSystemd();
-builder.Services.AddLogging();
+
+Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.Debug()
+    .WriteTo.File("logs/conventionlist.log")
+    .CreateLogger();
+
+builder.Services.AddSerilog();
 
 string? connectionString = builder.Configuration.GetConnectionString("PostgresDatabaseConventionList");
 // Console.WriteLine($"*************************");
@@ -33,11 +40,6 @@ builder.Services.AddGoogleMapsSearchClient(builder);
 builder.Services.AddGeocodingService();
 builder.Services.AddConventionSceneSync();
 builder.Services.AddFanConsSync();
-builder.Services.AddLogging(loggingBuilder =>
-{
-    loggingBuilder.AddConsole();
-    loggingBuilder.AddDebug();
-});
 
 var app = builder.Build();
 app.UseMiddleware<RequestLoggingMiddleware>();
