@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import NavBar from "../Components/NavBar";
 import Logo from "../Components/Logo";
 import "./ConventionMap.css";
@@ -113,3 +114,7 @@ function CustomMarker({ convention }) {
     </>
   );
 }
+
+CustomMarker.propTypes = {
+  convention: PropTypes.object,
+};
