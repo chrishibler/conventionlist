@@ -1,0 +1,21 @@
+.map-body-container {
+  /*background-color: pink;*/
+  display: flex;
+  flex-direction: column;
+  margin-top: 24px;
+  align-items: center;
+}
+
+.info-window {
+  color: #1e1e2e;
+}
+
+.info-window a {
+  color: #89b4fa;
+  text-decoration: underline;
+}
+
+.info-window h3 {
+  line-height: 1;
+  margin-bottom: 6px;
+}
