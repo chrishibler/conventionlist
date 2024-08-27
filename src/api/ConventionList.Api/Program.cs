@@ -43,7 +43,6 @@ builder.Services.AddFanConsSync();
 
 var app = builder.Build();
 app.UseMiddleware<RequestLoggingMiddleware>();
-app.UsePathBase("/api");
 app.UseRouting();
 app.UseCors();
 app.UseAuthentication();
