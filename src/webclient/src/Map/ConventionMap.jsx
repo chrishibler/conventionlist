@@ -43,7 +43,7 @@ export default function ConventionMap() {
       <div className="map-body-container">
         <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}>
           <Map
-            mapId="e2231b20cac1904"
+            mapId="db68134f4fb4a75f"
             onBoundsChanged={(event) => setBounds(event.detail.bounds)}
             style={{ width: "80vw", height: "80vh" }}
             defaultZoom={6}

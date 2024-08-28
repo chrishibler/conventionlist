@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import ConventionItem from "./ConventionItem";
 import ApiService from "../../Services/ApiService";
 import Loader from "../../Components/Loader";
@@ -17,7 +18,7 @@ export default function ConventionList({ searchInfo }) {
     return response;
   }
 
-  function handleNextPageParam(lastPage, pages) {
+  function handleNextPageParam(lastPage) {
     return lastPage.currentPage === lastPage.totalPages
       ? undefined
       : lastPage.currentPage + 1;
@@ -46,7 +47,7 @@ export default function ConventionList({ searchInfo }) {
     if (inView && hasNextPage) {
       fetchNextPage();
     }
-  }, [inView, fetchNextPage]);
+  }, [inView, fetchNextPage, hasNextPage]);
 
   const conventions = useMemo(() => {
     return data?.pages.reduce((acc, page) => {
@@ -80,3 +81,7 @@ export default function ConventionList({ searchInfo }) {
     </div>
   );
 }
+
+ConventionList.propTypes = {
+  searchInfo: PropTypes.object,
+};
