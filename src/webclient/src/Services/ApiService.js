@@ -3,6 +3,7 @@ import SearchParams from "../SearchParams";
 
 class ApiService {
   constructor(baseUrl) {
+    console.log(`api url: ${baseUrl}`);
     this.client = axios.create({ baseURL: baseUrl });
     this.client.interceptors.request.use((request) => {
       //console.log("Starting Request", JSON.stringify(request, null, 2));
