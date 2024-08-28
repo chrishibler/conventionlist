@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - src/webclient/**
+  workflow_dispatch:
 
 jobs:
   build:
@@ -20,16 +21,21 @@ jobs:
         with:
           node-version: "16"
 
+      - name: See what's up in root
+        run: |
+          pwd
+          ls -lA
+
       - name: Install dependencies
         run: npm install
-        working-directory: src/api/webclient
+        working-directory: src/webclient
 
       - name: Build the site
         run: npm run build
-        working-directory: src/api/webclient
+        working-directory: src/webclient
 
       - name: Deploy to Netlify
-        working-directory: src/api/webclient
+        working-directory: src/webclient
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_ACCESS_TOKEN }}
         run: |
