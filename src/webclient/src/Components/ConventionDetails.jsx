@@ -1,4 +1,4 @@
-import React from "react";
+import PropTypes from "prop-types";
 import Description from "./Description";
 
 export default function ConventionDetails({ convention }) {
@@ -22,3 +22,7 @@ export default function ConventionDetails({ convention }) {
     </div>
   );
 }
+
+ConventionDetails.propTypes = {
+  convention: PropTypes.object,
+};

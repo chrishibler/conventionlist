@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import ConventionItem from "./ConventionItem";
-import ApiService from "../../Services/ApiService";
-import Loader from "../../Components/Loader";
+import ApiService from "../Services/ApiService";
+import Loader from "./Loader";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useEffect, useMemo } from "react";
 import { useInView } from "react-intersection-observer";
@@ -77,7 +77,11 @@ export default function ConventionList({ searchInfo }) {
           <ConventionItem convention={convention} index={index} />
         </div>
       ))}
-      {isFetching && <Loader />}
+      {isFetching && (
+        <div className="loader-container">
+          <Loader />
+        </div>
+      )}
     </div>
   );
 }

@@ -1,8 +1,8 @@
 import "./Home.css";
-import React, { useState } from "react";
-import ConventionList from "./Components/ConventionList";
+import { useState } from "react";
+import ConventionList from "../Components/ConventionList";
 import NavBar from "../Components/NavBar";
-import SearchField from "./Components/SearchField";
+import SearchField from "../Components/SearchField";
 import Logo from "../Components/Logo";
 import Locator from "../Services/Locator";
 

@@ -53,7 +53,7 @@ export default function ConventionMap() {
                 : { lat: 36.99, lng: -119.79 }
             }
             gestureHandling={"greedy"}
-            disableDefaultUI={true}
+            disableDefaultUI={false}
           >
             {query.data?.map((c) => (
               <CustomMarker key={c.id} convention={c} />
