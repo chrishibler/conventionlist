@@ -1,5 +1,5 @@
 import Home from "./Home/Home";
-import ConventionMap from "./Map/ConventionMap";
+import MapBoxConventionMap from "./Map/MapBoxConventionMap";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
@@ -16,7 +16,7 @@ export default function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/map" element={<ConventionMap />} />
+          <Route path="/map" element={<MapBoxConventionMap />} />
         </Routes>
       </Router>
     </QueryClientProvider>
