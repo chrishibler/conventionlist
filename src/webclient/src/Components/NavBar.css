@@ -45,7 +45,8 @@ nav ul li a:focus {
   color: var(--text);
   transition: border-color 0.3s;
   max-width: 650px;
-  width: 100%;
+  /* width: 100%; */
+  flex-grow: 1;
   margin-left: 0px;
 }
 

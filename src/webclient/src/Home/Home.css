@@ -64,8 +64,8 @@ a {
 }
 
 .app {
-  display: grid;
-  justify-content: stretch;
+  display: flex;
+  flex-direction: column;
 }
 
 .header {
@@ -93,10 +93,11 @@ a {
 }
 
 .body-container {
-  /*background-color: pink;*/
   margin: 18px 12px 0px 12px;
   max-width: 1920px;
-  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 }
 
 .convention-list {
@@ -136,11 +137,4 @@ a {
 
 .convention-item-container-odd {
   background-color: var(--mantle);
-}
-
-.loader-container {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  justify-content: center;
 }

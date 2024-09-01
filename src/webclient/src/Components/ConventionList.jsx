@@ -1,3 +1,4 @@
+import "./ConventionList.css";
 import PropTypes from "prop-types";
 import ConventionItem from "./ConventionItem";
 import ApiService from "../Services/ApiService";
@@ -28,20 +29,12 @@ export default function ConventionList({ searchInfo }) {
     return `${searchInfo.search}-${searchInfo.lat}-${searchInfo.lon}-${searchInfo.orderBy}`;
   }
 
-  const {
-    data,
-    error,
-    fetchNextPage,
-    hasNextPage,
-    isFetching,
-    isFetchingNextPage,
-    status,
-    isLoading,
-  } = useInfiniteQuery({
-    queryKey: [getQueryKey(searchInfo)],
-    queryFn: fetchConventions,
-    getNextPageParam: handleNextPageParam,
-  });
+  const { data, error, fetchNextPage, hasNextPage, isFetching, isLoading } =
+    useInfiniteQuery({
+      queryKey: [getQueryKey(searchInfo)],
+      queryFn: fetchConventions,
+      getNextPageParam: handleNextPageParam,
+    });
 
   useEffect(() => {
     if (inView && hasNextPage) {
@@ -57,7 +50,7 @@ export default function ConventionList({ searchInfo }) {
 
   if (isLoading)
     return (
-      <div style={{ display: "flex", justifyContent: "center" }}>
+      <div className="loader-item">
         <Loader />
       </div>
     );

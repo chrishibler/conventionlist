@@ -16,6 +16,10 @@ class ApiService {
     });
   }
 
+  delay(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
+
   async getConventions(searchInfo) {
     const queryString = new SearchParams(searchInfo).toQueryString();
     const url = `conventions${queryString}`;
