@@ -2,6 +2,10 @@ import Home from "./Home/Home";
 import MapBoxConventionMap from "./Map/MapBoxConventionMap";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import AddEditConventionForm from "./Manage/AddEditConventionForm";
+import Page from "./Components/Page";
+import ProtectedRoute from "./auth/ProtectedRoute";
+import Auth0ProviderWithRedirectCallback from "./auth/Auth0ProviderWithRedirectCallback.jsx";
 
 export default function App() {
   const queryClient = new QueryClient({
@@ -14,11 +18,31 @@ export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <Router>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/map" element={<MapBoxConventionMap />} />
-        </Routes>
+        <Auth0ProviderWithRedirectCallback
+          domain="hiblermedia.us.auth0.com"
+          clientId="Jc7oekVuHsEVL1ZvdCiCEy5Uui4NSrPz"
+          authorizationParams={{
+            redirect_uri: window.location.origin,
+          }}
+        >
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/map" element={<MapBoxConventionMap />} />
+            <Route
+              path="/add"
+              element={<ProtectedRoute component={AddEditConventionPage} />}
+            />
+          </Routes>
+        </Auth0ProviderWithRedirectCallback>
       </Router>
     </QueryClientProvider>
+  );
+}
+
+function AddEditConventionPage() {
+  return (
+    <Page>
+      <AddEditConventionForm />
+    </Page>
   );
 }

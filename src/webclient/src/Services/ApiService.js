@@ -41,7 +41,6 @@ class ApiService {
 
     while (hasMore) {
       let url = `conventions/bounds?${boundsQuery}&page=${currentPage}`;
-      console.log(url);
       const consResponse = await this.client.get(url);
       if (consResponse.status !== 200) {
         throw Error(
@@ -53,6 +52,16 @@ class ApiService {
       currentPage = currentPage + 1;
     }
     return results;
+  }
+
+  async postConvention(conventionData) {
+    let url = "conventions";
+    const postResponse = await this.client.post(url, conventionData);
+    if (postResponse.status !== 200) {
+      throw Error(
+        `Conventions by bounds call ${url} returned an error. Status=${postResponse.status} - ${postResponse.statusText}`
+      );
+    }
   }
 }
 

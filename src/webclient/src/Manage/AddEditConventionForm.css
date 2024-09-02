@@ -1,0 +1,66 @@
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 3px;
+}
+
+form {
+  max-width: 500px;
+  padding: 36px;
+  margin: 0 auto;
+  background-color: var(--surface0);
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.add-form-input {
+  width: 100%;
+  padding: 10px;
+  border: 3px solid var(--overlay0);
+  border-radius: 6px;
+  font-size: 16px;
+  margin: 0px;
+  background-color: var(--surface1);
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.3s ease,
+    box-shadow 0.3s ease background-color 0.3s ease-in-out;
+}
+
+.add-form-input:focus {
+  border: 3px solid var(--saphire);
+  background-color: var(--surface0);
+}
+
+.add-edit-form-title {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 24px;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+button[type="submit"] {
+  background-color: transparent;
+  color: var(--saphire);
+  padding: 10px;
+  font-size: 16px;
+  border-style: solid;
+  border-radius: 5px;
+  border-color: var(--saphire);
+  cursor: pointer;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: var(--surface0);
+  border-color: var(--green);
+}
+
+.error {
+  color: var(--red);
+}

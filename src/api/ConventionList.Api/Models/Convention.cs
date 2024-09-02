@@ -46,4 +46,6 @@ public class Convention
 
     // [Column(TypeName = "geography (point)")]
     public Point? Position { get; set; }
+
+    public bool IsApproved {get; set; }
 }

@@ -97,25 +97,30 @@ public class ConventionsController(ConventionListDbContext db,
         return Ok(mapper.Map<ApiConvention>(convention));
     }
 
-    [Authorize]
+    // [Authorize]
     [HttpPost]
     public async Task<ActionResult<ApiConvention>> Post([FromBody] NewApiConvention newCon)
     {
-        string? userId = HttpContext.User.SubjectId();
-        if (userId is null)
-            return Unauthorized("No user ID (sub) not found in access token.");
-
-        await EnsureUser(userId);
+        // string? userId = HttpContext.User.SubjectId();
+        // if (userId is null)
+        //     return Unauthorized("No user ID found");
 
         var con = mapper.Map<Convention>(newCon);
         con.Id = Guid.NewGuid();
-        con.SubmitterId = userId;
+        // con.SubmitterId = userId;
         await GeocodeCon(con);
         _ = db.Conventions.Add(con);
-        _ = await db.SaveChangesAsync();
+        try 
+        {
+            _ = await db.SaveChangesAsync();
+        }
+        catch (Exception ex)
+        {
+            log.LogError("Error saving convention", ex);
+        }
         var apiConvention = mapper.Map<ApiConvention>(con);
 
-        return Created($"~api/conventions/{con.Id}", apiConvention);
+        return Created($"~conventions/{con.Id}", apiConvention);
     }
 
     private async Task EnsureUser(string userId)

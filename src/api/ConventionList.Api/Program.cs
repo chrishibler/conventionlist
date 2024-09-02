@@ -1,7 +1,7 @@
 using ConventionList.Api.Data;
-using Microsoft.EntityFrameworkCore;
 using ConventionList.Api.Extensions;
 using ConventionList.Api.Middleware;
+using Microsoft.EntityFrameworkCore;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,23 +14,27 @@ Log.Logger = new LoggerConfiguration()
 
 builder.Services.AddSerilog();
 
-string? connectionString = builder.Configuration.GetConnectionString("PostgresDatabaseConventionList");
+string? connectionString = builder.Configuration.GetConnectionString(
+    "PostgresDatabaseConventionList"
+);
+
 // Console.WriteLine($"*************************");
 // Console.WriteLine($"*** Connection string = {connectionString}");
 // Console.WriteLine($"*************************");
 
 // Postgres
-builder.Services.AddDbContext<ConventionListDbContext>(options => options.UseNpgsql(connectionString, x => x.UseNetTopologySuite()));
+builder.Services.AddDbContext<ConventionListDbContext>(options =>
+    options.UseNpgsql(connectionString, x => x.UseNetTopologySuite())
+);
 
 builder.Services.AddCors(options =>
 {
-    options.AddDefaultPolicy(
-        policy =>
-        {
-            policy.AllowAnyOrigin();
-            policy.AllowAnyHeader();
-            policy.AllowAnyMethod();
-        });
+    options.AddDefaultPolicy(policy =>
+    {
+        policy.AllowAnyOrigin();
+        policy.AllowAnyHeader();
+        policy.AllowAnyMethod();
+    });
 });
 
 builder.Services.AddControllers();
@@ -42,6 +46,7 @@ builder.Services.AddConventionSceneSync();
 builder.Services.AddFanConsSync();
 
 var app = builder.Build();
+app.Migrate();
 app.UseMiddleware<RequestLoggingMiddleware>();
 app.UseRouting();
 app.UseCors();
