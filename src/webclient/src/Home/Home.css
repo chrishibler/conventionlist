@@ -79,25 +79,6 @@ a {
   margin: 0px;
 }
 
-.logo {
-  display: none;
-}
-
-.logo-img {
-  width: 60px;
-  margin-right: 12px;
-}
-
-.logo h1 {
-  font-family: "Atomic Age", cursive;
-  font-weight: 400;
-  font-size: 30px;
-  font-style: normal;
-  color: var(--green);
-  text-align: center;
-  margin: 0px;
-}
-
 .body-container {
   margin: 18px 12px 0px 12px;
   max-width: 1920px;

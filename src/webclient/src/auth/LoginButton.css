@@ -1,0 +1,17 @@
+.login-button {
+  background-color: transparent;
+  color: var(--saphire);
+  padding: 10px;
+  font-size: 16px;
+  border-style: solid;
+  border-radius: 5px;
+  border-color: var(--saphire);
+  cursor: pointer;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  width: 84px;
+}
+
+.login-button:hover {
+  background-color: var(--surface0);
+  border-color: var(--green);
+}

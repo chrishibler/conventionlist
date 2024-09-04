@@ -4,8 +4,8 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import AddEditConventionForm from "./Manage/AddEditConventionForm";
 import Page from "./Components/Page";
-import ProtectedRoute from "./auth/ProtectedRoute";
-import Auth0ProviderWithRedirectCallback from "./auth/Auth0ProviderWithRedirectCallback.jsx";
+import ProtectedRoute from "./Auth/ProtectedRoute.jsx";
+import Auth0ProviderWithRedirectCallback from "./Auth/Auth0ProviderWithRedirectCallback.jsx";
 
 export default function App() {
   const queryClient = new QueryClient({

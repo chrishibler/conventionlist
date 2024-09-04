@@ -7,7 +7,7 @@ export default function OrderBy({ onOrderByChanged }) {
   const [selectedOption, setSelectedOption] = useState(defaultOption);
   const options = [defaultOption, { value: "distance", label: "Distance" }];
 
-  function CustomSingleValue({ innerProps, isDisabled }) {
+  function CustomSingleValue() {
     return (
       <div style={{ marginBottom: "10px", marginLeft: "8px" }}>
         <ArrowDown color="#cdd6f4" />
@@ -39,6 +39,7 @@ export default function OrderBy({ onOrderByChanged }) {
           width: "60px",
           color: "#cdd6f4",
         }),
+        // eslint-disable-next-line no-unused-vars
         option: (provided, state) => ({
           ...provided,
           borderWidth: "1px",
@@ -48,20 +49,12 @@ export default function OrderBy({ onOrderByChanged }) {
           width: "200px",
           ":hover": { backgroundColor: "#45475a" },
         }),
-        singleValue: (provided, state) => ({
-          ...provided,
-          // color: "#cdd6f4",
-        }),
         menu: (base) => ({
           ...base,
-          width: "216px",
+          // width: "216px",
+          width: "200px",
           borderStyle: "none",
           backgroundColor: "#313244",
-          // backgroundColor: "orange",
-        }),
-        menuList: (base) => ({
-          ...base,
-          backgroundColor: "transparent",
         }),
       }}
     />

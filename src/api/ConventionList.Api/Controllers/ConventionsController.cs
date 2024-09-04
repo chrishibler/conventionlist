@@ -14,20 +14,24 @@ namespace ConventionList.Api.Controllers;
 
 [Route("[controller]")]
 [ApiController]
-public class ConventionsController(ConventionListDbContext db,
-                                   IMapper mapper,
-                                   ILogger<ConventionsController> log,
-                                   GeocodingService geocoder) : ControllerBase
+public class ConventionsController(
+    ConventionListDbContext db,
+    IMapper mapper,
+    ILogger<ConventionsController> log,
+    GeocodingService geocoder
+) : ControllerBase
 {
     // [Authorize]
     // api/Conventions
     [HttpGet]
     [AllowAnonymous]
-    public async Task<ActionResult<ConventionsResult>> GetConventions([FromQuery] int page = 1,
-                                                                      [FromQuery] int pageSize = 20,
-                                                                      [FromQuery] double? lat = null,
-                                                                      [FromQuery] double? lon = null,
-                                                                      [FromQuery] SearchParams? searchParams = null)
+    public async Task<ActionResult<ConventionsResult>> GetConventions(
+        [FromQuery] int page = 1,
+        [FromQuery] int pageSize = 20,
+        [FromQuery] double? lat = null,
+        [FromQuery] double? lon = null,
+        [FromQuery] SearchParams? searchParams = null
+    )
     {
         var query = db.Conventions.AsQueryable();
         query = searchParams?.ApplyFilter(query) ?? query;
@@ -36,7 +40,9 @@ public class ConventionsController(ConventionListDbContext db,
         {
             var geoFactory = NtsGeometryServices.Instance.CreateGeometryFactory(srid: 4326);
             var location = geoFactory.CreatePoint(new Coordinate((double)lon!, (double)lat!));
-            query = query.OrderBy(c => c.Position == null ? double.MaxValue : c.Position.Distance(location));
+            query = query.OrderBy(c =>
+                c.Position == null ? double.MaxValue : c.Position.Distance(location)
+            );
         }
         else
         {
@@ -47,26 +53,29 @@ public class ConventionsController(ConventionListDbContext db,
         int totalPages = (int)Math.Ceiling((double)totalCount / pageSize);
 
         var cons = await query
-                    .Skip((page - 1) * pageSize)
-                    .Take(pageSize)
-                    .Select(c => mapper.Map<ApiConvention>(c)).ToListAsync();
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
+            .Select(c => mapper.Map<ApiConvention>(c))
+            .ToListAsync();
         return Ok(new ConventionsResult(totalCount, totalPages, page, pageSize, cons));
     }
 
     // GET: api/conventions/bounds
     [HttpGet("bounds")]
     [AllowAnonymous]
-    public async Task<ActionResult<ConventionsResult>> GetConventionsByBounds([FromQuery] Bounds bounds,
-                                                                              [FromQuery] int page = 1,
-                                                                              [FromQuery] int pageSize = 20)
+    public async Task<ActionResult<ConventionsResult>> GetConventionsByBounds(
+        [FromQuery] Bounds bounds,
+        [FromQuery] int page = 1,
+        [FromQuery] int pageSize = 20
+    )
     {
         var points = new[]
         {
-            new Coordinate(bounds.West, bounds.North),  // TR
-            new Coordinate(bounds.West, bounds.South),  // BR
-            new Coordinate(bounds.East, bounds.South),  // BL
-            new Coordinate(bounds.East, bounds.North),  // TL
-            new Coordinate(bounds.West, bounds.North),  // TR
+            new Coordinate(bounds.West, bounds.North), // TR
+            new Coordinate(bounds.West, bounds.South), // BR
+            new Coordinate(bounds.East, bounds.South), // BL
+            new Coordinate(bounds.East, bounds.North), // TL
+            new Coordinate(bounds.West, bounds.North), // TR
         };
 
         var query = db.Conventions.AsQueryable();
@@ -78,9 +87,10 @@ public class ConventionsController(ConventionListDbContext db,
         int totalPages = (int)Math.Ceiling((double)totalCount / pageSize);
 
         var cons = await query
-                    .Skip((page - 1) * pageSize)
-                    .Take(pageSize)
-                    .Select(c => mapper.Map<ApiConvention>(c)).ToListAsync();
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
+            .Select(c => mapper.Map<ApiConvention>(c))
+            .ToListAsync();
         return Ok(new ConventionsResult(totalCount, totalPages, page, pageSize, cons));
     }
 
@@ -110,7 +120,7 @@ public class ConventionsController(ConventionListDbContext db,
         // con.SubmitterId = userId;
         await GeocodeCon(con);
         _ = db.Conventions.Add(con);
-        try 
+        try
         {
             _ = await db.SaveChangesAsync();
         }

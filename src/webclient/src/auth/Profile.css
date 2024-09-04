@@ -1,0 +1,18 @@
+.profile-pic {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  align-self: flex-end;
+}
+
+.profile-button {
+  background-color: transparent;
+  box-shadow: none;
+  border-radius: 50%;
+}
+
+.option-list {
+  padding: 6px;
+  border-radius: 12px;
+}
