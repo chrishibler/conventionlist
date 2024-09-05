@@ -28,15 +28,16 @@ export default function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/map" element={<MapBoxConventionMap />} />
-            <Route
-              path="/add"
-              element={<ProtectedRoute component={AddEditConventionPage} />}
-            />
+            <Route path="/add" element={<SecureAddPage />} />
           </Routes>
         </Auth0ProviderWithRedirectCallback>
       </Router>
     </QueryClientProvider>
   );
+}
+
+function SecureAddPage() {
+  return <ProtectedRoute component={AddEditConventionPage} />;
 }
 
 function AddEditConventionPage() {
