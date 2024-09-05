@@ -100,8 +100,11 @@ export default function ConventionMap() {
     };
 
     for (const feature of geoJson.features) {
-      const el = document.createElement("div");
+      // const el = document.createElement("div");
+      // el.className = "marker";
+      const el = document.createElement("img");
       el.className = "marker";
+      el.src = "./logo-sm.png";
 
       new mapboxgl.Marker(el)
         .setLngLat(feature.geometry.coordinates)
