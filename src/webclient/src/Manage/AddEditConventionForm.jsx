@@ -1,9 +1,11 @@
 import "./AddEditConventionForm.css";
 import { useForm } from "react-hook-form";
 import ApiService from "../Services/ApiService";
+import { useAuth0 } from "@auth0/auth0-react";
 
 export default function AddEditConventionForm() {
   const apiService = new ApiService(import.meta.env.VITE_API_URL);
+  const { getAccessTokenSilently } = useAuth0();
   const {
     register,
     formState: { errors },
@@ -12,8 +14,9 @@ export default function AddEditConventionForm() {
     defaultValues: { country: "US" },
   });
 
-  function onSubmit(data) {
-    apiService.postConvention(data);
+  async function onSubmit(data) {
+    let accessToken = await getAccessTokenSilently();
+    apiService.postConvention(data, accessToken);
   }
 
   return (

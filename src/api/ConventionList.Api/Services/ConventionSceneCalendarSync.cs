@@ -5,13 +5,16 @@ using Ical.Net;
 
 namespace ConventionList.Api.Services;
 
-public sealed class ConventinSceneCalendarSync(ILogger<ConventinSceneCalendarSync> logger,
-                                               IServiceScopeFactory scopeFactory,
-                                               IHttpClientFactory clientFactory,
-                                               IMapper autoMapper,
-                                               GeocodingService geocodingService) : HostedService
+public sealed class ConventinSceneCalendarSync(
+    ILogger<ConventinSceneCalendarSync> logger,
+    IServiceScopeFactory scopeFactory,
+    IHttpClientFactory clientFactory,
+    IMapper autoMapper,
+    GeocodingService geocodingService
+) : HostedService
 {
     private const string IcalUrl = "https://www.conventionscene.com/?feed=gigpress-ical";
+    public const string ConventionSceneSyncUserId = "convention_scene_sync_user";
 
     public override Task StartAsync(CancellationToken cancellationToken)
     {
@@ -34,7 +37,9 @@ public sealed class ConventinSceneCalendarSync(ILogger<ConventinSceneCalendarSyn
                 try
                 {
                     var conventionSceneCon = autoMapper.Map<Convention>(evnt);
-                    var existingCon = db.Conventions.FirstOrDefault(c => c.Name == conventionSceneCon.Name);
+                    var existingCon = db.Conventions.FirstOrDefault(c =>
+                        c.Name == conventionSceneCon.Name
+                    );
                     if (existingCon == null && conventionSceneCon.EndDate >= DateTime.UtcNow.Date)
                     {
                         try
@@ -44,12 +49,19 @@ public sealed class ConventinSceneCalendarSync(ILogger<ConventinSceneCalendarSyn
                         }
                         catch (Exception ex)
                         {
-                            logger.LogError(ex, "Error geocoding FanConsCon {ConName}", conventionSceneCon.Name);
+                            logger.LogError(
+                                ex,
+                                "Error geocoding FanConsCon {ConName}",
+                                conventionSceneCon.Name
+                            );
                         }
                         conventionSceneCon.Name = conventionSceneCon.Name.Trim();
                         db.Conventions.Add(conventionSceneCon);
                     }
-                    else if (existingCon is not null && existingCon.SubmitterId == User.ConventionSceneSyncUserId)
+                    else if (
+                        existingCon is not null
+                        && existingCon.SubmitterId == ConventionSceneSyncUserId
+                    )
                     {
                         autoMapper.Map(conventionSceneCon, existingCon);
                         db.Conventions.Update(existingCon);

@@ -11,18 +11,6 @@ public class CcDbSeed
         try
         {
             dbContext.Database.Migrate();
-
-            if (!dbContext.Users.Any(u => u.Id == User.ConventionSceneSyncUserId))
-            {
-                _ = dbContext.Add(new User { Id = User.ConventionSceneSyncUserId });
-            }
-
-            if (!dbContext.Users.Any(u => u.Id == User.FanConsSyncUserId))
-            {
-                _ = dbContext.Add(new User { Id = User.FanConsSyncUserId });
-            }
-
-            dbContext.SaveChanges();
         }
         catch (Exception ex)
         {

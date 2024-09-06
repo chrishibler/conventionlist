@@ -9,8 +9,6 @@ public class Convention
 
     public string? SubmitterId { get; set; }
 
-    public User? Submitter { get; set; }
-
     public Category Category { get; set; }
 
     public string? ExternalId { get; set; }
@@ -44,7 +42,6 @@ public class Convention
 
     public string? Country { get; set; } = "US";
 
-    // [Column(TypeName = "geography (point)")]
     public Point? Position { get; set; }
 
     public bool IsApproved {get; set; }

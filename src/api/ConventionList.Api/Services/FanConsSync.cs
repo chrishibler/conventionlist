@@ -7,11 +7,14 @@ using Newtonsoft.Json;
 
 namespace ConventionList.Api.Services;
 
-public sealed class FanConsSync(ILogger<FanConsSync> logger,
-                                IServiceScopeFactory scopeFactory,
-                                IMapper autoMapper,
-                                GeocodingService geocodingService) : HostedService
+public sealed class FanConsSync(
+    ILogger<FanConsSync> logger,
+    IServiceScopeFactory scopeFactory,
+    IMapper autoMapper,
+    GeocodingService geocodingService
+) : HostedService
 {
+    public const string FanConsSyncUserId = "fancons_sync_user";
 
     public override Task StartAsync(CancellationToken cancellationToken)
     {
@@ -44,15 +47,25 @@ public sealed class FanConsSync(ILogger<FanConsSync> logger,
                         }
                         catch (Exception ex)
                         {
-                            logger.LogError(ex, "Error geocoding FanConsCon {ConName}", fanConsCon.Name);
+                            logger.LogError(
+                                ex,
+                                "Error geocoding FanConsCon {ConName}",
+                                fanConsCon.Name
+                            );
                         }
                         fanConsCon.Name = fanConsCon.Name.Trim();
                         await PoulateConventionUrl(fanConsCon);
                         db.Conventions.Add(fanConsCon);
                     }
-                    else if (User.SyncUserIds.Contains(existingCon.SubmitterId))
+                    else if (FanConsSyncUserId == existingCon.SubmitterId)
                     {
-                        if (fanConsCon.WebsiteAddress is not null && fanConsCon.WebsiteAddress.Contains("fancons.com/events", StringComparison.CurrentCultureIgnoreCase))
+                        if (
+                            fanConsCon.WebsiteAddress is not null
+                            && fanConsCon.WebsiteAddress.Contains(
+                                "fancons.com/events",
+                                StringComparison.CurrentCultureIgnoreCase
+                            )
+                        )
                         {
                             await PoulateConventionUrl(fanConsCon);
                         }
@@ -67,7 +80,6 @@ public sealed class FanConsSync(ILogger<FanConsSync> logger,
                     logger.LogError(ex, "Exception processing FanCons con");
                 }
             }
-
         }
         catch (Exception ex)
         {
@@ -89,14 +101,16 @@ public sealed class FanConsSync(ILogger<FanConsSync> logger,
         logger.LogInformation("FanCons response: {StatusCode}", response.StatusCode);
         HtmlDocument htmlDoc = new();
         htmlDoc.LoadHtml(await response.Content.ReadAsStringAsync());
-        string jsonData = htmlDoc.DocumentNode.SelectNodes("/html[1]/body[1]/script[1]").First().InnerText
+        string jsonData =
+            htmlDoc.DocumentNode.SelectNodes("/html[1]/body[1]/script[1]").First().InnerText
             ?? throw new InvalidOperationException("No FanCons json data found");
 
         var fanConsEvents = JsonConvert.DeserializeObject<List<FanConEvent>>(jsonData) ?? [];
 
         var fanconConventions = fanConsEvents
             .Select(autoMapper.Map<Convention>)
-            .Where(c => c is not null && c.EndDate >= DateTime.UtcNow.Date).ToList();
+            .Where(c => c is not null && c.EndDate >= DateTime.UtcNow.Date)
+            .ToList();
 
         return fanconConventions;
     }
@@ -110,10 +124,15 @@ public sealed class FanConsSync(ILogger<FanConsSync> logger,
             var response = await httpClient.GetAsync(con.WebsiteAddress);
             var htmlDoc = new HtmlDocument();
             htmlDoc.LoadHtml(await response.Content.ReadAsStringAsync());
-            string conLink = htmlDoc.DocumentNode.SelectNodes("//a[@href]")
-                                                  .First(n => n.InnerText == "Visit Convention Site")
-                                                  .GetAttributeValue("href", null)
-                                                  .Replace("fancons.com", "conventionlist.org", StringComparison.CurrentCultureIgnoreCase);
+            string conLink = htmlDoc
+                .DocumentNode.SelectNodes("//a[@href]")
+                .First(n => n.InnerText == "Visit Convention Site")
+                .GetAttributeValue("href", null)
+                .Replace(
+                    "fancons.com",
+                    "conventionlist.org",
+                    StringComparison.CurrentCultureIgnoreCase
+                );
             con.WebsiteAddress = conLink;
         }
         catch (Exception ex)

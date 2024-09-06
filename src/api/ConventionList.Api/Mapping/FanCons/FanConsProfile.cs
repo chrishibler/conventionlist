@@ -1,6 +1,7 @@
 using System.Web;
 using AutoMapper;
 using ConventionList.Api.Models;
+using ConventionList.Api.Services;
 
 namespace ConventionList.Api.Mapping.FanCons;
 
@@ -20,7 +21,10 @@ public class FanConConventionProfile : Profile
             .ForMember(dest => dest.EndDate, opt => opt.MapFrom(src => GetEndDate(src)))
             .ForMember(dest => dest.Description, opt => opt.MapFrom(src => GetDescription(src)))
             .ForMember(dest => dest.ExternalSource, opt => opt.MapFrom(src => "fancons.com"))
-            .ForMember(dest => dest.SubmitterId, opt => opt.MapFrom(src => User.FanConsSyncUserId));
+            .ForMember(
+                dest => dest.SubmitterId,
+                opt => opt.MapFrom(src => FanConsSync.FanConsSyncUserId)
+            );
     }
 
     private static DateTime GetStartDate(FanConEvent evnt) =>

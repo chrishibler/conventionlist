@@ -54,9 +54,14 @@ class ApiService {
     return results;
   }
 
-  async postConvention(conventionData) {
+  async postConvention(conventionData, accessToken) {
     let url = "conventions";
-    const postResponse = await this.client.post(url, conventionData);
+
+    const config = {
+      headers: { Authorization: `Bearer ${accessToken}` },
+    };
+
+    const postResponse = await this.client.post(url, conventionData, config);
     if (postResponse.status !== 200) {
       throw Error(
         `Conventions by bounds call ${url} returned an error. Status=${postResponse.status} - ${postResponse.statusText}`

@@ -1,7 +1,12 @@
+using System.Security.Claims;
+using ConventionList.Api.Auth;
 using ConventionList.Api.Data;
 using ConventionList.Api.Extensions;
 using ConventionList.Api.Middleware;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,6 +26,22 @@ string? connectionString = builder.Configuration.GetConnectionString(
 // Console.WriteLine($"*************************");
 // Console.WriteLine($"*** Connection string = {connectionString}");
 // Console.WriteLine($"*************************");
+Console.WriteLine($"*********{builder.Configuration["Auth0:Domain"]}");
+Console.WriteLine($"*********{builder.Configuration["Auth0:Audience"]}");
+
+// Program.cs
+var domain = $"https://{builder.Configuration["Auth0:Domain"]}";
+builder
+    .Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.Authority = domain;
+        options.Audience = builder.Configuration["Auth0:Audience"];
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            NameClaimType = ClaimTypes.NameIdentifier,
+        };
+    });
 
 // Postgres
 builder.Services.AddDbContext<ConventionListDbContext>(options =>
@@ -37,6 +58,19 @@ builder.Services.AddCors(options =>
     });
 });
 
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy(
+        "manage:myconventions",
+        policy => policy.Requirements.Add(new HasScopeRequirement("manage:myconventions", domain))
+    );
+    options.AddPolicy(
+        "manage:allconventions",
+        policy =>
+            policy.Requirements.Add(new HasScopeRequirement("manage:allconventions", domain))
+    );
+});
+builder.Services.AddSingleton<IAuthorizationHandler, HasScopeHandler>();
 builder.Services.AddControllers();
 builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddHttpClient();
@@ -46,6 +80,8 @@ builder.Services.AddConventionSceneSync();
 builder.Services.AddFanConsSync();
 
 var app = builder.Build();
+app.UseAuthentication();
+app.UseAuthorization();
 app.Migrate();
 app.UseMiddleware<RequestLoggingMiddleware>();
 app.UseRouting();

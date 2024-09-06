@@ -1,5 +1,6 @@
 using AutoMapper;
 using ConventionList.Api.Models;
+using ConventionList.Api.Services;
 using ConventionList.Api.Services.Utils;
 using Ical.Net.CalendarComponents;
 
@@ -10,14 +11,26 @@ public class ConventionSceneProfile : Profile
     public ConventionSceneProfile()
     {
         CreateMap<CalendarEvent, Convention>()
-            .ForMember(dest => dest.SubmitterId, opt => opt.MapFrom(src => User.ConventionSceneSyncUserId))
+            .ForMember(
+                dest => dest.SubmitterId,
+                opt => opt.MapFrom(src => ConventinSceneCalendarSync.ConventionSceneSyncUserId)
+            )
             .ForMember(dest => dest.Category, opt => opt.MapFrom(src => GetCategory(src)))
             .ForMember(dest => dest.ExternalId, opt => opt.MapFrom(src => GetExternalId(src)))
-            .ForMember(dest => dest.ExternalSource, opt => opt.MapFrom(src => "conventionscene.com"))
+            .ForMember(
+                dest => dest.ExternalSource,
+                opt => opt.MapFrom(src => "conventionscene.com")
+            )
             .ForMember(dest => dest.Name, opt => opt.MapFrom(src => GetConventionName(src)))
             .ForMember(dest => dest.VenueName, opt => opt.MapFrom(src => GetVenueName(src)))
-            .ForMember(dest => dest.StartDate, opt => opt.MapFrom(src => src.Start.Date.ToUniversalTime()))
-            .ForMember(dest => dest.EndDate, opt => opt.MapFrom(src => src.End.Date.ToUniversalTime()))
+            .ForMember(
+                dest => dest.StartDate,
+                opt => opt.MapFrom(src => src.Start.Date.ToUniversalTime())
+            )
+            .ForMember(
+                dest => dest.EndDate,
+                opt => opt.MapFrom(src => src.End.Date.ToUniversalTime())
+            )
             .ForMember(dest => dest.City, opt => opt.MapFrom(src => GetCity(src)))
             .ForMember(dest => dest.State, opt => opt.MapFrom(src => GetState(src)))
             .ForMember(dest => dest.Country, opt => opt.MapFrom(src => GetCountry(src)))
@@ -25,10 +38,17 @@ public class ConventionSceneProfile : Profile
             .ForMember(dest => dest.Position, opt => opt.Ignore());
     }
 
-    public string GetConventionName(CalendarEvent calEvent) => GetLocationPart(calEvent, LocationPart.ConName) ?? "Unkown Name";
-    public string? GetVenueName(CalendarEvent calEvent) => GetLocationPart(calEvent, LocationPart.VenueName);
+    public string GetConventionName(CalendarEvent calEvent) =>
+        GetLocationPart(calEvent, LocationPart.ConName) ?? "Unkown Name";
+
+    public string? GetVenueName(CalendarEvent calEvent) =>
+        GetLocationPart(calEvent, LocationPart.VenueName);
+
     public string? GetCity(CalendarEvent calEvent) => GetLocationPart(calEvent, LocationPart.City);
-    public string? GetCountry(CalendarEvent calEvent) => GetLocationPart(calEvent, LocationPart.Country);
+
+    public string? GetCountry(CalendarEvent calEvent) =>
+        GetLocationPart(calEvent, LocationPart.Country);
+
     public Category GetCategory(CalendarEvent calEvent)
     {
         //"summary": "Comic Book Convention at Beyond Comicon",
@@ -95,6 +115,7 @@ public class ConventionSceneProfile : Profile
 
         return null;
     }
+
     public string GetExternalId(CalendarEvent calEvent) => calEvent.Uid;
 
     public string GetExternalSource() => "conventionscene.com";
@@ -165,7 +186,6 @@ public class ConventionSceneProfile : Profile
                 break;
         }
 
-
         return part;
     }
 
@@ -183,6 +203,6 @@ public class ConventionSceneProfile : Profile
         ConName,
         VenueName,
         City,
-        Country
+        Country,
     }
 }

@@ -1,4 +1,5 @@
 using AutoMapper;
+using ConventionList.Api.Auth;
 using ConventionList.Api.Data;
 using ConventionList.Api.Extensions;
 using ConventionList.Api.Models;
@@ -107,17 +108,17 @@ public class ConventionsController(
         return Ok(mapper.Map<ApiConvention>(convention));
     }
 
-    // [Authorize]
     [HttpPost]
+    [Authorize("manage:myconventions")]
     public async Task<ActionResult<ApiConvention>> Post([FromBody] NewApiConvention newCon)
     {
-        // string? userId = HttpContext.User.SubjectId();
-        // if (userId is null)
-        //     return Unauthorized("No user ID found");
+        string? userId = HttpContext.User.SubjectId();
+        if (userId is null)
+            return Unauthorized("No user ID found");
 
         var con = mapper.Map<Convention>(newCon);
         con.Id = Guid.NewGuid();
-        // con.SubmitterId = userId;
+        con.SubmitterId = userId;
         await GeocodeCon(con);
         _ = db.Conventions.Add(con);
         try
@@ -133,18 +134,7 @@ public class ConventionsController(
         return Created($"~conventions/{con.Id}", apiConvention);
     }
 
-    private async Task EnsureUser(string userId)
-    {
-        var user = await db.FindAsync<User>(userId);
-        if (user == null)
-        {
-            User newUser = new() { Id = userId };
-            await db.Users.AddAsync(newUser);
-            await db.SaveChangesAsync();
-        }
-    }
-
-    [Authorize]
+    [Authorize("manage:myconventions")]
     [HttpPut("{id}")]
     public async Task<ActionResult> Put([FromRoute] Guid id, [FromBody] Convention updatedCon)
     {
@@ -159,9 +149,9 @@ public class ConventionsController(
             return BadRequest(ModelState);
         }
 
-        if (HttpContext.User.SubjectId() != existingCon.SubmitterId)
+        if (!HttpContext.User.IsSubmitterOrAdmin(existingCon))
         {
-            return Forbid();
+            return Forbid("User did not submit this convention.");
         }
 
         mapper.Map(updatedCon, existingCon);
@@ -180,7 +170,7 @@ public class ConventionsController(
             return NotFound();
         }
 
-        if (HttpContext.User.SubjectId() != existingCon.SubmitterId)
+        if (!HttpContext.User.IsSubmitterOrAdmin(existingCon))
         {
             return Forbid("User did not submit this convention.");
         }

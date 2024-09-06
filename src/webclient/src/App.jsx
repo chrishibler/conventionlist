@@ -23,6 +23,7 @@ export default function App() {
           clientId="Jc7oekVuHsEVL1ZvdCiCEy5Uui4NSrPz"
           authorizationParams={{
             redirect_uri: window.location.origin,
+            audience: "https://api.conventionlist.org",
           }}
         >
           <Routes>
