@@ -50,6 +50,10 @@ a {
   color: var(--text);
 }
 
+fieldset {
+  border: 0;
+}
+
 .convention-name {
   font-size: 1.3em;
 }

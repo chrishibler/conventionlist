@@ -3,7 +3,6 @@ import SearchParams from "../SearchParams";
 
 class ApiService {
   constructor(baseUrl) {
-    console.log(`api url: ${baseUrl}`);
     this.client = axios.create({ baseURL: baseUrl });
     this.client.interceptors.request.use((request) => {
       //console.log("Starting Request", JSON.stringify(request, null, 2));
@@ -62,7 +61,7 @@ class ApiService {
     };
 
     const postResponse = await this.client.post(url, conventionData, config);
-    if (postResponse.status !== 200) {
+    if (postResponse.status !== 201) {
       throw Error(
         `Conventions by bounds call ${url} returned an error. Status=${postResponse.status} - ${postResponse.statusText}`
       );
