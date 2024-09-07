@@ -1,7 +1,6 @@
 using AutoMapper;
 using ConventionList.Api.Auth;
 using ConventionList.Api.Data;
-using ConventionList.Api.Extensions;
 using ConventionList.Api.Models;
 using ConventionList.Api.Models.Api;
 using ConventionList.Api.Services;
@@ -22,8 +21,7 @@ public class ConventionsController(
     GeocodingService geocoder
 ) : ControllerBase
 {
-    // [Authorize]
-    // api/Conventions
+    // Conventions
     [HttpGet]
     [AllowAnonymous]
     public async Task<ActionResult<ConventionsResult>> GetConventions(
@@ -61,7 +59,7 @@ public class ConventionsController(
         return Ok(new ConventionsResult(totalCount, totalPages, page, pageSize, cons));
     }
 
-    // GET: api/conventions/bounds
+    // GET: conventions/bounds
     [HttpGet("bounds")]
     [AllowAnonymous]
     public async Task<ActionResult<ConventionsResult>> GetConventionsByBounds(
@@ -95,8 +93,8 @@ public class ConventionsController(
         return Ok(new ConventionsResult(totalCount, totalPages, page, pageSize, cons));
     }
 
+    // conventions/key
     [HttpGet("{id}")]
-    // api/Conventions/key
     public async Task<ActionResult<ApiConvention>> Get([FromRoute] Guid id)
     {
         var convention = await db.Conventions.FindAsync(id);
@@ -154,17 +152,26 @@ public class ConventionsController(
             return Forbid("User did not submit this convention.");
         }
 
-        mapper.Map(updatedCon, existingCon);
-        db.SaveChanges();
+        updatedCon.SubmitterId = HttpContext.User.SubjectId();
 
-        return new ObjectResult(existingCon);
+        try
+        {
+            mapper.Map(updatedCon, existingCon);
+            db.SaveChanges();
+        }
+        catch (Exception ex)
+        {
+            log.LogError("Error updating convention", ex);
+        }
+
+        return NoContent();
     }
 
-    [Authorize]
-    [HttpDelete]
-    public async Task<ActionResult> Delete([FromRoute] Guid key)
+    [Authorize("manage:myconventions")]
+    [HttpDelete("{id}")]
+    public async Task<ActionResult> Delete([FromRoute] Guid id)
     {
-        var existingCon = await db.Conventions.SingleOrDefaultAsync(d => d.Id == key);
+        var existingCon = await db.Conventions.SingleOrDefaultAsync(d => d.Id == id);
         if (existingCon == null)
         {
             return NotFound();
@@ -173,6 +180,16 @@ public class ConventionsController(
         if (!HttpContext.User.IsSubmitterOrAdmin(existingCon))
         {
             return Forbid("User did not submit this convention.");
+        }
+
+        _ = db.Conventions.Remove(existingCon);
+        try
+        {
+            _ = await db.SaveChangesAsync();
+        }
+        catch (Exception ex)
+        {
+            log.LogError("Error deleting convention", ex);
         }
 
         db.SaveChanges();

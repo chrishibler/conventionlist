@@ -2,10 +2,12 @@ import "./AddEditConventionForm.css";
 import { useForm } from "react-hook-form";
 import ApiService from "../Services/ApiService";
 import { useAuth0 } from "@auth0/auth0-react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 export default function AddEditConventionForm() {
   const navigate = useNavigate();
+  const location = useLocation();
+  let convention = location.state ? location.state.convention : null;
   const apiService = new ApiService(import.meta.env.VITE_API_URL);
   const { getAccessTokenSilently } = useAuth0();
   const {
@@ -13,14 +15,36 @@ export default function AddEditConventionForm() {
     formState: { errors, isSubmitSuccessful },
     handleSubmit,
   } = useForm({
-    defaultValues: { country: "US" },
+    defaultValues: {
+      name: convention ? convention.name : "",
+      description: convention ? convention.description : "",
+      startDate: convention
+        ? new Date(convention.startDate).toISOString().substring(0, 10)
+        : "",
+      endDate: convention
+        ? new Date(convention.endDate).toISOString().substring(0, 10)
+        : "",
+      websiteAddress: convention ? convention.websiteAddress : null,
+      venueName: convention ? convention.venueName : null,
+      address1: convention ? convention.address1 : null,
+      address2: convention ? convention.address2 : null,
+      city: convention ? convention.city : null,
+      postalCode: convention ? convention.postalCode : null,
+      country: "US",
+    },
   });
 
   async function onSubmit(data) {
     try {
       let accessToken = await getAccessTokenSilently();
-      await apiService.postConvention(data, accessToken);
-      navigate("/");
+      if (convention) {
+        data.id = convention.id;
+        await apiService.putConvention(data, accessToken);
+      } else {
+        await apiService.postConvention(data, accessToken);
+      }
+
+      navigate("/manage");
     } catch (err) {
       console.error(err);
       throw err;

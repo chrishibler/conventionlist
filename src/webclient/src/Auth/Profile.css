@@ -15,4 +15,9 @@
 .option-list {
   padding: 6px;
   border-radius: 12px;
+  display: inline-block;
+}
+
+.profile-menu-li {
+  margin-bottom: 6px;
 }

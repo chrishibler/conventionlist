@@ -6,6 +6,7 @@ import AddEditConventionForm from "./Manage/AddEditConventionForm";
 import Page from "./Components/Page";
 import ProtectedRoute from "./Auth/ProtectedRoute.jsx";
 import Auth0ProviderWithRedirectCallback from "./Auth/Auth0ProviderWithRedirectCallback.jsx";
+import ManageConventionsTable from "./Manage/ManageConventionsTable.jsx";
 
 export default function App() {
   const queryClient = new QueryClient({
@@ -30,6 +31,8 @@ export default function App() {
             <Route path="/" element={<Home />} />
             <Route path="/map" element={<MapBoxConventionMap />} />
             <Route path="/add" element={<SecureAddPage />} />
+            <Route path="/manage" element={<SecureManageConventionsPage />} />
+            <Route path="/edit" element={<SecureEditPage />} />
           </Routes>
         </Auth0ProviderWithRedirectCallback>
       </Router>
@@ -45,6 +48,30 @@ function AddEditConventionPage() {
   return (
     <Page>
       <AddEditConventionForm />
+    </Page>
+  );
+}
+
+function SecureEditPage() {
+  return <ProtectedRoute component={EditConventionPage} />;
+}
+
+function EditConventionPage() {
+  return (
+    <Page>
+      <AddEditConventionForm />
+    </Page>
+  );
+}
+
+function SecureManageConventionsPage() {
+  return <ProtectedRoute component={ManageConventionsPage} />;
+}
+
+function ManageConventionsPage() {
+  return (
+    <Page>
+      <ManageConventionsTable />
     </Page>
   );
 }

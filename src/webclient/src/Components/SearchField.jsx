@@ -8,7 +8,7 @@ export default function SearchField({ onSearch, onOrderByChanged }) {
 
   useEffect(() => {
     onSearch(debouncedSearchTerm);
-  }, [debouncedSearchTerm]);
+  }, [debouncedSearchTerm, onSearch]);
 
   return (
     <div className="search-field-container">

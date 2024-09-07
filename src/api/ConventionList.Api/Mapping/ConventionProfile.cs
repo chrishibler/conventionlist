@@ -12,7 +12,15 @@ public class ConventionProfile : Profile
     {
         CreateMap<Convention, Convention>()
             .ForMember(dest => dest.Id, act => act.Ignore())
-            .ForMember(dest => dest.Position, act => act.Ignore());
+            .ForMember(dest => dest.Position, act => act.Ignore())
+            .ForMember(
+                dest => dest.StartDate,
+                opt => opt.MapFrom(src => src.StartDate.ToUniversalTime())
+            )
+            .ForMember(
+                dest => dest.EndDate,
+                opt => opt.MapFrom(src => src.EndDate.ToUniversalTime())
+            );
 
         CreateMap<Convention, ApiConvention>()
             .ForMember(dest => dest.Position, opt => opt.MapFrom(src => src.ToGeocoordinate()));
