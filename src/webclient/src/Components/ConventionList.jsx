@@ -50,7 +50,7 @@ export default function ConventionList({ searchInfo }) {
 
   if (isLoading)
     return (
-      <div className="loader-item">
+      <div className="loader-container">
         <Loader />
       </div>
     );
