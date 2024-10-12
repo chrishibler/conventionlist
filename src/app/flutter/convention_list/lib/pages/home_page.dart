@@ -1,5 +1,7 @@
+import 'package:convention_list/theme/mocha.dart';
 import 'package:convention_list/widgets/clearable_text_field.dart';
 import 'package:dio/dio.dart';
+import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -59,10 +61,28 @@ Widget getListTile(Convention convention) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      Text(convention.name),
       Text(
-          '${DateFormat('dd MMMM yyyy').format(convention.startDate)} - ${DateFormat('dd MMMM yyyy').format(convention.endDate)}'),
-      Text((convention.description ?? '').replaceAll('\n', ' ')),
+        convention.name,
+        style: const TextStyle(
+          fontSize: 18,
+          color: CatppuccinMocha.green,
+          decoration: TextDecoration.underline,
+        ),
+      ),
+      Text(
+        '${DateFormat('dd MMMM yyyy').format(convention.startDate)} - ${DateFormat('dd MMMM yyyy').format(convention.endDate)}',
+        style: const TextStyle(
+          fontSize: 16,
+          fontStyle: FontStyle.italic,
+        ),
+      ),
+      ExpandableText(
+        (convention.description ?? '').replaceAll('\n', ' '),
+        expandText: 'show more',
+        collapseText: 'show less',
+        maxLines: 3,
+        linkColor: CatppuccinMocha.sapphire,
+      ),
       const SizedBox(height: 24),
     ],
   );
