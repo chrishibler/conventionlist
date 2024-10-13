@@ -3,10 +3,12 @@ import 'package:convention_list/widgets/clearable_text_field.dart';
 import 'package:dio/dio.dart';
 import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:intl/intl.dart';
 
 import '../models/convention.dart';
 import '../models/response_page.dart';
+import '../theme/text_styles.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -16,12 +18,35 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  Future<ResponsePage> f = () async {
-    final dio = Dio();
-    final response =
-        await dio.get('https://api.conventionlist.org/conventions');
-    return ResponsePage.fromJson(response.data);
-  }();
+  final PagingController<int, Convention> _pagingController =
+      PagingController(firstPageKey: 2);
+
+  Future<void> _fetchPage(int pageKey) async {
+    try {
+      final dio = Dio();
+      final String url =
+          'https://api.conventionlist.org/conventions?page=$pageKey';
+      final response = await dio.get(url);
+      ResponsePage page = ResponsePage.fromJson(response.data);
+      bool isLastPage = page.totalPages == page.currentPage;
+      if (isLastPage) {
+        _pagingController.appendLastPage(page.conventions);
+      } else {
+        _pagingController.appendPage(page.conventions, pageKey + 1);
+      }
+    } catch (error) {
+      _pagingController.error = error;
+      print(error);
+    }
+  }
+
+  @override
+  void initState() {
+    _pagingController.addPageRequestListener((pageKey) {
+      _fetchPage(pageKey);
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,46 +60,33 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(12.0),
-        child: FutureBuilder(
-          future: f,
-          builder:
-              (BuildContext context, AsyncSnapshot<ResponsePage> snapshot) {
-            if (snapshot.hasData) {
-              return ListView(
-                children: snapshot.data!.conventions
-                    .map<Widget>((c) => getListTile(c))
-                    .toList(),
-              );
-            } else if (snapshot.hasError) {
-              return const Text('');
-            } else {
-              return const CircularProgressIndicator();
-            }
-          },
+        child: PagedListView<int, Convention>(
+          pagingController: _pagingController,
+          builderDelegate: PagedChildBuilderDelegate(
+              itemBuilder: (context, item, index) => _getListTile(item)),
         ),
       ),
     );
   }
+
+  @override
+  void dispose() {
+    _pagingController.dispose();
+    super.dispose();
+  }
 }
 
-Widget getListTile(Convention convention) {
+Widget _getListTile(Convention convention) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       Text(
         convention.name,
-        style: const TextStyle(
-          fontSize: 18,
-          color: CatppuccinMocha.green,
-          decoration: TextDecoration.underline,
-        ),
+        style: listConventionNameStyle,
       ),
       Text(
         '${DateFormat('dd MMMM yyyy').format(convention.startDate)} - ${DateFormat('dd MMMM yyyy').format(convention.endDate)}',
-        style: const TextStyle(
-          fontSize: 16,
-          fontStyle: FontStyle.italic,
-        ),
+        style: listDateStyle,
       ),
       ExpandableText(
         (convention.description ?? '').replaceAll('\n', ' '),

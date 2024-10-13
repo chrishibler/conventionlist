@@ -20,6 +20,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: CatppuccinMocha.base,
         inputDecorationTheme: CatppuccinMocha.inputTheme,
         appBarTheme: CatppuccinMocha.appBarTheme,
+        textTheme: CatppuccinMocha.textTheme,
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
