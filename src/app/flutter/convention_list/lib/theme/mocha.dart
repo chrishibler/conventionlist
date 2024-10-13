@@ -63,4 +63,16 @@ class CatppuccinMocha {
   static AppBarTheme appBarTheme = const AppBarTheme(
     backgroundColor: base,
   );
+
+  static TextTheme textTheme = const TextTheme().copyWith(
+    bodySmall: const TextStyle(color: text),
+    bodyMedium: const TextStyle(color: text),
+    bodyLarge: const TextStyle(color: text),
+    labelSmall: const TextStyle(color: text),
+    labelMedium: const TextStyle(color: text),
+    labelLarge: const TextStyle(color: text),
+    displaySmall: const TextStyle(color: text),
+    displayMedium: const TextStyle(color: text),
+    displayLarge: const TextStyle(color: text),
+  );
 }
