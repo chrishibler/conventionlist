@@ -36,8 +36,7 @@ class CatppuccinMocha {
     fillColor: CatppuccinMocha.surface0,
     hintStyle: const TextStyle(color: surface0),
     // Light grey background
-    contentPadding:
-        const EdgeInsets.symmetric(vertical: 15.0, horizontal: 20.0),
+    contentPadding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 20.0),
     border: OutlineInputBorder(
       borderRadius: BorderRadius.circular(30.0),
       borderSide: BorderSide.none,
@@ -61,7 +60,7 @@ class CatppuccinMocha {
   );
 
   static AppBarTheme appBarTheme = const AppBarTheme(
-    backgroundColor: base,
+    backgroundColor: crust,
   );
 
   static TextTheme textTheme = const TextTheme().copyWith(
