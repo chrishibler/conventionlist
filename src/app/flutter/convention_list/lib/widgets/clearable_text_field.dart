@@ -1,7 +1,8 @@
+import 'package:convention_list/theme/mocha.dart';
 import 'package:flutter/material.dart';
 
 class ClearableTextField extends StatefulWidget {
-  const ClearableTextField({super.key, this.hintText = ""});
+  const ClearableTextField({super.key, required this.hintText});
 
   final String hintText;
 
@@ -18,6 +19,7 @@ class _ClearableTextFieldState extends State<ClearableTextField> {
       controller: _controller,
       decoration: InputDecoration(
         hintText: widget.hintText,
+        hintStyle: const TextStyle(fontSize: 20.0, color: CatppuccinMocha.overlay2),
         suffixIcon: _controller.text.isEmpty
             ? null
             : IconButton(
