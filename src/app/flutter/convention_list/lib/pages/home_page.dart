@@ -50,9 +50,9 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: 96,
+        toolbarHeight: 90,
         leading: const Padding(
-          padding: EdgeInsets.all(0.0),
+          padding: EdgeInsets.fromLTRB(12, 0, 0, 0),
           child: Image(image: AssetImage('assets/logo-sm.png')),
         ),
         title: const ClearableTextField(hintText: 'Search'),
