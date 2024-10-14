@@ -1,5 +1,6 @@
 import 'package:convention_list/theme/mocha.dart';
 import 'package:convention_list/widgets/clearable_text_field.dart';
+import 'package:convention_list/widgets/drawer.dart';
 import 'package:dio/dio.dart';
 import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';
@@ -51,12 +52,18 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 90,
-        leading: const Padding(
-          padding: EdgeInsets.fromLTRB(12, 0, 0, 0),
-          child: Image(image: AssetImage('assets/logo-sm.png')),
-        ),
+        leading: Builder(builder: (context) {
+          return InkWell(
+            onTap: () => Scaffold.of(context).openDrawer(),
+            child: const Padding(
+              padding: EdgeInsets.fromLTRB(12, 0, 0, 0),
+              child: Image(image: AssetImage('assets/logo-sm.png')),
+            ),
+          );
+        }),
         title: const ClearableTextField(hintText: 'Search'),
       ),
+      drawer: const AppDrawer(),
       body: Padding(
         padding: const EdgeInsets.all(12.0),
         child: RefreshIndicator(
