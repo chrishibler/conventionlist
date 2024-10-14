@@ -53,7 +53,8 @@ public sealed class FanConsSync(
                                 fanConsCon.Name
                             );
                         }
-                        fanConsCon.Name = fanConsCon.Name.Trim();
+                        fanConsCon.Name = HtmlFixService.ReplaceHtmlChars(fanConsCon.Name);
+
                         await PoulateConventionUrl(fanConsCon);
                         db.Conventions.Add(fanConsCon);
                     }

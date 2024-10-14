@@ -55,7 +55,10 @@ public sealed class ConventinSceneCalendarSync(
                                 conventionSceneCon.Name
                             );
                         }
-                        conventionSceneCon.Name = conventionSceneCon.Name.Trim();
+                        conventionSceneCon.Name = HtmlFixService.ReplaceHtmlChars(
+                            conventionSceneCon.Name
+                        );
+
                         db.Conventions.Add(conventionSceneCon);
                     }
                     else if (
