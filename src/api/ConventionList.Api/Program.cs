@@ -66,8 +66,7 @@ builder.Services.AddAuthorization(options =>
     );
     options.AddPolicy(
         "manage:allconventions",
-        policy =>
-            policy.Requirements.Add(new HasScopeRequirement("manage:allconventions", domain))
+        policy => policy.Requirements.Add(new HasScopeRequirement("manage:allconventions", domain))
     );
 });
 builder.Services.AddSingleton<IAuthorizationHandler, HasScopeHandler>();
@@ -78,6 +77,7 @@ builder.Services.AddGoogleMapsSearchClient(builder);
 builder.Services.AddGeocodingService();
 builder.Services.AddConventionSceneSync();
 builder.Services.AddFanConsSync();
+builder.Services.AddHtmlFixService();
 
 var app = builder.Build();
 app.UseAuthentication();

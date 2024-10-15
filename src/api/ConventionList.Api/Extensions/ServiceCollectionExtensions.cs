@@ -14,43 +14,59 @@ public static class ServiceCollectionExtensions
     public static void AddGeocodingService(this IServiceCollection services)
     {
         services.AddSingleton<GeocodingService>();
-        services.AddHostedService((serviceProvider) =>
-        {
-            GeocodingService service = new(
-                serviceProvider.GetRequiredService<IMapsSearchClient>(),
-                serviceProvider.GetRequiredService<ILogger<GeocodingService>>(),
-                serviceProvider.GetRequiredService<IServiceScopeFactory>()
-            );
-            return service;
-        });
+        services.AddHostedService(
+            (serviceProvider) =>
+            {
+                GeocodingService service =
+                    new(
+                        serviceProvider.GetRequiredService<IMapsSearchClient>(),
+                        serviceProvider.GetRequiredService<ILogger<GeocodingService>>(),
+                        serviceProvider.GetRequiredService<IServiceScopeFactory>()
+                    );
+                return service;
+            }
+        );
     }
 
     public static void AddConventionSceneSync(this IServiceCollection services)
     {
-        services.AddHostedService((serviceProvider) =>
-        {
-            ConventinSceneCalendarSync service = new(serviceProvider.GetRequiredService<ILogger<ConventinSceneCalendarSync>>(),
-                                                     serviceProvider.GetRequiredService<IServiceScopeFactory>(),
-                                                     serviceProvider.GetRequiredService<IHttpClientFactory>(),
-                                                     serviceProvider.GetRequiredService<IMapper>(),
-                                                     serviceProvider.GetRequiredService<GeocodingService>());
-            return service;
-        });
+        services.AddHostedService(
+            (serviceProvider) =>
+            {
+                ConventinSceneCalendarSync service =
+                    new(
+                        serviceProvider.GetRequiredService<ILogger<ConventinSceneCalendarSync>>(),
+                        serviceProvider.GetRequiredService<IServiceScopeFactory>(),
+                        serviceProvider.GetRequiredService<IHttpClientFactory>(),
+                        serviceProvider.GetRequiredService<IMapper>(),
+                        serviceProvider.GetRequiredService<GeocodingService>()
+                    );
+                return service;
+            }
+        );
     }
 
     public static void AddFanConsSync(this IServiceCollection services)
     {
-        services.AddHostedService((serviceProvider) =>
-        {
-            FanConsSync service = new(serviceProvider.GetRequiredService<ILogger<FanConsSync>>(),
-                                      serviceProvider.GetRequiredService<IServiceScopeFactory>(),
-                                      serviceProvider.GetRequiredService<IMapper>(),
-                                      serviceProvider.GetRequiredService<GeocodingService>());
-            return service;
-        });
+        services.AddHostedService(
+            (serviceProvider) =>
+            {
+                FanConsSync service =
+                    new(
+                        serviceProvider.GetRequiredService<ILogger<FanConsSync>>(),
+                        serviceProvider.GetRequiredService<IServiceScopeFactory>(),
+                        serviceProvider.GetRequiredService<IMapper>(),
+                        serviceProvider.GetRequiredService<GeocodingService>()
+                    );
+                return service;
+            }
+        );
     }
 
-    public static void AddGoogleMapsSearchClient(this IServiceCollection services, WebApplicationBuilder builder)
+    public static void AddGoogleMapsSearchClient(
+        this IServiceCollection services,
+        WebApplicationBuilder builder
+    )
     {
         string? key = builder.Configuration[GoogleMapsApiKey];
         if (key is null or "")
@@ -60,5 +76,16 @@ public static class ServiceCollectionExtensions
 
         GoogleMapsSearchClient clClient = new(key);
         services.AddSingleton<IMapsSearchClient>(clClient);
+    }
+
+    public static void AddHtmlFixService(this IServiceCollection services)
+    {
+        services.AddHostedService<HtmlFixService>(
+            (factory) =>
+                new HtmlFixService(
+                    factory.GetRequiredService<IServiceScopeFactory>(),
+                    factory.GetRequiredService<ILogger<HtmlFixService>>()
+                )
+        );
     }
 }
