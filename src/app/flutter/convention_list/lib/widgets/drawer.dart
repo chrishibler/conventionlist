@@ -1,9 +1,20 @@
+import 'package:convention_list/services/auth_service.dart';
+import 'package:convention_list/widgets/drawer_item.dart';
 import 'package:flutter/material.dart';
 
 import '../theme/mocha.dart';
 
-class AppDrawer extends StatelessWidget {
-  const AppDrawer({super.key});
+class AppDrawer extends StatefulWidget {
+  const AppDrawer({super.key, this.additionalItems});
+
+  final List<Widget>? additionalItems;
+
+  @override
+  State<AppDrawer> createState() => _AppDrawerState();
+}
+
+class _AppDrawerState extends State<AppDrawer> {
+  bool isLoggedIn = AuthService.credentials != null;
 
   @override
   Widget build(BuildContext context) {
@@ -32,27 +43,29 @@ class AppDrawer extends StatelessWidget {
               ),
             ),
           ),
-          ListTile(
-            title: const Text('Login'),
-            onTap: () {
-              // Update the state of the app.
-              // ...
+          DrawerItem(
+            icon: isLoggedIn ? Icons.logout : Icons.login,
+            text: isLoggedIn ? "Logout" : "Login",
+            onTap: () async {
+              try {
+                if (isLoggedIn) {
+                  await AuthService().logout();
+                  setState(() {
+                    isLoggedIn = false;
+                  });
+                } else {
+                  await AuthService().login();
+                  setState(() {
+                    isLoggedIn = true;
+                  });
+                }
+              } catch (e) {
+                print(e);
+              }
             },
           ),
-          ListTile(
-            title: const Text('Sort by Distance'),
-            onTap: () {
-              // Update the state of the app.
-              // ...
-            },
-          ),
-          ListTile(
-            title: const Text('Sort by Date'),
-            onTap: () {
-              // Update the state of the app.
-              // ...
-            },
-          ),
+          const Divider(),
+          ...?widget.additionalItems,
         ],
       ),
     );
