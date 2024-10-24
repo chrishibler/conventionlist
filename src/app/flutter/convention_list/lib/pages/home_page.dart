@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 
 import 'package:convention_list/api_info.dart';
+import 'package:convention_list/services/geo_service.dart';
 import 'package:convention_list/theme/mocha.dart';
 import 'package:convention_list/widgets/clearable_text_field.dart';
 import 'package:convention_list/widgets/drawer.dart';
@@ -14,6 +15,7 @@ import 'package:rxdart/rxdart.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../models/convention.dart';
+import '../models/position.dart';
 import '../models/response_page.dart';
 import '../models/search_params.dart';
 import '../theme/text_styles.dart';
@@ -32,11 +34,21 @@ class _HomePageState extends State<HomePage> {
   final BehaviorSubject<String> searchSubject = BehaviorSubject<String>();
   OrderBy orderBy = OrderBy.distance;
   String? search;
+  Position? position;
+
+  Future<void> _setupPosition() async {
+    try {
+      position = await GeoService.getPosition();
+    } catch (e) {
+      print(e);
+      orderBy = OrderBy.startDate;
+    }
+  }
 
   Future<void> _fetchPage(int pageKey) async {
     try {
       final String url =
-          '$apiBaseUrl/conventions?page=$pageKey${SearchParams(orderBy: orderBy, search: search).toQueryString()}';
+          '$apiBaseUrl/conventions?page=$pageKey${SearchParams(orderBy: orderBy, search: search, position: position).toQueryString()}';
       print(url);
       final response = await dio.get(url);
       ResponsePage page = ResponsePage.fromJson(response.data);
@@ -87,10 +99,18 @@ class _HomePageState extends State<HomePage> {
       drawer: AppDrawer(additionalItems: [
         orderBy == OrderBy.startDate
             ? DrawerItem(
-                icon: Icons.map,
+                icon: Icons.near_me,
                 text: 'Sort by distance',
-                onTap: () {
+                onTap: () async {
+                  Position? pos;
+                  try {
+                    pos = await GeoService.getPosition();
+                  } catch (e) {
+                    print(e); // TODO: Show an error
+                    return;
+                  }
                   setState(() {
+                    position = pos;
                     orderBy = OrderBy.distance;
                   });
                   _pagingController.refresh();
@@ -111,23 +131,9 @@ class _HomePageState extends State<HomePage> {
           onRefresh: () => Future.sync(
             () => _pagingController.refresh(),
           ),
-          child: PagedListView<int, Convention>(
+          child: _ConventionList(
             pagingController: _pagingController,
-            builderDelegate: PagedChildBuilderDelegate(
-              itemBuilder: (context, item, index) => _getListTile(item),
-              firstPageErrorIndicatorBuilder: (_) => _FirstPageErrorIndicator(
-                error: _pagingController.error,
-                onTap: () => _pagingController.refresh(),
-              ),
-              newPageErrorIndicatorBuilder: (_) => _ErrorIndicator(
-                error: _pagingController.error,
-                onTap: () => _pagingController.retryLastFailedRequest(),
-              ),
-              firstPageProgressIndicatorBuilder: (_) => const AppProgressIndicator(),
-              newPageProgressIndicatorBuilder: (_) => const AppProgressIndicator(),
-              noItemsFoundIndicatorBuilder: (_) => const _NoItemsFoundIndicator(),
-              noMoreItemsIndicatorBuilder: (_) => const _NoMoreItemsIndicator(),
-            ),
+            positionSetup: _setupPosition(),
           ),
         ),
       ),
@@ -190,6 +196,47 @@ Widget _getListTile(Convention convention) {
       ],
     ),
   );
+}
+
+class _ConventionList extends StatelessWidget {
+  const _ConventionList({super.key, required this.pagingController, required this.positionSetup});
+
+  final Future<void> positionSetup;
+  final PagingController<int, Convention> pagingController;
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder<void>(
+      future: positionSetup,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState != ConnectionState.done) {
+          // Future not done, return a temporary loading widget
+          return const Center(
+            child: AppProgressIndicator(),
+          );
+        }
+
+        return PagedListView<int, Convention>(
+          pagingController: pagingController,
+          builderDelegate: PagedChildBuilderDelegate(
+            itemBuilder: (context, item, index) => _getListTile(item),
+            firstPageErrorIndicatorBuilder: (_) => _FirstPageErrorIndicator(
+              error: pagingController.error,
+              onTap: () => pagingController.refresh(),
+            ),
+            newPageErrorIndicatorBuilder: (_) => _ErrorIndicator(
+              error: pagingController.error,
+              onTap: () => pagingController.retryLastFailedRequest(),
+            ),
+            firstPageProgressIndicatorBuilder: (_) => const AppProgressIndicator(),
+            newPageProgressIndicatorBuilder: (_) => const AppProgressIndicator(),
+            noItemsFoundIndicatorBuilder: (_) => const _NoItemsFoundIndicator(),
+            noMoreItemsIndicatorBuilder: (_) => const _NoMoreItemsIndicator(),
+          ),
+        );
+      },
+    );
+  }
 }
 
 class _NoItemsFoundIndicator extends StatelessWidget {
