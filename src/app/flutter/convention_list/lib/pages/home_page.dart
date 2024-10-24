@@ -1,17 +1,21 @@
 import 'dart:math' as math;
 
+import 'package:convention_list/api_info.dart';
 import 'package:convention_list/theme/mocha.dart';
 import 'package:convention_list/widgets/clearable_text_field.dart';
 import 'package:convention_list/widgets/drawer.dart';
+import 'package:convention_list/widgets/drawer_item.dart';
 import 'package:dio/dio.dart';
 import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:intl/intl.dart';
+import 'package:rxdart/rxdart.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../models/convention.dart';
 import '../models/response_page.dart';
+import '../models/search_params.dart';
 import '../theme/text_styles.dart';
 import '../widgets/app_progress_indicator.dart';
 
@@ -23,12 +27,17 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final PagingController<int, Convention> _pagingController = PagingController(firstPageKey: 2);
+  final PagingController<int, Convention> _pagingController = PagingController(firstPageKey: 1);
   final dio = Dio();
+  final BehaviorSubject<String> searchSubject = BehaviorSubject<String>();
+  OrderBy orderBy = OrderBy.distance;
+  String? search;
 
   Future<void> _fetchPage(int pageKey) async {
     try {
-      final String url = 'https://api.conventionlist.org/conventions?page=$pageKey';
+      final String url =
+          '$apiBaseUrl/conventions?page=$pageKey${SearchParams(orderBy: orderBy, search: search).toQueryString()}';
+      print(url);
       final response = await dio.get(url);
       ResponsePage page = ResponsePage.fromJson(response.data);
       bool isLastPage = page.totalPages == page.currentPage;
@@ -47,6 +56,12 @@ class _HomePageState extends State<HomePage> {
     _pagingController.addPageRequestListener((pageKey) {
       _fetchPage(pageKey);
     });
+
+    searchSubject.debounceTime(const Duration(milliseconds: 300)).listen((text) {
+      search = text;
+      _pagingController.refresh();
+    });
+
     super.initState();
   }
 
@@ -64,9 +79,32 @@ class _HomePageState extends State<HomePage> {
             ),
           );
         }),
-        title: const ClearableTextField(hintText: 'Search'),
+        title: ClearableTextField(
+          hintText: 'Search',
+          onChanged: (text) => searchSubject.add(text),
+        ),
       ),
-      drawer: const AppDrawer(),
+      drawer: AppDrawer(additionalItems: [
+        orderBy == OrderBy.startDate
+            ? DrawerItem(
+                icon: Icons.map,
+                text: 'Sort by distance',
+                onTap: () {
+                  setState(() {
+                    orderBy = OrderBy.distance;
+                  });
+                  _pagingController.refresh();
+                })
+            : DrawerItem(
+                icon: Icons.text_rotate_vertical,
+                text: 'Sort by Start Date',
+                onTap: () {
+                  setState(() {
+                    orderBy = OrderBy.startDate;
+                  });
+                  _pagingController.refresh();
+                }),
+      ]),
       body: Padding(
         padding: const EdgeInsets.all(12.0),
         child: RefreshIndicator(
@@ -88,7 +126,7 @@ class _HomePageState extends State<HomePage> {
               firstPageProgressIndicatorBuilder: (_) => const AppProgressIndicator(),
               newPageProgressIndicatorBuilder: (_) => const AppProgressIndicator(),
               noItemsFoundIndicatorBuilder: (_) => const _NoItemsFoundIndicator(),
-              noMoreItemsIndicatorBuilder: (_) => const Placeholder(),
+              noMoreItemsIndicatorBuilder: (_) => const _NoMoreItemsIndicator(),
             ),
           ),
         ),
@@ -170,6 +208,27 @@ class _NoItemsFoundIndicator extends StatelessWidget {
         ),
         SizedBox(width: 12),
         Text('No conventions found', style: TextStyle(fontSize: 20, color: CatppuccinMocha.red)),
+      ],
+    );
+  }
+}
+
+class _NoMoreItemsIndicator extends StatelessWidget {
+  const _NoMoreItemsIndicator({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Icon(
+          Icons.pin_end_outlined,
+          color: CatppuccinMocha.red,
+          size: 36,
+        ),
+        SizedBox(width: 12),
+        Text('No more conventions', style: TextStyle(fontSize: 20, color: CatppuccinMocha.sapphire)),
       ],
     );
   }

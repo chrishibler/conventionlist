@@ -2,8 +2,13 @@ import 'package:convention_list/theme/mocha.dart';
 import 'package:flutter/material.dart';
 
 class ClearableTextField extends StatefulWidget {
-  const ClearableTextField({super.key, required this.hintText});
+  const ClearableTextField({
+    super.key,
+    required this.hintText,
+    this.onChanged,
+  });
 
+  final void Function(String)? onChanged;
   final String hintText;
 
   @override
@@ -12,6 +17,14 @@ class ClearableTextField extends StatefulWidget {
 
 class _ClearableTextFieldState extends State<ClearableTextField> {
   final TextEditingController _controller = TextEditingController();
+
+  @override
+  void initState() {
+    _controller.addListener(() {
+      widget.onChanged!(_controller.text);
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +43,7 @@ class _ClearableTextFieldState extends State<ClearableTextField> {
                 onPressed: () => setState(() => _controller.clear()),
               ),
       ),
-      onChanged: (text) => setState(() {}),
+      onChanged: widget.onChanged,
     );
   }
 
