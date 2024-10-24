@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:convention_list/theme/mocha.dart';
 import 'package:convention_list/widgets/clearable_text_field.dart';
 import 'package:convention_list/widgets/drawer.dart';
@@ -6,6 +8,7 @@ import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:intl/intl.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../models/convention.dart';
 import '../models/response_page.dart';
@@ -107,9 +110,31 @@ Widget _getListTile(Convention convention) {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(
-          convention.name,
-          style: listConventionNameStyle,
+        GestureDetector(
+          onTap: () {
+            if (convention.websiteAddress != null) {
+              launchUrl(Uri.parse(convention.websiteAddress!));
+            }
+          },
+          child: Row(
+            children: [
+              Flexible(
+                child: Text(
+                  convention.name,
+                  style: listConventionNameStyle,
+                ),
+              ),
+              const SizedBox(width: 12),
+              Transform.rotate(
+                angle: -45 * math.pi / 180,
+                child: const Icon(
+                  Icons.link,
+                  size: 16,
+                  color: CatppuccinMocha.green,
+                ),
+              ),
+            ],
+          ),
         ),
         const SizedBox(height: 3),
         Text(

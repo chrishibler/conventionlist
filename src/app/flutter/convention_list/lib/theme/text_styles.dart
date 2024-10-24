@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 TextStyle listConventionNameStyle = const TextStyle(
   fontSize: 18,
   color: CatppuccinMocha.green,
-  decoration: TextDecoration.underline,
   fontWeight: FontWeight.bold,
 );
 
