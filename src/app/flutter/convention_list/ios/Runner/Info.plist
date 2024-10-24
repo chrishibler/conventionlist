@@ -14,6 +14,8 @@
 	<string>6.0</string>
 	<key>CFBundleName</key>
 	<string>convention_list</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Allow Convention List to find conventions near you</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>

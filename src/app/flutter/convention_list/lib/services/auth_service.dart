@@ -16,8 +16,8 @@ class AuthService {
     return credentials;
   }
 
-  Future<void> logout() {
-    return _auth0.webAuthentication().logout();
+  Future<void> logout() async {
+    await _auth0.webAuthentication().logout();
     credentials = null;
   }
 }
