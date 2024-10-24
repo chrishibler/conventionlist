@@ -1,6 +1,6 @@
 import 'dart:math' as math;
 
-import 'package:convention_list/api_info.dart';
+import 'package:convention_list/services/api.dart';
 import 'package:convention_list/services/geo_service.dart';
 import 'package:convention_list/theme/mocha.dart';
 import 'package:convention_list/widgets/clearable_text_field.dart';
@@ -47,11 +47,12 @@ class _HomePageState extends State<HomePage> {
 
   Future<void> _fetchPage(int pageKey) async {
     try {
-      final String url =
-          '$apiBaseUrl/conventions?page=$pageKey${SearchParams(orderBy: orderBy, search: search, position: position).toQueryString()}';
-      print(url);
-      final response = await dio.get(url);
-      ResponsePage page = ResponsePage.fromJson(response.data);
+      ResponsePage page = await Api().getConventions(
+        orderBy: orderBy,
+        pageKey: pageKey,
+        search: search,
+        position: position,
+      );
       bool isLastPage = page.totalPages == page.currentPage;
       if (isLastPage) {
         _pagingController.appendLastPage(page.conventions);
