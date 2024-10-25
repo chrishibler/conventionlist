@@ -64,10 +64,19 @@ class _AppDrawerState extends State<AppDrawer> {
               }
             },
           ),
+          if (isLoggedIn) ..._getAuthItems(),
           const Divider(),
           ...?widget.additionalItems,
         ],
       ),
     );
+  }
+
+  List<Widget> _getAuthItems() {
+    return [
+      const Divider(),
+      DrawerItem(icon: Icons.add, text: 'Add Convention', onTap: () {}),
+      DrawerItem(icon: Icons.edit, text: 'Edit/Delete Conventions', onTap: () {})
+    ];
   }
 }
