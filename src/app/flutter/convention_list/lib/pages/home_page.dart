@@ -88,7 +88,9 @@ class _HomePageState extends State<HomePage> {
             onTap: () => Scaffold.of(context).openDrawer(),
             child: const Padding(
               padding: EdgeInsets.fromLTRB(12, 0, 0, 0),
-              child: Image(image: AssetImage('assets/logo-sm.png')),
+              child: Image(
+                image: AssetImage('assets/logo-sm.png'),
+              ),
             ),
           );
         }),

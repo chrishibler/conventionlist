@@ -1,6 +1,7 @@
 import 'package:convention_list/services/auth_service.dart';
 import 'package:convention_list/widgets/drawer_item.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../theme/mocha.dart';
 
@@ -64,7 +65,7 @@ class _AppDrawerState extends State<AppDrawer> {
               }
             },
           ),
-          if (isLoggedIn) ..._getAuthItems(),
+          if (isLoggedIn) ..._getAuthItems(context),
           const Divider(),
           ...?widget.additionalItems,
         ],
@@ -72,10 +73,14 @@ class _AppDrawerState extends State<AppDrawer> {
     );
   }
 
-  List<Widget> _getAuthItems() {
+  List<Widget> _getAuthItems(BuildContext context) {
     return [
       const Divider(),
-      DrawerItem(icon: Icons.add, text: 'Add Convention', onTap: () {}),
+      DrawerItem(
+        icon: Icons.add,
+        text: 'Add Convention',
+        onTap: () => context.go('/add'),
+      ),
       DrawerItem(icon: Icons.edit, text: 'Edit/Delete Conventions', onTap: () {})
     ];
   }

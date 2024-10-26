@@ -1,4 +1,6 @@
 import 'package:convention_list/api_info.dart';
+import 'package:convention_list/models/new_convention.dart';
+import 'package:convention_list/services/auth_service.dart';
 import 'package:dio/dio.dart';
 
 import '../models/position.dart';
@@ -19,5 +21,19 @@ class Api {
     var response = await dio.get(url);
     ResponsePage page = ResponsePage.fromJson(response.data);
     return page;
+  }
+
+  Future<void> postConvention(NewConvention newConvention) async {
+    if (AuthService.credentials == null) {
+      throw Exception('No credentials found');
+    }
+    String accessToken = AuthService.credentials!.accessToken;
+    Options options = Options(headers: {'Authorization': 'Bearer $accessToken'});
+    var response = await dio.post(
+      '$apiBaseUrl/conventions',
+      data: newConvention.toJson(),
+      options: options,
+    );
+    print(response);
   }
 }
