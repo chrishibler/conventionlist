@@ -85,7 +85,6 @@ builder.Services.AddHtmlFixService();
 
 var app = builder.Build();
 app.Migrate();
-app.SeedDb();
 app.UseMiddleware<RequestLoggingMiddleware>();
 app.UseCors();
 app.UseAuthentication();
