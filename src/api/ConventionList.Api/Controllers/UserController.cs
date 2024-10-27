@@ -10,7 +10,11 @@ namespace ConventionList.Api.Controllers;
 
 [Route("[controller]")]
 [ApiController]
-public class UserController(ConventionListDbContext db, IMapper mapper) : ControllerBase
+public class UserController(
+    ConventionListDbContext db,
+    IMapper mapper,
+    ILogger<UserController> logger
+) : ControllerBase
 {
     // users/conventions
     [HttpGet("conventions")]
@@ -20,6 +24,11 @@ public class UserController(ConventionListDbContext db, IMapper mapper) : Contro
         [FromQuery] int pageSize = 20
     )
     {
+        string? jwtToken = HttpContext.Request.Headers.Authorization.FirstOrDefault();
+
+        logger.LogDebug($"------ Token={jwtToken}");
+        logger.LogDebug($"------ SubjectId={HttpContext.User.SubjectId()}");
+        logger.LogDebug($"------ {string.Join(",", HttpContext.User.Claims.Select(c => c.Value))}");
         string? userId = HttpContext.User.SubjectId();
         if (string.IsNullOrWhiteSpace(userId))
         {

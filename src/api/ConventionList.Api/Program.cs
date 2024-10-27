@@ -84,15 +84,13 @@ builder.Services.AddFanConsSync();
 builder.Services.AddHtmlFixService();
 
 var app = builder.Build();
-app.UseAuthentication();
-app.UseAuthorization();
 app.Migrate();
+app.SeedDb();
 app.UseMiddleware<RequestLoggingMiddleware>();
-app.UseRouting();
 app.UseCors();
 app.UseAuthentication();
+app.UseRouting();
 app.UseAuthorization();
-app.SeedDb();
 app.MapControllers();
 
 app.Run();
