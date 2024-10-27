@@ -1,3 +1,4 @@
+using System.Reflection;
 using System.Security.Claims;
 using ConventionList.Api.Auth;
 using ConventionList.Api.Data;
@@ -12,9 +13,11 @@ using Serilog;
 var builder = WebApplication.CreateBuilder(args);
 Host.CreateDefaultBuilder(args).UseSystemd();
 
+string logFileLocation =
+    $"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}/logs/conventionlist.log";
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Debug()
-    .WriteTo.File("logs/conventionlist.log")
+    .WriteTo.File(logFileLocation)
     .CreateLogger();
 
 builder.Services.AddSerilog();
@@ -28,6 +31,7 @@ string? connectionString = builder.Configuration.GetConnectionString(
 // Console.WriteLine($"*************************");
 Console.WriteLine($"*********{builder.Configuration["Auth0:Domain"]}");
 Console.WriteLine($"*********{builder.Configuration["Auth0:Audience"]}");
+Console.WriteLine($"*********{logFileLocation}");
 
 // Program.cs
 var domain = $"https://{builder.Configuration["Auth0:Domain"]}";
