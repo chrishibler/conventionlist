@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 import 'router.dart';
 import 'theme/mocha.dart';
 
 void main() {
+  HttpOverrides.global = _AppHttpOverrides();
   runApp(const MyApp());
 }
 
@@ -25,5 +28,13 @@ class MyApp extends StatelessWidget {
         textTheme: CatppuccinMocha.textTheme,
       ),
     );
+  }
+}
+
+class _AppHttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext? context) {
+    return super.createHttpClient(context)
+      ..badCertificateCallback = (X509Certificate cert, String host, int port) => true;
   }
 }
