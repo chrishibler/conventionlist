@@ -12,12 +12,12 @@ class AuthService {
   }
 
   Future<Credentials?> login() async {
-    credentials = await _auth0.webAuthentication().login();
+    credentials = await _auth0.webAuthentication(scheme: 'app').login();
     return credentials;
   }
 
   Future<void> logout() async {
-    await _auth0.webAuthentication().logout();
+    await _auth0.webAuthentication(scheme: 'app').logout();
     credentials = null;
   }
 }
