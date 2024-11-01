@@ -48,7 +48,7 @@ public class ConventionsController(
             query = query.OrderBy(c => c.StartDate).ThenBy(c => c.Name);
         }
 
-        query = query.Where(c => c.StartDate.ToUniversalTime() >= DateTime.UtcNow);
+        query = query.Where(c => c.StartDate >= DateTime.UtcNow.Date);
         int totalCount = query.Count();
         int totalPages = (int)Math.Ceiling((double)totalCount / pageSize);
 

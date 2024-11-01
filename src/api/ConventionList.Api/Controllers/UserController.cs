@@ -24,11 +24,6 @@ public class UserController(
         [FromQuery] int pageSize = 20
     )
     {
-        string? jwtToken = HttpContext.Request.Headers.Authorization.FirstOrDefault();
-
-        logger.LogDebug($"------ Token={jwtToken}");
-        logger.LogDebug($"------ SubjectId={HttpContext.User.SubjectId()}");
-        logger.LogDebug($"------ {string.Join(",", HttpContext.User.Claims.Select(c => c.Value))}");
         string? userId = HttpContext.User.SubjectId();
         if (string.IsNullOrWhiteSpace(userId))
         {
