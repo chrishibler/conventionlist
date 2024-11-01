@@ -12,7 +12,7 @@ class AuthService {
   }
 
   Future<Credentials?> login() async {
-    credentials = await _auth0.webAuthentication(scheme: 'app').login();
+    credentials = await _auth0.webAuthentication(scheme: 'app').login(audience: 'https://api.conventionlist.org');
     return credentials;
   }
 

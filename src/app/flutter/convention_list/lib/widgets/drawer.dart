@@ -79,7 +79,7 @@ class _AppDrawerState extends State<AppDrawer> {
       DrawerItem(
         icon: Icons.add,
         text: 'Add Convention',
-        onTap: () => context.go('/add'),
+        onTap: () => context.push('/add'),
       ),
       DrawerItem(icon: Icons.edit, text: 'Edit/Delete Conventions', onTap: () {})
     ];

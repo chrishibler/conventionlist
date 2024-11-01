@@ -83,23 +83,12 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 90,
-        leading: Builder(builder: (context) {
-          return InkWell(
-            onTap: () => Scaffold.of(context).openDrawer(),
-            child: const Padding(
-              padding: EdgeInsets.fromLTRB(12, 0, 0, 0),
-              child: Image(
-                image: AssetImage('assets/logo-sm.png'),
-              ),
-            ),
-          );
-        }),
         title: ClearableTextField(
           hintText: 'Search',
           onChanged: (text) => searchSubject.add(text),
         ),
       ),
-      drawer: AppDrawer(additionalItems: [
+      endDrawer: AppDrawer(additionalItems: [
         orderBy == OrderBy.startDate
             ? DrawerItem(
                 icon: Icons.near_me,

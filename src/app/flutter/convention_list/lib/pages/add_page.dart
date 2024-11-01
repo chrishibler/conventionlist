@@ -42,8 +42,16 @@ class _AddPageState extends State<AddPage> {
             }
           },
         ),
+        Builder(builder: (builderContext) {
+          return IconButton(
+            icon: const Icon(Icons.menu),
+            onPressed: () async {
+              Scaffold.of(builderContext).openEndDrawer();
+            },
+          );
+        }),
       ]),
-      drawer: const AppDrawer(),
+      endDrawer: const AppDrawer(),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -239,6 +247,7 @@ class _AddPageState extends State<AddPage> {
       city: value['city'],
       state: value['state'],
       postalCode: value['postalCode'],
+      country: value['country'],
     );
 
     await Api().postConvention(newCon);
