@@ -239,7 +239,7 @@ class _AddPageState extends State<AddPage> {
       startDate: value['startDate'],
       endDate: value['endDate'],
       description: value['description'],
-      category: value['category'],
+      category: value['category'] ?? 0,
       websiteAddress: value['websiteAddress'],
       venueName: value['venueName'],
       address1: value['address1'],
