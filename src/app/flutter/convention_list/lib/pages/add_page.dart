@@ -1,5 +1,6 @@
 import 'package:convention_list/models/new_convention.dart';
 import 'package:convention_list/util/constants.dart';
+import 'package:convention_list/widgets/app_progress_indicator.dart';
 import 'package:convention_list/widgets/drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -16,32 +17,44 @@ class AddPage extends StatefulWidget {
 
 class _AddPageState extends State<AddPage> {
   final _formKey = GlobalKey<FormBuilderState>();
+  bool _isBusy = false;
+
+  void setIsBusy(bool busy) {
+    setState(() {
+      _isBusy = busy;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Add Convention'), actions: [
-        IconButton(
-          icon: const Icon(Icons.save),
-          onPressed: () async {
-            try {
-              bool success = await _saveConvention();
-              if (context.mounted) {
-                if (!success) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Some fields are invalid.')),
-                  );
-                }
-              }
-            } catch (e) {
-              if (context.mounted) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text('Save failed. $e')),
-                );
-              }
-            }
-          },
-        ),
+        _isBusy
+            ? const AppProgressIndicator(size: 24)
+            : IconButton(
+                icon: const Icon(Icons.save),
+                onPressed: () async {
+                  setIsBusy(true);
+                  try {
+                    bool success = await _saveConvention();
+                    if (context.mounted) {
+                      if (!success) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Some fields are invalid.')),
+                        );
+                      }
+                    }
+                  } catch (e) {
+                    if (context.mounted) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('Save failed. $e')),
+                      );
+                    }
+                  } finally {
+                    setIsBusy(false);
+                  }
+                },
+              ),
         Builder(builder: (builderContext) {
           return IconButton(
             icon: const Icon(Icons.menu),
@@ -57,6 +70,7 @@ class _AddPageState extends State<AddPage> {
           padding: const EdgeInsets.all(16.0),
           child: FormBuilder(
             key: _formKey,
+            enabled: !_isBusy,
             child: SingleChildScrollView(
               child: Column(
                 children: [
