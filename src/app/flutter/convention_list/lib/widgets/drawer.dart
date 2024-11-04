@@ -81,7 +81,7 @@ class _AppDrawerState extends State<AppDrawer> {
         text: 'Add Convention',
         onTap: () => context.push('/add'),
       ),
-      DrawerItem(icon: Icons.edit, text: 'Edit/Delete Conventions', onTap: () {})
+      DrawerItem(icon: Icons.edit, text: 'Manage Conventions', onTap: () {})
     ];
   }
 }
