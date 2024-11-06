@@ -1,0 +1,49 @@
+PODS:
+  - Auth0 (2.3.2):
+    - JWTDecode (~> 3.0)
+    - SimpleKeychain (~> 1.0)
+  - auth0_flutter (1.1.0):
+    - Auth0 (~> 2.3)
+    - Flutter
+  - Flutter (1.0.0)
+  - geolocator_apple (1.2.0):
+    - Flutter
+  - JWTDecode (3.0.1)
+  - SimpleKeychain (1.0.1)
+  - url_launcher_ios (0.0.1):
+    - Flutter
+
+DEPENDENCIES:
+  - auth0_flutter (from `.symlinks/plugins/auth0_flutter/ios`)
+  - Flutter (from `Flutter`)
+  - geolocator_apple (from `.symlinks/plugins/geolocator_apple/ios`)
+  - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
+
+SPEC REPOS:
+  trunk:
+    - Auth0
+    - JWTDecode
+    - SimpleKeychain
+
+EXTERNAL SOURCES:
+  auth0_flutter:
+    :path: ".symlinks/plugins/auth0_flutter/ios"
+  Flutter:
+    :path: Flutter
+  geolocator_apple:
+    :path: ".symlinks/plugins/geolocator_apple/ios"
+  url_launcher_ios:
+    :path: ".symlinks/plugins/url_launcher_ios/ios"
+
+SPEC CHECKSUMS:
+  Auth0: 64da28fdc5cd499aa516dc4bfd0ace8efae2c1da
+  auth0_flutter: 2db6426f2a0489ff64318a0d2602a54aa9eef796
+  Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
+  geolocator_apple: 6cbaf322953988e009e5ecb481f07efece75c450
+  JWTDecode: 2eed97c2fa46ccaf3049a787004eedf0be474a87
+  SimpleKeychain: 130211269f88f038d7dc5254cf0b1b9ce978c398
+  url_launcher_ios: 5334b05cef931de560670eeae103fd3e431ac3fe
+
+PODFILE CHECKSUM: 819463e6a0290f5a72f145ba7cde16e8b6ef0796
+
+COCOAPODS: 1.15.2
