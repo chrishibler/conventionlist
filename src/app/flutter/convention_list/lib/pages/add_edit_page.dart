@@ -7,16 +7,19 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:go_router/go_router.dart';
 
+import '../models/convention.dart';
 import '../services/api.dart';
 
-class AddPage extends StatefulWidget {
-  const AddPage({super.key});
+class AddEditPage extends StatefulWidget {
+  const AddEditPage({super.key, this.convention});
+
+  final Convention? convention;
 
   @override
-  State<AddPage> createState() => _AddPageState();
+  State<AddEditPage> createState() => _AddEditPageState();
 }
 
-class _AddPageState extends State<AddPage> {
+class _AddEditPageState extends State<AddEditPage> {
   final _formKey = GlobalKey<FormBuilderState>();
   bool _isBusy = false;
 
@@ -29,44 +32,50 @@ class _AddPageState extends State<AddPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Add Convention'), actions: [
-        _isBusy
-            ? const AppProgressIndicator(size: 24)
-            : IconButton(
-                icon: const Icon(Icons.save),
-                onPressed: () async {
-                  setIsBusy(true);
-                  try {
-                    bool success = await _saveConvention();
-                    if (context.mounted) {
-                      if (!success) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Some fields are invalid.')),
-                        );
-                      } else {
-                        context.pop();
+      appBar: AppBar(
+          title: const Text('Add Convention'),
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () => context.go('/manage'),
+          ),
+          actions: [
+            _isBusy
+                ? const AppProgressIndicator(size: 24)
+                : IconButton(
+                    icon: const Icon(Icons.save),
+                    onPressed: () async {
+                      setIsBusy(true);
+                      try {
+                        bool success = await _saveConvention();
+                        if (context.mounted) {
+                          if (!success) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text('Some fields are invalid.')),
+                            );
+                          } else {
+                            context.pushReplacement('/manage');
+                          }
+                        }
+                      } catch (e) {
+                        if (context.mounted) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text('Save failed. $e')),
+                          );
+                        }
+                      } finally {
+                        setIsBusy(false);
                       }
-                    }
-                  } catch (e) {
-                    if (context.mounted) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('Save failed. $e')),
-                      );
-                    }
-                  } finally {
-                    setIsBusy(false);
-                  }
+                    },
+                  ),
+            Builder(builder: (builderContext) {
+              return IconButton(
+                icon: const Icon(Icons.menu),
+                onPressed: () async {
+                  Scaffold.of(builderContext).openEndDrawer();
                 },
-              ),
-        Builder(builder: (builderContext) {
-          return IconButton(
-            icon: const Icon(Icons.menu),
-            onPressed: () async {
-              Scaffold.of(builderContext).openEndDrawer();
-            },
-          );
-        }),
-      ]),
+              );
+            }),
+          ]),
       endDrawer: const AppDrawer(),
       body: SafeArea(
         child: Padding(
@@ -79,6 +88,7 @@ class _AddPageState extends State<AddPage> {
                 children: [
                   FormBuilderTextField(
                     name: 'name',
+                    initialValue: widget.convention?.name,
                     decoration: const InputDecoration(
                       label: Text('Name'),
                       isDense: true,
@@ -88,6 +98,7 @@ class _AddPageState extends State<AddPage> {
                   const SizedBox(height: 12),
                   FormBuilderDropdown(
                     name: 'category',
+                    initialValue: widget.convention?.category,
                     items: const [
                       DropdownMenuItem<int>(value: 0, child: Text('None')),
                       DropdownMenuItem<int>(value: 1, child: Text('Sci-Fi and Fantasy')),
@@ -106,6 +117,7 @@ class _AddPageState extends State<AddPage> {
                   const SizedBox(height: 12),
                   FormBuilderTextField(
                     name: 'description',
+                    initialValue: widget.convention?.description,
                     decoration: const InputDecoration(
                       label: Text('Description'),
                       isDense: true,
@@ -118,6 +130,7 @@ class _AddPageState extends State<AddPage> {
                         child: FormBuilderDateTimePicker(
                           name: 'startDate',
                           inputType: InputType.date,
+                          initialValue: widget.convention?.startDate,
                           decoration: const InputDecoration(
                             label: Text('Start Date'),
                             isDense: true,
@@ -138,6 +151,7 @@ class _AddPageState extends State<AddPage> {
                       Expanded(
                         child: FormBuilderDateTimePicker(
                           name: 'endDate',
+                          initialValue: widget.convention?.endDate,
                           inputType: InputType.date,
                           decoration: const InputDecoration(
                             label: Text('End Date'),
@@ -160,6 +174,7 @@ class _AddPageState extends State<AddPage> {
                   const SizedBox(height: 12),
                   FormBuilderTextField(
                     name: 'websiteAddress',
+                    initialValue: widget.convention?.websiteAddress,
                     decoration: const InputDecoration(
                       label: Text('Website Address'),
                       isDense: true,
@@ -169,6 +184,7 @@ class _AddPageState extends State<AddPage> {
                   const SizedBox(height: 12),
                   FormBuilderTextField(
                     name: 'venueName',
+                    initialValue: widget.convention?.venueName,
                     decoration: const InputDecoration(
                       label: Text('Venue Name'),
                       isDense: true,
@@ -177,6 +193,7 @@ class _AddPageState extends State<AddPage> {
                   const SizedBox(height: 12),
                   FormBuilderTextField(
                     name: 'address1',
+                    initialValue: widget.convention?.address1,
                     decoration: const InputDecoration(
                       label: Text('Address 1'),
                       isDense: true,
@@ -185,6 +202,7 @@ class _AddPageState extends State<AddPage> {
                   const SizedBox(height: 12),
                   FormBuilderTextField(
                     name: 'address2',
+                    initialValue: widget.convention?.address2,
                     decoration: const InputDecoration(
                       label: Text('Address 2'),
                       isDense: true,
@@ -193,6 +211,7 @@ class _AddPageState extends State<AddPage> {
                   const SizedBox(height: 12),
                   FormBuilderTextField(
                     name: 'city',
+                    initialValue: widget.convention?.city,
                     decoration: const InputDecoration(
                       label: Text('City'),
                       isDense: true,
@@ -202,6 +221,7 @@ class _AddPageState extends State<AddPage> {
                   const SizedBox(height: 12),
                   FormBuilderTextField(
                     name: 'state',
+                    initialValue: widget.convention?.state,
                     decoration: const InputDecoration(
                       label: Text('State/Province'),
                       isDense: true,
@@ -210,6 +230,7 @@ class _AddPageState extends State<AddPage> {
                   const SizedBox(height: 12),
                   FormBuilderTextField(
                     name: 'postalCode',
+                    initialValue: widget.convention?.postalCode,
                     decoration: const InputDecoration(
                       label: Text('Postal Code'),
                       isDense: true,
@@ -219,7 +240,7 @@ class _AddPageState extends State<AddPage> {
                   const SizedBox(height: 12),
                   FormBuilderDropdown<String>(
                     name: 'country',
-                    initialValue: 'United States',
+                    initialValue: widget.convention == null ? 'United States' : widget.convention!.country,
                     decoration: const InputDecoration(
                       label: Text('Country'),
                       isDense: true,
@@ -250,24 +271,45 @@ class _AddPageState extends State<AddPage> {
     }
 
     var value = _formKey.currentState!.value;
+    if (widget.convention == null) {
+      NewConvention newCon = NewConvention(
+        name: value['name'],
+        startDate: value['startDate'],
+        endDate: value['endDate'],
+        description: value['description'],
+        category: value['category'] ?? 0,
+        websiteAddress: value['websiteAddress'],
+        venueName: value['venueName'],
+        address1: value['address1'],
+        address2: value['address2'],
+        city: value['city'],
+        state: value['state'],
+        postalCode: value['postalCode'],
+        country: value['country'],
+      );
 
-    NewConvention newCon = NewConvention(
-      name: value['name'],
-      startDate: value['startDate'],
-      endDate: value['endDate'],
-      description: value['description'],
-      category: value['category'] ?? 0,
-      websiteAddress: value['websiteAddress'],
-      venueName: value['venueName'],
-      address1: value['address1'],
-      address2: value['address2'],
-      city: value['city'],
-      state: value['state'],
-      postalCode: value['postalCode'],
-      country: value['country'],
-    );
-
-    await Api().postConvention(newCon);
-    return true;
+      await Api().postConvention(newCon);
+      return true;
+    } else {
+      Convention convention = Convention(
+        id: widget.convention!.id,
+        position: widget.convention!.position,
+        name: value['name'],
+        startDate: value['startDate'],
+        endDate: value['endDate'],
+        description: value['description'],
+        category: value['category'] ?? 0,
+        websiteAddress: value['websiteAddress'],
+        venueName: value['venueName'],
+        address1: value['address1'],
+        address2: value['address2'],
+        city: value['city'],
+        state: value['state'],
+        postalCode: value['postalCode'],
+        country: value['country'],
+      );
+      await Api().putConvention(convention);
+      return true;
+    }
   }
 }
