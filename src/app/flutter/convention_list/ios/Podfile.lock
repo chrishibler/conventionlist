@@ -9,7 +9,19 @@ PODS:
   - geolocator_apple (1.2.0):
     - Flutter
   - JWTDecode (3.0.1)
+  - mapbox_maps_flutter (2.3.0):
+    - Flutter
+    - MapboxMaps (~> 11.7.0)
+    - Turf (= 3.0.0)
+  - MapboxCommon (24.7.1)
+  - MapboxCoreMaps (11.7.1):
+    - MapboxCommon (~> 24.7)
+  - MapboxMaps (11.7.1):
+    - MapboxCommon (= 24.7.1)
+    - MapboxCoreMaps (= 11.7.1)
+    - Turf (= 3.0.0)
   - SimpleKeychain (1.0.1)
+  - Turf (3.0.0)
   - url_launcher_ios (0.0.1):
     - Flutter
 
@@ -17,13 +29,18 @@ DEPENDENCIES:
   - auth0_flutter (from `.symlinks/plugins/auth0_flutter/ios`)
   - Flutter (from `Flutter`)
   - geolocator_apple (from `.symlinks/plugins/geolocator_apple/ios`)
+  - mapbox_maps_flutter (from `.symlinks/plugins/mapbox_maps_flutter/ios`)
   - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
 
 SPEC REPOS:
   trunk:
     - Auth0
     - JWTDecode
+    - MapboxCommon
+    - MapboxCoreMaps
+    - MapboxMaps
     - SimpleKeychain
+    - Turf
 
 EXTERNAL SOURCES:
   auth0_flutter:
@@ -32,6 +49,8 @@ EXTERNAL SOURCES:
     :path: Flutter
   geolocator_apple:
     :path: ".symlinks/plugins/geolocator_apple/ios"
+  mapbox_maps_flutter:
+    :path: ".symlinks/plugins/mapbox_maps_flutter/ios"
   url_launcher_ios:
     :path: ".symlinks/plugins/url_launcher_ios/ios"
 
@@ -41,7 +60,12 @@ SPEC CHECKSUMS:
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   geolocator_apple: 6cbaf322953988e009e5ecb481f07efece75c450
   JWTDecode: 2eed97c2fa46ccaf3049a787004eedf0be474a87
+  mapbox_maps_flutter: fb6e57802405af69ecd96a9a2c7cdf9c756c4985
+  MapboxCommon: 0ba7bc2bbf20b6e7687747a9959ef5f82adffd85
+  MapboxCoreMaps: 02656fd04e2e2ad8c7db39adba301cef55a4c2cf
+  MapboxMaps: 3a77eda93f83ad27c178df86122dc3ad8645078d
   SimpleKeychain: 130211269f88f038d7dc5254cf0b1b9ce978c398
+  Turf: a1604e74adce15c58462c9ae2acdbf049d5be35e
   url_launcher_ios: 5334b05cef931de560670eeae103fd3e431ac3fe
 
 PODFILE CHECKSUM: 819463e6a0290f5a72f145ba7cde16e8b6ef0796

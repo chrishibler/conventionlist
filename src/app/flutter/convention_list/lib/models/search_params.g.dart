@@ -6,7 +6,8 @@ part of 'search_params.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-SearchParams _$SearchParamsFromJson(Map<String, dynamic> json) => SearchParams(
+_$SearchParamsImpl _$$SearchParamsImplFromJson(Map<String, dynamic> json) =>
+    _$SearchParamsImpl(
       orderBy: $enumDecodeNullable(_$OrderByEnumMap, json['orderBy']) ??
           OrderBy.distance,
       search: json['search'] as String?,
@@ -15,7 +16,7 @@ SearchParams _$SearchParamsFromJson(Map<String, dynamic> json) => SearchParams(
           : Position.fromJson(json['position'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$SearchParamsToJson(SearchParams instance) =>
+Map<String, dynamic> _$$SearchParamsImplToJson(_$SearchParamsImpl instance) =>
     <String, dynamic>{
       'orderBy': _$OrderByEnumMap[instance.orderBy]!,
       'search': instance.search,

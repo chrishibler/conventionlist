@@ -1,4 +1,5 @@
 import 'package:convention_list/pages/add_edit_page.dart';
+import 'package:convention_list/pages/flutter_map_page.dart';
 import 'package:convention_list/pages/manage_page.dart';
 import 'package:go_router/go_router.dart';
 
@@ -28,5 +29,10 @@ final router = GoRouter(
       path: '/manage',
       builder: (context, state) => const ManagePage(),
     ),
+    GoRoute(
+      path: '/map',
+      //builder: (context, state) => const MapPage(),
+      builder: (context, state) => const FlutterMapPage(),
+    )
   ],
 );

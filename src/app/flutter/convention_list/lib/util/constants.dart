@@ -1,3 +1,5 @@
+import '../models/position.dart';
+
 List<String> countryNames = [
   "Afghanistan",
   "Albania",
@@ -193,3 +195,5 @@ List<String> countryNames = [
   "Zambia",
   "Zimbabwe"
 ];
+
+final Position defaultPosition = Position(latitude: 36.99, longitude: -119.79);

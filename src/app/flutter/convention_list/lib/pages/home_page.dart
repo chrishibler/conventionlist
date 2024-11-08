@@ -1,24 +1,19 @@
-import 'dart:math' as math;
-
 import 'package:convention_list/services/api.dart';
 import 'package:convention_list/services/geo_service.dart';
+import 'package:convention_list/util/constants.dart';
 import 'package:convention_list/widgets/clearable_text_field.dart';
 import 'package:convention_list/widgets/drawer.dart';
 import 'package:convention_list/widgets/drawer_item.dart';
-import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
-import 'package:intl/intl.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../models/convention.dart';
 import '../models/position.dart';
 import '../models/response_page.dart';
 import '../models/search_params.dart';
-import '../theme/mocha.dart';
-import '../theme/text_styles.dart';
 import '../widgets/app_progress_indicator.dart';
+import '../widgets/convention_list/convention_info.dart';
 import '../widgets/convention_list/error_indicators.dart';
 
 class HomePage extends StatefulWidget {
@@ -33,7 +28,7 @@ class _HomePageState extends State<HomePage> {
   final BehaviorSubject<String> searchSubject = BehaviorSubject<String>();
   OrderBy orderBy = OrderBy.startDate;
   String? search;
-  Position? position;
+  Position position = defaultPosition;
 
   Future<void> _setupPosition() async {
     try {
@@ -93,7 +88,7 @@ class _HomePageState extends State<HomePage> {
                 icon: Icons.near_me,
                 text: 'Sort by distance',
                 onTap: () async {
-                  Position? pos;
+                  Position pos = defaultPosition;
                   try {
                     pos = await GeoService.getPosition();
                   } catch (e) {
@@ -138,7 +133,7 @@ class _HomePageState extends State<HomePage> {
               return PagedListView<int, Convention>(
                 pagingController: _pagingController,
                 builderDelegate: PagedChildBuilderDelegate(
-                  itemBuilder: (context, item, index) => _ConventionListTile(
+                  itemBuilder: (context, item, index) => ConventionInfo(
                     convention: item,
                   ),
                   firstPageErrorIndicatorBuilder: (_) => FirstPageErrorIndicator(
@@ -166,72 +161,5 @@ class _HomePageState extends State<HomePage> {
   void dispose() {
     _pagingController.dispose();
     super.dispose();
-  }
-}
-
-class _ConventionListTile extends StatelessWidget {
-  const _ConventionListTile({
-    super.key,
-    required this.convention,
-  });
-
-  final Convention convention;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(0, 12, 0, 12),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          GestureDetector(
-            onTap: () async {
-              if (convention.websiteAddress != null) {
-                try {
-                  Uri uri = Uri.parse(convention.websiteAddress!);
-                  launchUrl(uri);
-                } catch (e) {
-                  print(e);
-                  return;
-                }
-              }
-            },
-            child: Row(
-              children: [
-                Flexible(
-                  child: Text(
-                    convention.name,
-                    style: listConventionNameStyle,
-                  ),
-                ),
-                const SizedBox(width: 6),
-                Transform.rotate(
-                  angle: -45 * math.pi / 180,
-                  child: const Icon(
-                    Icons.link,
-                    size: 16,
-                    color: CatppuccinMocha.green,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 3),
-          Text(
-            '${DateFormat('dd MMMM yyyy').format(convention.startDate)} - ${DateFormat('dd MMMM yyyy').format(convention.endDate)}',
-            style: listDateStyle,
-          ),
-          const SizedBox(height: 3),
-          ExpandableText(
-            (convention.description ?? '').replaceAll('\n', ' '),
-            expandText: 'show more',
-            collapseText: 'show less',
-            maxLines: 3,
-            linkColor: CatppuccinMocha.sapphire,
-          ),
-        ],
-      ),
-    );
   }
 }

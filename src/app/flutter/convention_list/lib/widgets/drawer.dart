@@ -45,6 +45,21 @@ class _AppDrawerState extends State<AppDrawer> {
             ),
           ),
           DrawerItem(
+            icon: Icons.home,
+            text: 'Home',
+            onTap: () {
+              context.go('/');
+            },
+          ),
+          DrawerItem(
+            icon: Icons.map,
+            text: 'Map',
+            onTap: () {
+              context.go('/map');
+            },
+          ),
+          if (isLoggedIn) const Divider(),
+          DrawerItem(
             icon: isLoggedIn ? Icons.logout : Icons.login,
             text: isLoggedIn ? "Logout" : "Login",
             onTap: () async {

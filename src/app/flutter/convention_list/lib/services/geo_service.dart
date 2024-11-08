@@ -1,6 +1,11 @@
+import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:mapbox_maps_flutter/mapbox_maps_flutter.dart' as mapbox;
 
+import '../models/bounds.dart';
+import '../models/convention.dart';
 import '../models/position.dart' as model_position;
+import 'api.dart';
 
 class GeoService {
   static bool isEnabled = false;
@@ -41,5 +46,48 @@ class GeoService {
     isEnabled = true;
     var position = await Geolocator.getCurrentPosition();
     return model_position.Position(latitude: position.latitude, longitude: position.longitude);
+  }
+
+  static Future<void> addMarkers({
+    required mapbox.MapboxMap map,
+    required mapbox.PointAnnotationManager pointManager,
+  }) async {
+    var camera = await map.getCameraState();
+    final bounds = await map.coordinateBoundsForCamera(mapbox.CameraOptions(
+      center: camera.center,
+      zoom: camera.zoom,
+      pitch: camera.pitch,
+    ));
+    var ne = bounds.northeast.coordinates;
+    var sw = bounds.southwest.coordinates;
+
+    Bounds apiBounds = Bounds(
+      north: ne.lat as double,
+      south: sw.lat as double,
+      east: ne.lng as double,
+      west: sw.lng as double,
+    );
+
+    // Load the image from assets
+    final ByteData bytes = await rootBundle.load('assets/logo-sm-round.png');
+    final Uint8List imageData = bytes.buffer.asUint8List();
+
+    var conventions = await Api().getAllConventionsByBounds(bounds: apiBounds);
+    for (Convention c in conventions) {
+      print(c.id);
+      mapbox.PointAnnotationOptions pointAnnotationOptions = mapbox.PointAnnotationOptions(
+          geometry: mapbox.Point(
+            coordinates: mapbox.Position(
+              c.position!.longitude,
+              c.position!.latitude,
+            ),
+          ),
+          image: imageData,
+          textOpacity: 0,
+          textField: c.id,
+          iconSize: 0.4);
+
+      pointManager.create(pointAnnotationOptions);
+    }
   }
 }

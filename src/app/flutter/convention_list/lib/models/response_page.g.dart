@@ -6,7 +6,8 @@ part of 'response_page.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-ResponsePage _$ResponsePageFromJson(Map<String, dynamic> json) => ResponsePage(
+_$ResponsePageImpl _$$ResponsePageImplFromJson(Map<String, dynamic> json) =>
+    _$ResponsePageImpl(
       totalCount: (json['totalCount'] as num).toInt(),
       totalPages: (json['totalPages'] as num).toInt(),
       currentPage: (json['currentPage'] as num).toInt(),
@@ -16,7 +17,7 @@ ResponsePage _$ResponsePageFromJson(Map<String, dynamic> json) => ResponsePage(
           .toList(),
     );
 
-Map<String, dynamic> _$ResponsePageToJson(ResponsePage instance) =>
+Map<String, dynamic> _$$ResponsePageImplToJson(_$ResponsePageImpl instance) =>
     <String, dynamic>{
       'totalCount': instance.totalCount,
       'totalPages': instance.totalPages,

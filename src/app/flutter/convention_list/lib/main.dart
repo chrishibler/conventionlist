@@ -6,6 +6,8 @@ import 'router.dart';
 import 'theme/mocha.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+
   HttpOverrides.global = _AppHttpOverrides();
   runApp(const MyApp());
 }

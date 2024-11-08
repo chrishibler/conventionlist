@@ -1,15 +1,18 @@
 import 'package:convention_list/models/position.dart';
-import 'package:json_annotation/json_annotation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
+part 'search_params.freezed.dart';
 part 'search_params.g.dart';
 
-@JsonSerializable()
-class SearchParams {
-  final OrderBy orderBy;
-  final String? search;
-  final Position? position;
+@freezed
+class SearchParams with _$SearchParams {
+  const factory SearchParams({
+    @Default(OrderBy.distance) OrderBy orderBy,
+    String? search,
+    Position? position,
+  }) = _SearchParams;
 
-  SearchParams({this.orderBy = OrderBy.distance, this.search, this.position});
+  const SearchParams._();
 
   String toQueryString() {
     String queryString = '&orderBy=${orderBy.name}';
@@ -24,8 +27,6 @@ class SearchParams {
   }
 
   factory SearchParams.fromJson(Map<String, dynamic> json) => _$SearchParamsFromJson(json);
-
-  Map<String, dynamic> toJson() => _$SearchParamsToJson(this);
 }
 
 enum OrderBy {

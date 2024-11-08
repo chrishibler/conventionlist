@@ -6,8 +6,8 @@ part of 'new_convention.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-NewConvention _$NewConventionFromJson(Map<String, dynamic> json) =>
-    NewConvention(
+_$NewConventionImpl _$$NewConventionImplFromJson(Map<String, dynamic> json) =>
+    _$NewConventionImpl(
       name: json['name'] as String,
       startDate: DateTime.parse(json['startDate'] as String),
       endDate: DateTime.parse(json['endDate'] as String),
@@ -20,22 +20,22 @@ NewConvention _$NewConventionFromJson(Map<String, dynamic> json) =>
       address1: json['address1'] as String?,
       address2: json['address2'] as String?,
       state: json['state'] as String?,
-      category: (json['category'] as num?)?.toInt(),
+      category: json['category'] as String?,
     );
 
-Map<String, dynamic> _$NewConventionToJson(NewConvention instance) =>
+Map<String, dynamic> _$$NewConventionImplToJson(_$NewConventionImpl instance) =>
     <String, dynamic>{
       'name': instance.name,
       'startDate': instance.startDate.toIso8601String(),
       'endDate': instance.endDate.toIso8601String(),
+      'city': instance.city,
+      'country': instance.country,
+      'postalCode': instance.postalCode,
       'description': instance.description,
       'websiteAddress': instance.websiteAddress,
       'venueName': instance.venueName,
       'address1': instance.address1,
       'address2': instance.address2,
-      'postalCode': instance.postalCode,
-      'city': instance.city,
-      'country': instance.country,
       'state': instance.state,
       'category': instance.category,
     };

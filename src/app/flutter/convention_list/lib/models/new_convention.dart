@@ -1,31 +1,25 @@
-import 'package:json_annotation/json_annotation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
+part 'new_convention.freezed.dart';
 part 'new_convention.g.dart';
 
-@JsonSerializable()
-class NewConvention {
-  final String name;
-  DateTime startDate, endDate;
-  final String? description, websiteAddress, venueName, address1, address2, postalCode, city, country, state;
-  final int? category;
-
-  NewConvention({
-    required this.name,
-    required this.startDate,
-    required this.endDate,
-    this.city,
-    this.country,
-    this.postalCode,
-    this.description,
-    this.websiteAddress,
-    this.venueName,
-    this.address1,
-    this.address2,
-    this.state,
-    this.category,
-  });
+@freezed
+class NewConvention with _$NewConvention {
+  const factory NewConvention({
+    required String name,
+    required DateTime startDate,
+    required DateTime endDate,
+    String? city,
+    String? country,
+    String? postalCode,
+    String? description,
+    String? websiteAddress,
+    String? venueName,
+    String? address1,
+    String? address2,
+    String? state,
+    String? category,
+  }) = _NewConvention;
 
   factory NewConvention.fromJson(Map<String, dynamic> json) => _$NewConventionFromJson(json);
-
-  Map<String, dynamic> toJson() => _$NewConventionToJson(this);
 }

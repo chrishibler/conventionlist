@@ -6,7 +6,8 @@ part of 'convention.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Convention _$ConventionFromJson(Map<String, dynamic> json) => Convention(
+_$ConventionImpl _$$ConventionImplFromJson(Map<String, dynamic> json) =>
+    _$ConventionImpl(
       id: json['id'] as String,
       name: json['name'] as String,
       startDate: DateTime.parse(json['startDate'] as String),
@@ -26,21 +27,21 @@ Convention _$ConventionFromJson(Map<String, dynamic> json) => Convention(
       category: (json['category'] as num?)?.toInt(),
     );
 
-Map<String, dynamic> _$ConventionToJson(Convention instance) =>
+Map<String, dynamic> _$$ConventionImplToJson(_$ConventionImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
-      'position': instance.position,
       'startDate': instance.startDate.toIso8601String(),
       'endDate': instance.endDate.toIso8601String(),
+      'city': instance.city,
+      'country': instance.country,
+      'postalCode': instance.postalCode,
+      'position': instance.position,
       'description': instance.description,
       'websiteAddress': instance.websiteAddress,
       'venueName': instance.venueName,
       'address1': instance.address1,
       'address2': instance.address2,
-      'postalCode': instance.postalCode,
-      'city': instance.city,
-      'country': instance.country,
       'state': instance.state,
       'category': instance.category,
     };
