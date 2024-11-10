@@ -1,5 +1,6 @@
 import 'package:convention_list/services/auth_service.dart';
 import 'package:convention_list/widgets/drawer_item.dart';
+import 'package:convention_list/widgets/paypal_button.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -83,6 +84,11 @@ class _AppDrawerState extends State<AppDrawer> {
           if (isLoggedIn) ..._getAuthItems(context),
           const Divider(),
           ...?widget.additionalItems,
+          const Divider(),
+          const FractionallySizedBox(
+            widthFactor: 0.7,
+            child: PayPalButton(),
+          ),
         ],
       ),
     );

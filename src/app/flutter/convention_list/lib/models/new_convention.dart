@@ -18,7 +18,7 @@ class NewConvention with _$NewConvention {
     String? address1,
     String? address2,
     String? state,
-    String? category,
+    int? category,
   }) = _NewConvention;
 
   factory NewConvention.fromJson(Map<String, dynamic> json) => _$NewConventionFromJson(json);

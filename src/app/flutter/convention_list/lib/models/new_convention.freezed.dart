@@ -32,7 +32,7 @@ mixin _$NewConvention {
   String? get address1 => throw _privateConstructorUsedError;
   String? get address2 => throw _privateConstructorUsedError;
   String? get state => throw _privateConstructorUsedError;
-  String? get category => throw _privateConstructorUsedError;
+  int? get category => throw _privateConstructorUsedError;
 
   /// Serializes this NewConvention to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -63,7 +63,7 @@ abstract class $NewConventionCopyWith<$Res> {
       String? address1,
       String? address2,
       String? state,
-      String? category});
+      int? category});
 }
 
 /// @nodoc
@@ -147,7 +147,7 @@ class _$NewConventionCopyWithImpl<$Res, $Val extends NewConvention>
       category: freezed == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
     ) as $Val);
   }
 }
@@ -173,7 +173,7 @@ abstract class _$$NewConventionImplCopyWith<$Res>
       String? address1,
       String? address2,
       String? state,
-      String? category});
+      int? category});
 }
 
 /// @nodoc
@@ -255,7 +255,7 @@ class __$$NewConventionImplCopyWithImpl<$Res>
       category: freezed == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
     ));
   }
 }
@@ -306,7 +306,7 @@ class _$NewConventionImpl implements _NewConvention {
   @override
   final String? state;
   @override
-  final String? category;
+  final int? category;
 
   @override
   String toString() {
@@ -389,7 +389,7 @@ abstract class _NewConvention implements NewConvention {
       final String? address1,
       final String? address2,
       final String? state,
-      final String? category}) = _$NewConventionImpl;
+      final int? category}) = _$NewConventionImpl;
 
   factory _NewConvention.fromJson(Map<String, dynamic> json) =
       _$NewConventionImpl.fromJson;
@@ -419,7 +419,7 @@ abstract class _NewConvention implements NewConvention {
   @override
   String? get state;
   @override
-  String? get category;
+  int? get category;
 
   /// Create a copy of NewConvention
   /// with the given fields replaced by the non-null parameter values.

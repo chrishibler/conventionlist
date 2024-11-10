@@ -20,7 +20,7 @@ _$NewConventionImpl _$$NewConventionImplFromJson(Map<String, dynamic> json) =>
       address1: json['address1'] as String?,
       address2: json['address2'] as String?,
       state: json['state'] as String?,
-      category: json['category'] as String?,
+      category: (json['category'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$$NewConventionImplToJson(_$NewConventionImpl instance) =>
