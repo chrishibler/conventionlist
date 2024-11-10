@@ -196,4 +196,4 @@ List<String> countryNames = [
   "Zimbabwe"
 ];
 
-final Position defaultPosition = Position(latitude: 36.99, longitude: -119.79);
+const Position defaultPosition = Position(latitude: 36.99, longitude: -119.79);

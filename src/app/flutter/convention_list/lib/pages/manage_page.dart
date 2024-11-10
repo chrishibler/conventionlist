@@ -88,7 +88,6 @@ class _ManagePageState extends State<ManagePage> {
 
 class _ConventionListTile extends StatelessWidget {
   const _ConventionListTile({
-    super.key,
     required this.convention,
     this.onDeleteConvention,
   });

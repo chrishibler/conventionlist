@@ -26,21 +26,23 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final PagingController<int, Convention> _pagingController = PagingController(firstPageKey: 1);
   final BehaviorSubject<String> searchSubject = BehaviorSubject<String>();
-  OrderBy orderBy = OrderBy.startDate;
+  late final Future<Position> positionFuture;
+  OrderBy orderBy = OrderBy.distance;
   String? search;
-  Position position = defaultPosition;
 
-  Future<void> _setupPosition() async {
+  Future<Position> _getPosition() async {
     try {
-      position = await GeoService.getPosition();
+      return await GeoService.getPosition();
     } catch (e) {
       print(e);
       orderBy = OrderBy.startDate;
     }
+    return defaultPosition;
   }
 
   Future<void> _fetchPage(int pageKey) async {
     try {
+      Position position = await positionFuture;
       ResponsePage page = await Api().getConventions(
         orderBy: orderBy,
         pageKey: pageKey,
@@ -60,6 +62,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
+    positionFuture = _getPosition();
     _pagingController.addPageRequestListener((pageKey) {
       _fetchPage(pageKey);
     });
@@ -88,18 +91,7 @@ class _HomePageState extends State<HomePage> {
                 icon: Icons.near_me,
                 text: 'Sort by distance',
                 onTap: () async {
-                  Position pos = defaultPosition;
-                  try {
-                    pos = await GeoService.getPosition();
-                  } catch (e) {
-                    setState(() {
-                      orderBy = OrderBy.startDate;
-                    });
-                    print(e); // TODO: Show an error
-                    return;
-                  }
                   setState(() {
-                    position = pos;
                     orderBy = OrderBy.distance;
                   });
                   _pagingController.refresh();
@@ -120,37 +112,25 @@ class _HomePageState extends State<HomePage> {
           onRefresh: () => Future.sync(
             () => _pagingController.refresh(),
           ),
-          child: FutureBuilder<void>(
-            future: _setupPosition(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState != ConnectionState.done) {
-                // Future not done, return a temporary loading widget
-                return const Center(
-                  child: AppProgressIndicator(),
-                );
-              }
-
-              return PagedListView<int, Convention>(
-                pagingController: _pagingController,
-                builderDelegate: PagedChildBuilderDelegate(
-                  itemBuilder: (context, item, index) => ConventionInfo(
-                    convention: item,
-                  ),
-                  firstPageErrorIndicatorBuilder: (_) => FirstPageErrorIndicator(
-                    error: _pagingController.error,
-                    onTap: () => _pagingController.refresh(),
-                  ),
-                  newPageErrorIndicatorBuilder: (_) => ErrorIndicator(
-                    error: _pagingController.error,
-                    onTap: () => _pagingController.retryLastFailedRequest(),
-                  ),
-                  firstPageProgressIndicatorBuilder: (_) => const AppProgressIndicator(),
-                  newPageProgressIndicatorBuilder: (_) => const AppProgressIndicator(),
-                  noItemsFoundIndicatorBuilder: (_) => const NoItemsFoundIndicator(),
-                  noMoreItemsIndicatorBuilder: (_) => const NoMoreItemsIndicator(),
-                ),
-              );
-            },
+          child: PagedListView<int, Convention>(
+            pagingController: _pagingController,
+            builderDelegate: PagedChildBuilderDelegate(
+              itemBuilder: (context, item, index) => ConventionInfo(
+                convention: item,
+              ),
+              firstPageErrorIndicatorBuilder: (_) => FirstPageErrorIndicator(
+                error: _pagingController.error,
+                onTap: () => _pagingController.refresh(),
+              ),
+              newPageErrorIndicatorBuilder: (_) => ErrorIndicator(
+                error: _pagingController.error,
+                onTap: () => _pagingController.retryLastFailedRequest(),
+              ),
+              firstPageProgressIndicatorBuilder: (_) => const AppProgressIndicator(),
+              newPageProgressIndicatorBuilder: (_) => const AppProgressIndicator(),
+              noItemsFoundIndicatorBuilder: (_) => const NoItemsFoundIndicator(),
+              noMoreItemsIndicatorBuilder: (_) => const NoMoreItemsIndicator(),
+            ),
           ),
         ),
       ),
