@@ -37,7 +37,8 @@ public sealed class FanConsSync(
 
                 try
                 {
-                    var existingCon = db.Conventions.FirstOrDefault(c => c.Name == fanConsCon.Name);
+                    fanConsCon.Name = HtmlFixService.ReplaceHtmlChars(fanConsCon.Name);
+                    var existingCon = db.Conventions.FirstOrDefault(c => c.Name == fanConsCon.Name && c.StartDate >= DateTime.UtcNow.Date);
                     if (existingCon == null)
                     {
                         try

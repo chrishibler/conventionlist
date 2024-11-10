@@ -37,8 +37,12 @@ public sealed class ConventinSceneCalendarSync(
                 try
                 {
                     var conventionSceneCon = autoMapper.Map<Convention>(evnt);
+                    conventionSceneCon.Name = HtmlFixService.ReplaceHtmlChars(
+                        conventionSceneCon.Name
+                    );
+
                     var existingCon = db.Conventions.FirstOrDefault(c =>
-                        c.Name == conventionSceneCon.Name
+                        c.Name == conventionSceneCon.Name && c.StartDate >= DateTime.UtcNow.Date
                     );
                     if (existingCon == null && conventionSceneCon.EndDate >= DateTime.UtcNow.Date)
                     {
