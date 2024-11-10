@@ -6,6 +6,8 @@ part 'convention.g.dart';
 
 @freezed
 class Convention with _$Convention {
+  const Convention._();
+
   const factory Convention({
     required String id,
     required String name,
@@ -25,4 +27,13 @@ class Convention with _$Convention {
   }) = _Convention;
 
   factory Convention.fromJson(Map<String, dynamic> json) => _$ConventionFromJson(json);
+
+  String getLocationInfo() {
+    String info = '$city';
+    if (state != null) {
+      info += ', $state, ';
+    }
+    info += '$country';
+    return info;
+  }
 }

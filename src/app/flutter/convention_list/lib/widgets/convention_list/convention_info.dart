@@ -57,7 +57,8 @@ class ConventionInfo extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(height: 3),
+          if (convention.getLocationInfo().isNotEmpty) Text(convention.getLocationInfo()),
+          if (convention.getLocationInfo().isNotEmpty) const SizedBox(width: 3),
           Text(
             '${DateFormat('dd MMMM yyyy').format(convention.startDate)} - ${DateFormat('dd MMMM yyyy').format(convention.endDate)}',
             style: listDateStyle,

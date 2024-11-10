@@ -307,7 +307,7 @@ class __$$ConventionImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$ConventionImpl implements _Convention {
+class _$ConventionImpl extends _Convention {
   const _$ConventionImpl(
       {required this.id,
       required this.name,
@@ -323,7 +323,8 @@ class _$ConventionImpl implements _Convention {
       this.address1,
       this.address2,
       this.state,
-      this.category});
+      this.category})
+      : super._();
 
   factory _$ConventionImpl.fromJson(Map<String, dynamic> json) =>
       _$$ConventionImplFromJson(json);
@@ -431,7 +432,7 @@ class _$ConventionImpl implements _Convention {
   }
 }
 
-abstract class _Convention implements Convention {
+abstract class _Convention extends Convention {
   const factory _Convention(
       {required final String id,
       required final String name,
@@ -448,6 +449,7 @@ abstract class _Convention implements Convention {
       final String? address2,
       final String? state,
       final int? category}) = _$ConventionImpl;
+  const _Convention._() : super._();
 
   factory _Convention.fromJson(Map<String, dynamic> json) =
       _$ConventionImpl.fromJson;
