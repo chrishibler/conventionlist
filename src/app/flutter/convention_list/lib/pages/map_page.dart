@@ -15,14 +15,14 @@ import '../models/response_page.dart';
 import '../services/api.dart';
 import '../widgets/app_progress_indicator.dart';
 
-class FlutterMapPage extends StatefulWidget {
-  const FlutterMapPage({super.key});
+class MapPage extends StatefulWidget {
+  const MapPage({super.key});
 
   @override
-  State<FlutterMapPage> createState() => _FlutterMapPageState();
+  State<MapPage> createState() => _MapPageState();
 }
 
-class _FlutterMapPageState extends State<FlutterMapPage> {
+class _MapPageState extends State<MapPage> {
   var cameraChangedSubject = BehaviorSubject<LatLngBounds>();
   MapController controller = MapController();
   Set<Convention> conventions = {};
