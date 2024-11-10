@@ -94,6 +94,9 @@ class _MapPageState extends State<MapPage> {
                   onPositionChanged: (camera, whoKnows) {
                     cameraChangedSubject.add(camera.visibleBounds);
                   },
+                  onMapReady: () {
+                    cameraChangedSubject.add(controller.camera.visibleBounds);
+                  },
                   interactionOptions: const InteractionOptions(
                     flags: InteractiveFlag.all,
                   ),
