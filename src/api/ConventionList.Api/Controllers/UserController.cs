@@ -18,7 +18,7 @@ public class UserController(
 {
     // users/conventions
     [HttpGet("conventions")]
-    [AllowAnonymous]
+    [Authorize("manage:myconventions")]
     public async Task<ActionResult<ConventionsResult>> GetConventions(
         [FromQuery] int page = 1,
         [FromQuery] int pageSize = 20
@@ -46,6 +46,7 @@ public class UserController(
     }
 
     [HttpGet("{userId}/conventions")]
+    [Authorize("manage:allconventions")]
     public async Task<ActionResult<ApiConvention>> Get(
         [FromRoute] string userId,
         [FromQuery] int page = 1,
