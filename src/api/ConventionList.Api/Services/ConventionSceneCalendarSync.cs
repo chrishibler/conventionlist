@@ -41,9 +41,11 @@ public sealed class ConventinSceneCalendarSync(
                         conventionSceneCon.Name
                     );
 
-                    var existingCon = db.Conventions.FirstOrDefault(c =>
-                        c.Name == conventionSceneCon.Name && c.StartDate >= DateTime.UtcNow.Date
-                    );
+                    var existingCon = db
+                        .Conventions.OrderByDescending(c => c.StartDate)
+                        .FirstOrDefault(c =>
+                            c.Name == conventionSceneCon.Name && c.StartDate >= DateTime.UtcNow.Date
+                        );
                     if (existingCon == null && conventionSceneCon.EndDate >= DateTime.UtcNow.Date)
                     {
                         try
@@ -63,12 +65,10 @@ public sealed class ConventinSceneCalendarSync(
                             conventionSceneCon.Name
                         );
 
+                        conventionSceneCon.IsApproved = true;
                         db.Conventions.Add(conventionSceneCon);
                     }
-                    else if (
-                        existingCon is not null
-                        && existingCon.SubmitterId == ConventionSceneSyncUserId
-                    )
+                    else if (existingCon is not null && !existingCon.Edited)
                     {
                         autoMapper.Map(conventionSceneCon, existingCon);
                         db.Conventions.Update(existingCon);

@@ -38,7 +38,11 @@ public sealed class FanConsSync(
                 try
                 {
                     fanConsCon.Name = HtmlFixService.ReplaceHtmlChars(fanConsCon.Name);
-                    var existingCon = db.Conventions.FirstOrDefault(c => c.Name == fanConsCon.Name && c.StartDate >= DateTime.UtcNow.Date);
+                    var existingCon = db
+                        .Conventions.OrderByDescending(c => c.StartDate)
+                        .FirstOrDefault(c =>
+                            c.Name == fanConsCon.Name && c.StartDate >= DateTime.UtcNow.Date
+                        );
                     if (existingCon == null)
                     {
                         try
@@ -59,7 +63,7 @@ public sealed class FanConsSync(
                         await PoulateConventionUrl(fanConsCon);
                         db.Conventions.Add(fanConsCon);
                     }
-                    else if (FanConsSyncUserId == existingCon.SubmitterId)
+                    else if (FanConsSyncUserId == existingCon.SubmitterId && !existingCon.Edited)
                     {
                         if (
                             fanConsCon.WebsiteAddress is not null

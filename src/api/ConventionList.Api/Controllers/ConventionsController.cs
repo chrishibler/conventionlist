@@ -117,6 +117,7 @@ public class ConventionsController(
 
         var con = mapper.Map<Convention>(newCon);
         con.Id = Guid.NewGuid();
+        con.Edited = true;
         con.SubmitterId = userId;
         await GeocodeCon(con);
         _ = db.Conventions.Add(con);
@@ -158,6 +159,7 @@ public class ConventionsController(
         try
         {
             mapper.Map(updatedCon, existingCon);
+            existingCon.Edited = true;
             db.SaveChanges();
         }
         catch (Exception ex)
