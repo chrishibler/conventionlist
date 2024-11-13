@@ -29,6 +29,7 @@ class _HomePageState extends State<HomePage> {
   late final Future<Position> positionFuture;
   OrderBy orderBy = OrderBy.distance;
   String? search;
+  bool disposed = false;
 
   Future<Position> _getPosition() async {
     try {
@@ -49,6 +50,10 @@ class _HomePageState extends State<HomePage> {
         search: search,
         position: position,
       );
+      // Prevent exception when leaving page before request returns.
+      // The exception doesn't cause a crash but is annoying.
+      if (disposed) return;
+
       bool isLastPage = page.totalPages == page.currentPage;
       if (isLastPage) {
         _pagingController.appendLastPage(page.conventions);
@@ -139,6 +144,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void dispose() {
+    disposed = true;
     _pagingController.dispose();
     super.dispose();
   }

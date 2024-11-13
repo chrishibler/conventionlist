@@ -1,6 +1,7 @@
 import 'package:convention_list/pages/add_edit_page.dart';
-import 'package:convention_list/pages/manage_page.dart';
+import 'package:convention_list/pages/admin_manage_page.dart';
 import 'package:convention_list/pages/map_page.dart';
+import 'package:convention_list/pages/user_manage_page.dart';
 import 'package:go_router/go_router.dart';
 
 import 'models/convention.dart';
@@ -16,22 +17,31 @@ final router = GoRouter(
       path: '/add',
       builder: (context, state) => const AddEditPage(),
     ),
-    GoRoute(
-      path: '/edit',
-      builder: (context, state) {
-        Convention? convention = state.extra as Convention;
-        return AddEditPage(
-          convention: convention,
-        );
-      },
-    ),
-    GoRoute(
-      path: '/manage',
-      builder: (context, state) => const ManagePage(),
-    ),
+    GoRoute(path: '/manage', builder: (context, state) => const UserManagePage(), routes: [
+      GoRoute(
+        path: '/edit',
+        builder: (context, state) {
+          Convention? convention = state.extra as Convention;
+          return AddEditPage(
+            convention: convention,
+          );
+        },
+      ),
+    ]),
     GoRoute(
       path: '/map',
       builder: (context, state) => const MapPage(),
-    )
+    ),
+    GoRoute(path: '/admin', builder: (context, state) => const AdminManagePage(), routes: [
+      GoRoute(
+        path: '/edit',
+        builder: (context, state) {
+          Convention? convention = state.extra as Convention;
+          return AddEditPage(
+            convention: convention,
+          );
+        },
+      ),
+    ]),
   ],
 );

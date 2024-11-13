@@ -1,4 +1,5 @@
 import 'package:convention_list/services/auth_service.dart';
+import 'package:convention_list/util/permissions.dart';
 import 'package:convention_list/widgets/drawer_item.dart';
 import 'package:convention_list/widgets/paypal_button.dart';
 import 'package:flutter/material.dart';
@@ -82,7 +83,7 @@ class _AppDrawerState extends State<AppDrawer> {
             },
           ),
           if (isLoggedIn) ..._getAuthItems(context),
-          const Divider(),
+          if (widget.additionalItems?.isNotEmpty == true) const Divider(),
           ...?widget.additionalItems,
           const Divider(),
           const FractionallySizedBox(
@@ -95,6 +96,7 @@ class _AppDrawerState extends State<AppDrawer> {
   }
 
   List<Widget> _getAuthItems(BuildContext context) {
+    bool isAdmin = AuthService().permissions.contains(Permissions.manageAllConventions);
     return [
       const Divider(),
       DrawerItem(
@@ -106,7 +108,14 @@ class _AppDrawerState extends State<AppDrawer> {
         icon: Icons.edit,
         text: 'Manage Conventions',
         onTap: () => context.go('/manage'),
-      )
+      ),
+      if (isAdmin) const Divider(),
+      if (isAdmin)
+        DrawerItem(
+          icon: Icons.admin_panel_settings,
+          text: 'Admin',
+          onTap: () => context.go('/admin'),
+        ),
     ];
   }
 }

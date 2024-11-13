@@ -32,50 +32,44 @@ class _AddEditPageState extends State<AddEditPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-          title: const Text('Add Convention'),
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back),
-            onPressed: () => context.go('/manage'),
-          ),
-          actions: [
-            _isBusy
-                ? const AppProgressIndicator(size: 24)
-                : IconButton(
-                    icon: const Icon(Icons.save),
-                    onPressed: () async {
-                      setIsBusy(true);
-                      try {
-                        bool success = await _saveConvention();
-                        if (context.mounted) {
-                          if (!success) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('Some fields are invalid.')),
-                            );
-                          } else {
-                            context.pushReplacement('/manage');
-                          }
-                        }
-                      } catch (e) {
-                        if (context.mounted) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text('Save failed. $e')),
-                          );
-                        }
-                      } finally {
-                        setIsBusy(false);
-                      }
-                    },
-                  ),
-            Builder(builder: (builderContext) {
-              return IconButton(
-                icon: const Icon(Icons.menu),
+      appBar: AppBar(title: const Text('Add Convention'), centerTitle: true, actions: [
+        _isBusy
+            ? const AppProgressIndicator(size: 24)
+            : IconButton(
+                icon: const Icon(Icons.save),
                 onPressed: () async {
-                  Scaffold.of(builderContext).openEndDrawer();
+                  setIsBusy(true);
+                  try {
+                    bool success = await _saveConvention();
+                    if (context.mounted) {
+                      if (!success) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Some fields are invalid.')),
+                        );
+                      } else {
+                        context.pushReplacement('/manage');
+                      }
+                    }
+                  } catch (e) {
+                    if (context.mounted) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('Save failed. $e')),
+                      );
+                    }
+                  } finally {
+                    setIsBusy(false);
+                  }
                 },
-              );
-            }),
-          ]),
+              ),
+        Builder(builder: (builderContext) {
+          return IconButton(
+            icon: const Icon(Icons.menu),
+            onPressed: () async {
+              Scaffold.of(builderContext).openEndDrawer();
+            },
+          );
+        }),
+      ]),
       endDrawer: const AppDrawer(),
       body: SafeArea(
         child: Padding(
@@ -86,6 +80,7 @@ class _AddEditPageState extends State<AddEditPage> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
+                  const SizedBox(height: 6),
                   FormBuilderTextField(
                     name: 'name',
                     initialValue: widget.convention?.name,
