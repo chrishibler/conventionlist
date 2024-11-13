@@ -68,7 +68,10 @@ public sealed class ConventinSceneCalendarSync(
                         conventionSceneCon.IsApproved = true;
                         db.Conventions.Add(conventionSceneCon);
                     }
-                    else if (existingCon is not null && !existingCon.Edited)
+                    else if (
+                        existingCon is not null
+                        && string.IsNullOrWhiteSpace(existingCon.Editor)
+                    )
                     {
                         autoMapper.Map(conventionSceneCon, existingCon);
                         db.Conventions.Update(existingCon);

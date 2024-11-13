@@ -117,7 +117,7 @@ public class ConventionsController(
 
         var con = mapper.Map<Convention>(newCon);
         con.Id = Guid.NewGuid();
-        con.Edited = true;
+        con.Editor = userId;
         con.SubmitterId = userId;
         await GeocodeCon(con);
         _ = db.Conventions.Add(con);
@@ -149,17 +149,16 @@ public class ConventionsController(
             return BadRequest(ModelState);
         }
 
-        if (!HttpContext.User.IsSubmitterOrAdmin(existingCon))
+        var user = HttpContext.User;
+        if (!user.IsSubmitterOrAdmin(existingCon))
         {
             return Forbid("User did not submit this convention.");
         }
 
-        updatedCon.SubmitterId = HttpContext.User.SubjectId();
-
         try
         {
             mapper.Map(updatedCon, existingCon);
-            existingCon.Edited = true;
+            existingCon.Editor = user.SubjectId()!;
             db.SaveChanges();
         }
         catch (Exception ex)

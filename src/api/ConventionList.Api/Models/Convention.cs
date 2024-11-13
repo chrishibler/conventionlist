@@ -52,5 +52,5 @@ public class Convention
 
     public bool IsApproved { get; set; }
 
-    public bool Edited { get; set; }
+    public string Editor { get; set; } = "";
 }

@@ -31,4 +31,6 @@ public class ApiConvention
     public string? Country { get; set; } = "US";
 
     public Geocoordinate? Position { get; set; }
+
+    public bool IsApproved { get; set; }
 }

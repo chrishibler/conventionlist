@@ -63,7 +63,10 @@ public sealed class FanConsSync(
                         await PoulateConventionUrl(fanConsCon);
                         db.Conventions.Add(fanConsCon);
                     }
-                    else if (FanConsSyncUserId == existingCon.SubmitterId && !existingCon.Edited)
+                    else if (
+                        FanConsSyncUserId == existingCon.SubmitterId
+                        && string.IsNullOrWhiteSpace(existingCon.Editor)
+                    )
                     {
                         if (
                             fanConsCon.WebsiteAddress is not null

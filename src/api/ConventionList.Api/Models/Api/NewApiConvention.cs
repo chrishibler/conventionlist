@@ -35,4 +35,6 @@ public class NewApiConvention
 
     [Required]
     public string? Country { get; set; } = "US";
+
+    public bool IsApproved { get; set; }
 }
