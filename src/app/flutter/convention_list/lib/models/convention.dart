@@ -13,6 +13,7 @@ class Convention with _$Convention {
     required String name,
     required DateTime startDate,
     required DateTime endDate,
+    required bool isApproved,
     String? city,
     String? country,
     String? postalCode,

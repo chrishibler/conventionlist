@@ -23,6 +23,7 @@ mixin _$NewConvention {
   String get name => throw _privateConstructorUsedError;
   DateTime get startDate => throw _privateConstructorUsedError;
   DateTime get endDate => throw _privateConstructorUsedError;
+  bool get isApproved => throw _privateConstructorUsedError;
   String? get city => throw _privateConstructorUsedError;
   String? get country => throw _privateConstructorUsedError;
   String? get postalCode => throw _privateConstructorUsedError;
@@ -54,6 +55,7 @@ abstract class $NewConventionCopyWith<$Res> {
       {String name,
       DateTime startDate,
       DateTime endDate,
+      bool isApproved,
       String? city,
       String? country,
       String? postalCode,
@@ -84,6 +86,7 @@ class _$NewConventionCopyWithImpl<$Res, $Val extends NewConvention>
     Object? name = null,
     Object? startDate = null,
     Object? endDate = null,
+    Object? isApproved = null,
     Object? city = freezed,
     Object? country = freezed,
     Object? postalCode = freezed,
@@ -108,6 +111,10 @@ class _$NewConventionCopyWithImpl<$Res, $Val extends NewConvention>
           ? _value.endDate
           : endDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      isApproved: null == isApproved
+          ? _value.isApproved
+          : isApproved // ignore: cast_nullable_to_non_nullable
+              as bool,
       city: freezed == city
           ? _value.city
           : city // ignore: cast_nullable_to_non_nullable
@@ -164,6 +171,7 @@ abstract class _$$NewConventionImplCopyWith<$Res>
       {String name,
       DateTime startDate,
       DateTime endDate,
+      bool isApproved,
       String? city,
       String? country,
       String? postalCode,
@@ -192,6 +200,7 @@ class __$$NewConventionImplCopyWithImpl<$Res>
     Object? name = null,
     Object? startDate = null,
     Object? endDate = null,
+    Object? isApproved = null,
     Object? city = freezed,
     Object? country = freezed,
     Object? postalCode = freezed,
@@ -216,6 +225,10 @@ class __$$NewConventionImplCopyWithImpl<$Res>
           ? _value.endDate
           : endDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      isApproved: null == isApproved
+          ? _value.isApproved
+          : isApproved // ignore: cast_nullable_to_non_nullable
+              as bool,
       city: freezed == city
           ? _value.city
           : city // ignore: cast_nullable_to_non_nullable
@@ -267,6 +280,7 @@ class _$NewConventionImpl implements _NewConvention {
       {required this.name,
       required this.startDate,
       required this.endDate,
+      this.isApproved = false,
       this.city,
       this.country,
       this.postalCode,
@@ -287,6 +301,9 @@ class _$NewConventionImpl implements _NewConvention {
   final DateTime startDate;
   @override
   final DateTime endDate;
+  @override
+  @JsonKey()
+  final bool isApproved;
   @override
   final String? city;
   @override
@@ -310,7 +327,7 @@ class _$NewConventionImpl implements _NewConvention {
 
   @override
   String toString() {
-    return 'NewConvention(name: $name, startDate: $startDate, endDate: $endDate, city: $city, country: $country, postalCode: $postalCode, description: $description, websiteAddress: $websiteAddress, venueName: $venueName, address1: $address1, address2: $address2, state: $state, category: $category)';
+    return 'NewConvention(name: $name, startDate: $startDate, endDate: $endDate, isApproved: $isApproved, city: $city, country: $country, postalCode: $postalCode, description: $description, websiteAddress: $websiteAddress, venueName: $venueName, address1: $address1, address2: $address2, state: $state, category: $category)';
   }
 
   @override
@@ -322,6 +339,8 @@ class _$NewConventionImpl implements _NewConvention {
             (identical(other.startDate, startDate) ||
                 other.startDate == startDate) &&
             (identical(other.endDate, endDate) || other.endDate == endDate) &&
+            (identical(other.isApproved, isApproved) ||
+                other.isApproved == isApproved) &&
             (identical(other.city, city) || other.city == city) &&
             (identical(other.country, country) || other.country == country) &&
             (identical(other.postalCode, postalCode) ||
@@ -348,6 +367,7 @@ class _$NewConventionImpl implements _NewConvention {
       name,
       startDate,
       endDate,
+      isApproved,
       city,
       country,
       postalCode,
@@ -380,6 +400,7 @@ abstract class _NewConvention implements NewConvention {
       {required final String name,
       required final DateTime startDate,
       required final DateTime endDate,
+      final bool isApproved,
       final String? city,
       final String? country,
       final String? postalCode,
@@ -400,6 +421,8 @@ abstract class _NewConvention implements NewConvention {
   DateTime get startDate;
   @override
   DateTime get endDate;
+  @override
+  bool get isApproved;
   @override
   String? get city;
   @override

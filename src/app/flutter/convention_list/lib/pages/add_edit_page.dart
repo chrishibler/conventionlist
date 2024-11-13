@@ -1,5 +1,7 @@
 import 'package:convention_list/models/new_convention.dart';
+import 'package:convention_list/services/auth_service.dart';
 import 'package:convention_list/util/constants.dart';
+import 'package:convention_list/util/permissions.dart';
 import 'package:convention_list/widgets/app_progress_indicator.dart';
 import 'package:convention_list/widgets/drawer.dart';
 import 'package:flutter/material.dart';
@@ -22,11 +24,18 @@ class AddEditPage extends StatefulWidget {
 class _AddEditPageState extends State<AddEditPage> {
   final _formKey = GlobalKey<FormBuilderState>();
   bool _isBusy = false;
+  late bool _isAdmin;
 
   void setIsBusy(bool busy) {
     setState(() {
       _isBusy = busy;
     });
+  }
+
+  @override
+  void initState() {
+    _isAdmin = AuthService().permissions.contains(Permissions.manageAllConventions);
+    super.initState();
   }
 
   @override
@@ -80,7 +89,14 @@ class _AddEditPageState extends State<AddEditPage> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  const SizedBox(height: 6),
+                  if (_isAdmin) const SizedBox(height: 6),
+                  if (_isAdmin)
+                    FormBuilderCheckbox(
+                      name: 'isApproved',
+                      title: const Text('Is Approved'),
+                      initialValue: widget.convention?.isApproved,
+                    ),
+                  const SizedBox(height: 12),
                   FormBuilderTextField(
                     name: 'name',
                     initialValue: widget.convention?.name,
@@ -281,6 +297,7 @@ class _AddEditPageState extends State<AddEditPage> {
         state: value['state'],
         postalCode: value['postalCode'],
         country: value['country'],
+        isApproved: value['isApproved'] ?? false,
       );
 
       await Api().postConvention(newCon);
@@ -302,6 +319,7 @@ class _AddEditPageState extends State<AddEditPage> {
         state: value['state'],
         postalCode: value['postalCode'],
         country: value['country'],
+        isApproved: value['isApproved'] ?? false,
       );
       await Api().putConvention(convention);
       return true;

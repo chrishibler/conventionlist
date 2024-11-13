@@ -9,6 +9,7 @@ class NewConvention with _$NewConvention {
     required String name,
     required DateTime startDate,
     required DateTime endDate,
+    @Default(false) bool isApproved,
     String? city,
     String? country,
     String? postalCode,

@@ -24,6 +24,7 @@ mixin _$Convention {
   String get name => throw _privateConstructorUsedError;
   DateTime get startDate => throw _privateConstructorUsedError;
   DateTime get endDate => throw _privateConstructorUsedError;
+  bool get isApproved => throw _privateConstructorUsedError;
   String? get city => throw _privateConstructorUsedError;
   String? get country => throw _privateConstructorUsedError;
   String? get postalCode => throw _privateConstructorUsedError;
@@ -57,6 +58,7 @@ abstract class $ConventionCopyWith<$Res> {
       String name,
       DateTime startDate,
       DateTime endDate,
+      bool isApproved,
       String? city,
       String? country,
       String? postalCode,
@@ -91,6 +93,7 @@ class _$ConventionCopyWithImpl<$Res, $Val extends Convention>
     Object? name = null,
     Object? startDate = null,
     Object? endDate = null,
+    Object? isApproved = null,
     Object? city = freezed,
     Object? country = freezed,
     Object? postalCode = freezed,
@@ -120,6 +123,10 @@ class _$ConventionCopyWithImpl<$Res, $Val extends Convention>
           ? _value.endDate
           : endDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      isApproved: null == isApproved
+          ? _value.isApproved
+          : isApproved // ignore: cast_nullable_to_non_nullable
+              as bool,
       city: freezed == city
           ? _value.city
           : city // ignore: cast_nullable_to_non_nullable
@@ -195,6 +202,7 @@ abstract class _$$ConventionImplCopyWith<$Res>
       String name,
       DateTime startDate,
       DateTime endDate,
+      bool isApproved,
       String? city,
       String? country,
       String? postalCode,
@@ -228,6 +236,7 @@ class __$$ConventionImplCopyWithImpl<$Res>
     Object? name = null,
     Object? startDate = null,
     Object? endDate = null,
+    Object? isApproved = null,
     Object? city = freezed,
     Object? country = freezed,
     Object? postalCode = freezed,
@@ -257,6 +266,10 @@ class __$$ConventionImplCopyWithImpl<$Res>
           ? _value.endDate
           : endDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      isApproved: null == isApproved
+          ? _value.isApproved
+          : isApproved // ignore: cast_nullable_to_non_nullable
+              as bool,
       city: freezed == city
           ? _value.city
           : city // ignore: cast_nullable_to_non_nullable
@@ -313,6 +326,7 @@ class _$ConventionImpl extends _Convention {
       required this.name,
       required this.startDate,
       required this.endDate,
+      required this.isApproved,
       this.city,
       this.country,
       this.postalCode,
@@ -338,6 +352,8 @@ class _$ConventionImpl extends _Convention {
   @override
   final DateTime endDate;
   @override
+  final bool isApproved;
+  @override
   final String? city;
   @override
   final String? country;
@@ -362,7 +378,7 @@ class _$ConventionImpl extends _Convention {
 
   @override
   String toString() {
-    return 'Convention(id: $id, name: $name, startDate: $startDate, endDate: $endDate, city: $city, country: $country, postalCode: $postalCode, position: $position, description: $description, websiteAddress: $websiteAddress, venueName: $venueName, address1: $address1, address2: $address2, state: $state, category: $category)';
+    return 'Convention(id: $id, name: $name, startDate: $startDate, endDate: $endDate, isApproved: $isApproved, city: $city, country: $country, postalCode: $postalCode, position: $position, description: $description, websiteAddress: $websiteAddress, venueName: $venueName, address1: $address1, address2: $address2, state: $state, category: $category)';
   }
 
   @override
@@ -375,6 +391,8 @@ class _$ConventionImpl extends _Convention {
             (identical(other.startDate, startDate) ||
                 other.startDate == startDate) &&
             (identical(other.endDate, endDate) || other.endDate == endDate) &&
+            (identical(other.isApproved, isApproved) ||
+                other.isApproved == isApproved) &&
             (identical(other.city, city) || other.city == city) &&
             (identical(other.country, country) || other.country == country) &&
             (identical(other.postalCode, postalCode) ||
@@ -404,6 +422,7 @@ class _$ConventionImpl extends _Convention {
       name,
       startDate,
       endDate,
+      isApproved,
       city,
       country,
       postalCode,
@@ -438,6 +457,7 @@ abstract class _Convention extends Convention {
       required final String name,
       required final DateTime startDate,
       required final DateTime endDate,
+      required final bool isApproved,
       final String? city,
       final String? country,
       final String? postalCode,
@@ -462,6 +482,8 @@ abstract class _Convention extends Convention {
   DateTime get startDate;
   @override
   DateTime get endDate;
+  @override
+  bool get isApproved;
   @override
   String? get city;
   @override
