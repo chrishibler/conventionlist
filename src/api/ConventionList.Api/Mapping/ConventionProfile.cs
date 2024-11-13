@@ -11,6 +11,7 @@ public class ConventionProfile : Profile
     public ConventionProfile()
     {
         CreateMap<Convention, Convention>()
+            .ForMember(dest => dest.SubmitterId, act => act.Ignore())
             .ForMember(dest => dest.Id, act => act.Ignore())
             .ForMember(dest => dest.Position, act => act.Ignore())
             .ForMember(
