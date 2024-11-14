@@ -61,6 +61,7 @@ public sealed class FanConsSync(
                         fanConsCon.Name = HtmlFixService.ReplaceHtmlChars(fanConsCon.Name);
 
                         await PoulateConventionUrl(fanConsCon);
+                        fanConsCon.IsApproved = true;
                         db.Conventions.Add(fanConsCon);
                     }
                     else if (
