@@ -1,3 +1,4 @@
+import 'package:convention_list/navigation/edit_extra_parameter.dart';
 import 'package:convention_list/widgets/drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -75,6 +76,9 @@ class _ManageViewState extends State<ManageView> {
           itemBuilder: (context, item, index) => _ConventionListTile(
             convention: item,
             editRoute: widget.editRoute,
+            refresh: () async {
+              _pagingController.refresh();
+            },
             onDeleteConvention: () {
               _pagingController.refresh();
             },
@@ -101,9 +105,11 @@ class _ConventionListTile extends StatelessWidget {
   const _ConventionListTile({
     required this.convention,
     required this.editRoute,
+    required this.refresh,
     this.onDeleteConvention,
   });
 
+  final Future<void> Function() refresh;
   final String editRoute;
   static const maxNameCharacters = 20;
   final void Function()? onDeleteConvention;
@@ -137,7 +143,13 @@ class _ConventionListTile extends StatelessWidget {
                         IconButton(
                           icon: const Icon(Icons.edit, color: CatppuccinMocha.sky),
                           onPressed: () async {
-                            await context.push(editRoute, extra: convention);
+                            await context.push(
+                              editRoute,
+                              extra: EditExtraParameter(
+                                refresh: refresh,
+                                convention: convention,
+                              ),
+                            );
                           },
                         ),
                         IconButton(

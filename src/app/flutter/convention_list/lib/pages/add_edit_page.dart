@@ -10,12 +10,18 @@ import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:go_router/go_router.dart';
 
 import '../models/convention.dart';
+import '../navigation/add_edit_page_args.dart';
 import '../services/api.dart';
 
 class AddEditPage extends StatefulWidget {
-  const AddEditPage({super.key, this.convention});
+  AddEditPage({super.key, required AddEditPageArgs args})
+      : returnRoute = args.returnRoute,
+        convention = args.convention,
+        refresh = args.refresh;
 
+  final String returnRoute;
   final Convention? convention;
+  final Future<void> Function()? refresh;
 
   @override
   State<AddEditPage> createState() => _AddEditPageState();
@@ -56,7 +62,10 @@ class _AddEditPageState extends State<AddEditPage> {
                           const SnackBar(content: Text('Some fields are invalid.')),
                         );
                       } else {
-                        context.pushReplacement('/manage');
+                        context.pop();
+                        if (widget.refresh != null) {
+                          await widget.refresh!();
+                        }
                       }
                     }
                   } catch (e) {

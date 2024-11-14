@@ -1,10 +1,11 @@
+import 'package:convention_list/navigation/add_edit_page_args.dart';
+import 'package:convention_list/navigation/edit_extra_parameter.dart';
 import 'package:convention_list/pages/add_edit_page.dart';
 import 'package:convention_list/pages/admin_manage_page.dart';
 import 'package:convention_list/pages/map_page.dart';
 import 'package:convention_list/pages/user_manage_page.dart';
 import 'package:go_router/go_router.dart';
 
-import 'models/convention.dart';
 import 'pages/home_page.dart';
 
 final router = GoRouter(
@@ -15,15 +16,21 @@ final router = GoRouter(
     ),
     GoRoute(
       path: '/add',
-      builder: (context, state) => const AddEditPage(),
+      builder: (context, state) => AddEditPage(
+        args: AddEditPageArgs(returnRoute: '/'),
+      ),
     ),
     GoRoute(path: '/manage', builder: (context, state) => const UserManagePage(), routes: [
       GoRoute(
         path: '/edit',
         builder: (context, state) {
-          Convention? convention = state.extra as Convention;
+          EditExtraParameter param = state.extra as EditExtraParameter;
           return AddEditPage(
-            convention: convention,
+            args: AddEditPageArgs(
+              returnRoute: '/manage',
+              convention: param.convention,
+              refresh: param.refresh,
+            ),
           );
         },
       ),
@@ -36,9 +43,13 @@ final router = GoRouter(
       GoRoute(
         path: '/edit',
         builder: (context, state) {
-          Convention? convention = state.extra as Convention;
+          EditExtraParameter param = state.extra as EditExtraParameter;
           return AddEditPage(
-            convention: convention,
+            args: AddEditPageArgs(
+              returnRoute: '/admin',
+              convention: param.convention,
+              refresh: param.refresh,
+            ),
           );
         },
       ),
