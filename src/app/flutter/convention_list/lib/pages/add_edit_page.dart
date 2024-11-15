@@ -6,6 +6,7 @@ import 'package:convention_list/widgets/app_progress_indicator.dart';
 import 'package:convention_list/widgets/drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:form_builder_extra_fields/form_builder_extra_fields.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:go_router/go_router.dart';
 
@@ -258,18 +259,12 @@ class _AddEditPageState extends State<AddEditPage> {
                     validator: FormBuilderValidators.required(),
                   ),
                   const SizedBox(height: 12),
-                  FormBuilderDropdown<String>(
+                  FormBuilderTypeAhead(
                     name: 'country',
                     initialValue: widget.convention == null ? 'United States' : widget.convention!.country,
-                    decoration: const InputDecoration(
-                      label: Text('Country'),
-                      isDense: true,
-                    ),
-                    items: countryNames
-                        .map(
-                          (c) => DropdownMenuItem(value: c, child: Text(c)),
-                        )
-                        .toList(growable: false),
+                    itemBuilder: (context, text) => Text(text),
+                    suggestionsCallback: (text) =>
+                        countryNames.map((c) => c.toLowerCase()).where((c) => c.startsWith(text)).toList(),
                   ),
                 ],
               ),
