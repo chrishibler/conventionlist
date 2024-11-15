@@ -24,7 +24,13 @@ public class ConventionProfile : Profile
             );
 
         CreateMap<Convention, ApiConvention>()
-            .ForMember(dest => dest.Position, opt => opt.MapFrom(src => src.ToGeocoordinate()));
+            .ForMember(
+                dest => dest.Position,
+                opt => opt.MapFrom(src => src.Position.ToGeocoordinate())
+            );
+
+        CreateMap<ApiConvention, Convention>()
+            .ForMember(dest => dest.Position, opt => opt.MapFrom(src => src.Position.ToPoint()));
 
         CreateMap<NewApiConvention, Convention>()
             .ForMember(

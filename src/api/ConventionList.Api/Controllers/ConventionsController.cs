@@ -136,7 +136,7 @@ public class ConventionsController(
 
     [Authorize("manage:myconventions")]
     [HttpPut("{id}")]
-    public async Task<ActionResult> Put([FromRoute] Guid id, [FromBody] Convention updatedCon)
+    public async Task<ActionResult> Put([FromRoute] Guid id, [FromBody] ApiConvention updatedCon)
     {
         var existingCon = await db.Conventions.SingleOrDefaultAsync(d => d.Id == id);
         if (existingCon == null)
