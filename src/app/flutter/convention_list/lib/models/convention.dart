@@ -32,9 +32,10 @@ class Convention with _$Convention {
   String getLocationInfo() {
     String info = '$city';
     if (state != null) {
-      info += ', $state, ';
+      info += ', $state, $country';
+    } else {
+      info += ', $country';
     }
-    info += '$country';
     return info;
   }
 }
