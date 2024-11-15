@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "163083018905",
+    "project_id": "conventionlist-db6d4",
+    "storage_bucket": "conventionlist-db6d4.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:163083018905:android:288459801b42819b168e08",
+        "android_client_info": {
+          "package_name": "com.hiblermedia.convention_list"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAwlc1OmwAzPLw5i47lau0OyPh1GJj-jok"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
