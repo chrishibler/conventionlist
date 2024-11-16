@@ -1,5 +1,6 @@
 using System.Reflection;
 using System.Security.Claims;
+using System.Text.Json.Serialization;
 using ConventionList.Api.Auth;
 using ConventionList.Api.Data;
 using ConventionList.Api.Extensions;
@@ -74,7 +75,6 @@ builder.Services.AddAuthorization(options =>
     );
 });
 builder.Services.AddSingleton<IAuthorizationHandler, HasScopeHandler>();
-builder.Services.AddControllers();
 builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddHttpClient();
 builder.Services.AddGoogleMapsSearchClient(builder);
@@ -82,6 +82,12 @@ builder.Services.AddGeocodingService();
 builder.Services.AddConventionSceneSync();
 builder.Services.AddFanConsSync();
 builder.Services.AddHtmlFixService();
+builder
+    .Services.AddControllers()
+    .AddJsonOptions(x =>
+    {
+        x.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+    });
 
 var app = builder.Build();
 app.Migrate();

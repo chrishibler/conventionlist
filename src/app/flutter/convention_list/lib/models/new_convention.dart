@@ -1,5 +1,8 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import 'category.dart';
+import 'converters/category_converter.dart';
+
 part 'new_convention.freezed.dart';
 part 'new_convention.g.dart';
 
@@ -19,7 +22,7 @@ class NewConvention with _$NewConvention {
     String? address1,
     String? address2,
     String? state,
-    int? category,
+    @CategoryConverter() @Default(Category.unlisted) Category category,
   }) = _NewConvention;
 
   factory NewConvention.fromJson(Map<String, dynamic> json) => _$NewConventionFromJson(json);

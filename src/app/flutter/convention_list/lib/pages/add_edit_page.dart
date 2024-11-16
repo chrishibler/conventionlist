@@ -10,6 +10,7 @@ import 'package:form_builder_extra_fields/form_builder_extra_fields.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:go_router/go_router.dart';
 
+import '../models/category.dart' as model_category;
 import '../models/convention.dart';
 import '../navigation/add_edit_page_args.dart';
 import '../services/api.dart';
@@ -120,16 +121,24 @@ class _AddEditPageState extends State<AddEditPage> {
                   FormBuilderDropdown(
                     name: 'category',
                     initialValue: widget.convention?.category,
-                    items: const [
-                      DropdownMenuItem<int>(value: 0, child: Text('None')),
-                      DropdownMenuItem<int>(value: 1, child: Text('Sci-Fi and Fantasy')),
-                      DropdownMenuItem<int>(value: 2, child: Text('Anime')),
-                      DropdownMenuItem<int>(value: 3, child: Text('Gaming')),
-                      DropdownMenuItem<int>(value: 4, child: Text('Comics')),
-                      DropdownMenuItem<int>(value: 5, child: Text('Book')),
-                      DropdownMenuItem<int>(value: 6, child: Text('Collectibles')),
-                      DropdownMenuItem<int>(value: 7, child: Text('Sports')),
-                    ],
+                    items: model_category.Category.values
+                        .map(
+                          (c) => DropdownMenuItem<model_category.Category>(
+                            value: c,
+                            child: Text(c.val),
+                          ),
+                        )
+                        .toList(),
+                    // const [
+                    //   DropdownMenuItem<int>(value: 0, child: Text('None')),
+                    //   DropdownMenuItem<int>(value: 1, child: Text('Sci-Fi and Fantasy')),
+                    //   DropdownMenuItem<int>(value: 2, child: Text('Anime')),
+                    //   DropdownMenuItem<int>(value: 3, child: Text('Gaming')),
+                    //   DropdownMenuItem<int>(value: 4, child: Text('Comics')),
+                    //   DropdownMenuItem<int>(value: 5, child: Text('Book')),
+                    //   DropdownMenuItem<int>(value: 6, child: Text('Collectibles')),
+                    //   DropdownMenuItem<int>(value: 7, child: Text('Sports')),
+                    // ],
                     decoration: const InputDecoration(
                       label: Text('Category'),
                       isDense: true,
@@ -292,7 +301,7 @@ class _AddEditPageState extends State<AddEditPage> {
         startDate: value['startDate'],
         endDate: value['endDate'],
         description: value['description'],
-        category: value['category'] ?? 0,
+        category: value['category'] ?? model_category.Category.unlisted,
         websiteAddress: value['websiteAddress'],
         venueName: value['venueName'],
         address1: value['address1'],
@@ -314,7 +323,7 @@ class _AddEditPageState extends State<AddEditPage> {
         startDate: value['startDate'],
         endDate: value['endDate'],
         description: value['description'],
-        category: value['category'] ?? 0,
+        category: value['category'] ?? model_category.Category.unlisted,
         websiteAddress: value['websiteAddress'],
         venueName: value['venueName'],
         address1: value['address1'],

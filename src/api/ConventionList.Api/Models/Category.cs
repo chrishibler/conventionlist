@@ -2,12 +2,12 @@ namespace ConventionList.Api.Models;
 
 public enum Category
 {
-    Unknown,
+    Unlisted,
     ScienceFictionAndFantasy,
     Anime,
     Gaming,
     Comics,
     Book,
     Collectibles,
-    Sports
+    Sports,
 }

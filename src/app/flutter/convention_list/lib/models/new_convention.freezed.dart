@@ -33,7 +33,8 @@ mixin _$NewConvention {
   String? get address1 => throw _privateConstructorUsedError;
   String? get address2 => throw _privateConstructorUsedError;
   String? get state => throw _privateConstructorUsedError;
-  int? get category => throw _privateConstructorUsedError;
+  @CategoryConverter()
+  Category get category => throw _privateConstructorUsedError;
 
   /// Serializes this NewConvention to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -65,7 +66,7 @@ abstract class $NewConventionCopyWith<$Res> {
       String? address1,
       String? address2,
       String? state,
-      int? category});
+      @CategoryConverter() Category category});
 }
 
 /// @nodoc
@@ -96,7 +97,7 @@ class _$NewConventionCopyWithImpl<$Res, $Val extends NewConvention>
     Object? address1 = freezed,
     Object? address2 = freezed,
     Object? state = freezed,
-    Object? category = freezed,
+    Object? category = null,
   }) {
     return _then(_value.copyWith(
       name: null == name
@@ -151,10 +152,10 @@ class _$NewConventionCopyWithImpl<$Res, $Val extends NewConvention>
           ? _value.state
           : state // ignore: cast_nullable_to_non_nullable
               as String?,
-      category: freezed == category
+      category: null == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as Category,
     ) as $Val);
   }
 }
@@ -181,7 +182,7 @@ abstract class _$$NewConventionImplCopyWith<$Res>
       String? address1,
       String? address2,
       String? state,
-      int? category});
+      @CategoryConverter() Category category});
 }
 
 /// @nodoc
@@ -210,7 +211,7 @@ class __$$NewConventionImplCopyWithImpl<$Res>
     Object? address1 = freezed,
     Object? address2 = freezed,
     Object? state = freezed,
-    Object? category = freezed,
+    Object? category = null,
   }) {
     return _then(_$NewConventionImpl(
       name: null == name
@@ -265,10 +266,10 @@ class __$$NewConventionImplCopyWithImpl<$Res>
           ? _value.state
           : state // ignore: cast_nullable_to_non_nullable
               as String?,
-      category: freezed == category
+      category: null == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as Category,
     ));
   }
 }
@@ -290,7 +291,7 @@ class _$NewConventionImpl implements _NewConvention {
       this.address1,
       this.address2,
       this.state,
-      this.category});
+      @CategoryConverter() this.category = Category.unlisted});
 
   factory _$NewConventionImpl.fromJson(Map<String, dynamic> json) =>
       _$$NewConventionImplFromJson(json);
@@ -323,7 +324,9 @@ class _$NewConventionImpl implements _NewConvention {
   @override
   final String? state;
   @override
-  final int? category;
+  @JsonKey()
+  @CategoryConverter()
+  final Category category;
 
   @override
   String toString() {
@@ -410,7 +413,7 @@ abstract class _NewConvention implements NewConvention {
       final String? address1,
       final String? address2,
       final String? state,
-      final int? category}) = _$NewConventionImpl;
+      @CategoryConverter() final Category category}) = _$NewConventionImpl;
 
   factory _NewConvention.fromJson(Map<String, dynamic> json) =
       _$NewConventionImpl.fromJson;
@@ -442,7 +445,8 @@ abstract class _NewConvention implements NewConvention {
   @override
   String? get state;
   @override
-  int? get category;
+  @CategoryConverter()
+  Category get category;
 
   /// Create a copy of NewConvention
   /// with the given fields replaced by the non-null parameter values.

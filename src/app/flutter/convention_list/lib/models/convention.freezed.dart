@@ -35,7 +35,8 @@ mixin _$Convention {
   String? get address1 => throw _privateConstructorUsedError;
   String? get address2 => throw _privateConstructorUsedError;
   String? get state => throw _privateConstructorUsedError;
-  int? get category => throw _privateConstructorUsedError;
+  @CategoryConverter()
+  Category get category => throw _privateConstructorUsedError;
 
   /// Serializes this Convention to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -69,7 +70,7 @@ abstract class $ConventionCopyWith<$Res> {
       String? address1,
       String? address2,
       String? state,
-      int? category});
+      @CategoryConverter() Category category});
 
   $PositionCopyWith<$Res>? get position;
 }
@@ -104,7 +105,7 @@ class _$ConventionCopyWithImpl<$Res, $Val extends Convention>
     Object? address1 = freezed,
     Object? address2 = freezed,
     Object? state = freezed,
-    Object? category = freezed,
+    Object? category = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -167,10 +168,10 @@ class _$ConventionCopyWithImpl<$Res, $Val extends Convention>
           ? _value.state
           : state // ignore: cast_nullable_to_non_nullable
               as String?,
-      category: freezed == category
+      category: null == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as Category,
     ) as $Val);
   }
 
@@ -213,7 +214,7 @@ abstract class _$$ConventionImplCopyWith<$Res>
       String? address1,
       String? address2,
       String? state,
-      int? category});
+      @CategoryConverter() Category category});
 
   @override
   $PositionCopyWith<$Res>? get position;
@@ -247,7 +248,7 @@ class __$$ConventionImplCopyWithImpl<$Res>
     Object? address1 = freezed,
     Object? address2 = freezed,
     Object? state = freezed,
-    Object? category = freezed,
+    Object? category = null,
   }) {
     return _then(_$ConventionImpl(
       id: null == id
@@ -310,10 +311,10 @@ class __$$ConventionImplCopyWithImpl<$Res>
           ? _value.state
           : state // ignore: cast_nullable_to_non_nullable
               as String?,
-      category: freezed == category
+      category: null == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as Category,
     ));
   }
 }
@@ -337,7 +338,7 @@ class _$ConventionImpl extends _Convention {
       this.address1,
       this.address2,
       this.state,
-      this.category})
+      @CategoryConverter() this.category = Category.unlisted})
       : super._();
 
   factory _$ConventionImpl.fromJson(Map<String, dynamic> json) =>
@@ -374,7 +375,9 @@ class _$ConventionImpl extends _Convention {
   @override
   final String? state;
   @override
-  final int? category;
+  @JsonKey()
+  @CategoryConverter()
+  final Category category;
 
   @override
   String toString() {
@@ -468,7 +471,7 @@ abstract class _Convention extends Convention {
       final String? address1,
       final String? address2,
       final String? state,
-      final int? category}) = _$ConventionImpl;
+      @CategoryConverter() final Category category}) = _$ConventionImpl;
   const _Convention._() : super._();
 
   factory _Convention.fromJson(Map<String, dynamic> json) =
@@ -505,7 +508,8 @@ abstract class _Convention extends Convention {
   @override
   String? get state;
   @override
-  int? get category;
+  @CategoryConverter()
+  Category get category;
 
   /// Create a copy of Convention
   /// with the given fields replaced by the non-null parameter values.

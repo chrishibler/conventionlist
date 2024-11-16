@@ -1,6 +1,9 @@
 import 'package:convention_list/models/position.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import 'category.dart';
+import 'converters/category_converter.dart';
+
 part 'convention.freezed.dart';
 part 'convention.g.dart';
 
@@ -24,7 +27,7 @@ class Convention with _$Convention {
     String? address1,
     String? address2,
     String? state,
-    int? category,
+    @CategoryConverter() @Default(Category.unlisted) Category category,
   }) = _Convention;
 
   factory Convention.fromJson(Map<String, dynamic> json) => _$ConventionFromJson(json);

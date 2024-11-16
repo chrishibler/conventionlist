@@ -21,7 +21,9 @@ _$NewConventionImpl _$$NewConventionImplFromJson(Map<String, dynamic> json) =>
       address1: json['address1'] as String?,
       address2: json['address2'] as String?,
       state: json['state'] as String?,
-      category: (json['category'] as num?)?.toInt(),
+      category: json['category'] == null
+          ? Category.unlisted
+          : const CategoryConverter().fromJson(json['category'] as String),
     );
 
 Map<String, dynamic> _$$NewConventionImplToJson(_$NewConventionImpl instance) =>
@@ -39,5 +41,5 @@ Map<String, dynamic> _$$NewConventionImplToJson(_$NewConventionImpl instance) =>
       'address1': instance.address1,
       'address2': instance.address2,
       'state': instance.state,
-      'category': instance.category,
+      'category': const CategoryConverter().toJson(instance.category),
     };

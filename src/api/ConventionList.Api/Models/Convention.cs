@@ -15,7 +15,7 @@ public class Convention
 
     public string? SubmitterId { get; set; }
 
-    public Category Category { get; set; }
+    public Category? Category { get; set; }
 
     public string? ExternalId { get; set; }
 

@@ -4,6 +4,7 @@ namespace ConventionList.Api.Models.Api;
 
 public class NewApiConvention
 {
+    [Required]
     public Category Category { get; set; }
 
     [Required]

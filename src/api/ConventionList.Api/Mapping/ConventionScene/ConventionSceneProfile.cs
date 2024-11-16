@@ -54,7 +54,7 @@ public class ConventionSceneProfile : Profile
         //"summary": "Comic Book Convention at Beyond Comicon",
         if (string.IsNullOrWhiteSpace(calEvent.Summary))
         {
-            return Category.Unknown;
+            return Category.Unlisted;
         }
 
         string[] parts = calEvent.Summary.Split("at");
@@ -89,7 +89,7 @@ public class ConventionSceneProfile : Profile
         }
         else
         {
-            return Category.Unknown;
+            return Category.Unlisted;
         }
     }
 
