@@ -65,6 +65,11 @@ public sealed class ConventinSceneCalendarSync(
                             conventionSceneCon.Name
                         );
 
+                        if (conventionSceneCon.Category == null)
+                        {
+                            conventionSceneCon.Category = Category.Unlisted;
+                        }
+
                         conventionSceneCon.IsApproved = true;
                         db.Conventions.Add(conventionSceneCon);
                     }
@@ -74,6 +79,12 @@ public sealed class ConventinSceneCalendarSync(
                     )
                     {
                         autoMapper.Map(conventionSceneCon, existingCon);
+
+                        if (existingCon.Category == null)
+                        {
+                            existingCon.Category = Category.Unlisted;
+                        }
+
                         db.Conventions.Update(existingCon);
                     }
 

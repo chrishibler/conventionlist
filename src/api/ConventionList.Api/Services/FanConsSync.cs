@@ -59,7 +59,7 @@ public sealed class FanConsSync(
                             );
                         }
                         fanConsCon.Name = HtmlFixService.ReplaceHtmlChars(fanConsCon.Name);
-
+                        fanConsCon.Category = Category.Unlisted;
                         await PoulateConventionUrl(fanConsCon);
                         fanConsCon.IsApproved = true;
                         db.Conventions.Add(fanConsCon);
@@ -80,6 +80,10 @@ public sealed class FanConsSync(
                             await PoulateConventionUrl(fanConsCon);
                         }
                         autoMapper.Map(fanConsCon, existingCon);
+                        if (existingCon.Category == null)
+                        {
+                            existingCon.Category = Category.Unlisted;
+                        }
                         db.Conventions.Update(existingCon);
                     }
 
