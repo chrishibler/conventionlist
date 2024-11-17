@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:intl/intl.dart';
 
+import '../injection.dart';
 import '../models/convention.dart';
 import '../services/api.dart';
 import '../theme/mocha.dart';
@@ -102,7 +103,7 @@ class _ManageViewState extends State<ManageView> {
 }
 
 class _ConventionListTile extends StatelessWidget {
-  const _ConventionListTile({
+  _ConventionListTile({
     required this.convention,
     required this.editRoute,
     required this.refresh,
@@ -114,6 +115,7 @@ class _ConventionListTile extends StatelessWidget {
   static const maxNameCharacters = 20;
   final void Function()? onDeleteConvention;
   final Convention convention;
+  final Api api = getIt<Api>();
 
   String _truncateNameIfNeeded(String name) {
     return name.length > maxNameCharacters ? '${name.substring(0, maxNameCharacters)}...' : name;
@@ -158,7 +160,7 @@ class _ConventionListTile extends StatelessWidget {
                             try {
                               bool? confirmed = await _showDeleteConfirmationDialog(context);
                               if (confirmed == true) {
-                                await Api().deleteConvention(convention);
+                                await api.deleteConvention(convention);
                                 if (onDeleteConvention != null) {
                                   onDeleteConvention!();
                                 }

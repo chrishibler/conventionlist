@@ -8,6 +8,7 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:rxdart/rxdart.dart';
 
+import '../injection.dart';
 import '../models/bounds.dart' as api_bounds;
 import '../models/convention.dart';
 import '../models/position.dart';
@@ -27,6 +28,8 @@ class _MapPageState extends State<MapPage> {
   MapController controller = MapController();
   Set<Convention> conventions = {};
   Future<Position> positionFuture = Future.value(defaultPosition);
+  final Api api = getIt<Api>();
+  final GeoService geoService = getIt<GeoService>();
 
   @override
   void initState() {
@@ -43,7 +46,7 @@ class _MapPageState extends State<MapPage> {
       bool hasMore = true;
       int pageKey = 1;
       while (hasMore) {
-        ResponsePage page = await Api().getConventionsByBounds(
+        ResponsePage page = await api.getConventionsByBounds(
           pageKey: pageKey,
           bounds: bounds,
         );
@@ -60,7 +63,7 @@ class _MapPageState extends State<MapPage> {
 
   Future<Position> _setupPosition() async {
     try {
-      return await GeoService.getPosition();
+      return await geoService.getPosition();
     } catch (e) {
       print(e);
       return defaultPosition;

@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:rxdart/rxdart.dart';
 
+import '../injection.dart';
 import '../models/convention.dart';
 import '../models/position.dart';
 import '../models/response_page.dart';
@@ -26,6 +27,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final PagingController<int, Convention> _pagingController = PagingController(firstPageKey: 1);
   final BehaviorSubject<String> searchSubject = BehaviorSubject<String>();
+  final Api api = getIt<Api>();
+  final GeoService geoService = getIt<GeoService>();
   late final Future<Position> positionFuture;
   OrderBy orderBy = OrderBy.distance;
   String? search;
@@ -33,7 +36,7 @@ class _HomePageState extends State<HomePage> {
 
   Future<Position> _getPosition() async {
     try {
-      return await GeoService.getPosition();
+      return await geoService.getPosition();
     } catch (e) {
       print(e);
       orderBy = OrderBy.startDate;
@@ -44,7 +47,7 @@ class _HomePageState extends State<HomePage> {
   Future<void> _fetchPage(int pageKey) async {
     try {
       Position position = await positionFuture;
-      ResponsePage page = await Api().getConventions(
+      ResponsePage page = await api.getConventions(
         orderBy: orderBy,
         pageKey: pageKey,
         search: search,

@@ -20,7 +20,7 @@ final router = GoRouter(
         args: AddEditPageArgs(returnRoute: '/'),
       ),
     ),
-    GoRoute(path: '/manage', builder: (context, state) => const UserManagePage(), routes: [
+    GoRoute(path: '/manage', builder: (context, state) => UserManagePage(), routes: [
       GoRoute(
         path: '/edit',
         builder: (context, state) {

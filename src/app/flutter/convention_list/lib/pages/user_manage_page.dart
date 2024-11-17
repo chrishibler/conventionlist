@@ -1,20 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
+import '../injection.dart';
 import '../models/convention.dart';
 import '../models/response_page.dart';
 import '../services/api.dart';
 import 'manage_view.dart';
 
 class UserManagePage extends StatelessWidget {
-  const UserManagePage({super.key});
+  final Api api = getIt<Api>();
+
+  UserManagePage({super.key});
 
   Future<void> _fetchPage(
     int pageKey,
     PagingController<int, Convention> controller,
   ) async {
     try {
-      ResponsePage page = await Api().getUserConventions(
+      ResponsePage page = await api.getUserConventions(
         pageKey: pageKey,
       );
       bool isLastPage = page.totalPages == page.currentPage;

@@ -10,6 +10,7 @@ import 'package:form_builder_extra_fields/form_builder_extra_fields.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:go_router/go_router.dart';
 
+import '../injection.dart';
 import '../models/category.dart' as model_category;
 import '../models/convention.dart';
 import '../navigation/add_edit_page_args.dart';
@@ -31,6 +32,7 @@ class AddEditPage extends StatefulWidget {
 
 class _AddEditPageState extends State<AddEditPage> {
   final _formKey = GlobalKey<FormBuilderState>();
+  final Api api = getIt<Api>();
   bool _isBusy = false;
   late bool _isAdmin;
 
@@ -42,7 +44,7 @@ class _AddEditPageState extends State<AddEditPage> {
 
   @override
   void initState() {
-    _isAdmin = AuthService().permissions.contains(Permissions.manageAllConventions);
+    _isAdmin = getIt<AuthService>().permissions.contains(Permissions.manageAllConventions);
     super.initState();
   }
 
@@ -313,7 +315,7 @@ class _AddEditPageState extends State<AddEditPage> {
         isApproved: value['isApproved'] ?? false,
       );
 
-      await Api().postConvention(newCon);
+      await api.postConvention(newCon);
       return true;
     } else {
       Convention convention = Convention(
@@ -334,7 +336,7 @@ class _AddEditPageState extends State<AddEditPage> {
         country: value['country'],
         isApproved: value['isApproved'] ?? false,
       );
-      await Api().putConvention(convention);
+      await api.putConvention(convention);
       return true;
     }
   }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:rxdart/rxdart.dart';
 
+import '../injection.dart';
 import '../models/convention.dart';
 import '../models/response_page.dart';
 import '../models/search_params.dart';
@@ -19,6 +20,7 @@ class _AdminManagePageState extends State<AdminManagePage> {
   final BehaviorSubject<SearchArgs> searchSubject = BehaviorSubject<SearchArgs>();
   OrderBy orderBy = OrderBy.distance;
   String? search;
+  final Api api = getIt<Api>();
 
   @override
   void initState() {
@@ -34,7 +36,7 @@ class _AdminManagePageState extends State<AdminManagePage> {
     PagingController<int, Convention> controller,
   ) async {
     try {
-      ResponsePage page = await Api().getConventions(
+      ResponsePage page = await api.getConventions(
         orderBy: orderBy,
         pageKey: pageKey,
         search: search,

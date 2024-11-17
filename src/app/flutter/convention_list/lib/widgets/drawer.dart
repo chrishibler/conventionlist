@@ -5,6 +5,7 @@ import 'package:convention_list/widgets/paypal_button.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../injection.dart';
 import '../theme/mocha.dart';
 
 class AppDrawer extends StatefulWidget {
@@ -17,7 +18,9 @@ class AppDrawer extends StatefulWidget {
 }
 
 class _AppDrawerState extends State<AppDrawer> {
-  bool isLoggedIn = AuthService.credentials != null;
+  final AuthService authService = getIt<AuthService>();
+  late bool isLoggedIn = authService.credentials != null;
+  late bool isAdmin = authService.permissions.contains(Permissions.manageAllConventions);
 
   @override
   Widget build(BuildContext context) {
@@ -67,12 +70,12 @@ class _AppDrawerState extends State<AppDrawer> {
             onTap: () async {
               try {
                 if (isLoggedIn) {
-                  await AuthService().logout();
+                  await authService.logout();
                   setState(() {
                     isLoggedIn = false;
                   });
                 } else {
-                  await AuthService().login();
+                  await authService.login();
                   setState(() {
                     isLoggedIn = true;
                   });
@@ -96,7 +99,7 @@ class _AppDrawerState extends State<AppDrawer> {
   }
 
   List<Widget> _getAuthItems(BuildContext context) {
-    bool isAdmin = AuthService().permissions.contains(Permissions.manageAllConventions);
+    bool isAdmin = authService.permissions.contains(Permissions.manageAllConventions);
     return [
       const Divider(),
       DrawerItem(
