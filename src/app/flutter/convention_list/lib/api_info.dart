@@ -1,2 +1,2 @@
-const String apiBaseUrl = 'https://api.conventionlist.org';
-//const String apiBaseUrl = 'https://10.0.2.2:8443';
+const String apiBaseUrl =
+    String.fromEnvironment('BASE_URL') == '' ? 'https://api.conventionlist.org' : String.fromEnvironment('BASE_URL');
