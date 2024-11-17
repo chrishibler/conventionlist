@@ -10,27 +10,28 @@ import 'package:form_builder_extra_fields/form_builder_extra_fields.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:go_router/go_router.dart';
 
-import '../injection.dart';
-import '../models/category.dart' as model_category;
-import '../models/convention.dart';
-import '../navigation/add_edit_page_args.dart';
-import '../services/api.dart';
+import '../../injection.dart';
+import '../../models/category.dart' as model_category;
+import '../../models/convention.dart';
+import '../../services/api.dart';
 
-class AddEditPage extends StatefulWidget {
-  AddEditPage({super.key, required AddEditPageArgs args})
-      : returnRoute = args.returnRoute,
-        convention = args.convention,
-        refresh = args.refresh;
+class AddEditView extends StatefulWidget {
+  const AddEditView({
+    super.key,
+    required this.returnRoute,
+    this.convention,
+    this.refresh,
+  });
 
   final String returnRoute;
   final Convention? convention;
   final Future<void> Function()? refresh;
 
   @override
-  State<AddEditPage> createState() => _AddEditPageState();
+  State<AddEditView> createState() => _AddEditViewState();
 }
 
-class _AddEditPageState extends State<AddEditPage> {
+class _AddEditViewState extends State<AddEditView> {
   final _formKey = GlobalKey<FormBuilderState>();
   final Api api = getIt<Api>();
   bool _isBusy = false;
@@ -131,16 +132,6 @@ class _AddEditPageState extends State<AddEditPage> {
                           ),
                         )
                         .toList(),
-                    // const [
-                    //   DropdownMenuItem<int>(value: 0, child: Text('None')),
-                    //   DropdownMenuItem<int>(value: 1, child: Text('Sci-Fi and Fantasy')),
-                    //   DropdownMenuItem<int>(value: 2, child: Text('Anime')),
-                    //   DropdownMenuItem<int>(value: 3, child: Text('Gaming')),
-                    //   DropdownMenuItem<int>(value: 4, child: Text('Comics')),
-                    //   DropdownMenuItem<int>(value: 5, child: Text('Book')),
-                    //   DropdownMenuItem<int>(value: 6, child: Text('Collectibles')),
-                    //   DropdownMenuItem<int>(value: 7, child: Text('Sports')),
-                    // ],
                     decoration: const InputDecoration(
                       label: Text('Category'),
                       isDense: true,
