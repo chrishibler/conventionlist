@@ -1,5 +1,4 @@
 import 'package:convention_list/services/auth_service.dart';
-import 'package:convention_list/util/permissions.dart';
 import 'package:convention_list/widgets/drawer_item.dart';
 import 'package:convention_list/widgets/paypal_button.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +19,7 @@ class AppDrawer extends StatefulWidget {
 class _AppDrawerState extends State<AppDrawer> {
   final AuthService authService = getIt<AuthService>();
   late bool isLoggedIn = authService.credentials != null;
-  late bool isAdmin = authService.permissions.contains(Permissions.manageAllConventions);
+  late bool isAdmin = authService.isAdmin;
 
   @override
   Widget build(BuildContext context) {
@@ -99,7 +98,6 @@ class _AppDrawerState extends State<AppDrawer> {
   }
 
   List<Widget> _getAuthItems(BuildContext context) {
-    bool isAdmin = authService.permissions.contains(Permissions.manageAllConventions);
     return [
       const Divider(),
       DrawerItem(
@@ -110,15 +108,8 @@ class _AppDrawerState extends State<AppDrawer> {
       DrawerItem(
         icon: Icons.edit,
         text: 'Manage Conventions',
-        onTap: () => context.go('/manage'),
+        onTap: () => context.push('/manage'),
       ),
-      if (isAdmin) const Divider(),
-      if (isAdmin)
-        DrawerItem(
-          icon: Icons.admin_panel_settings,
-          text: 'Admin',
-          onTap: () => context.go('/admin'),
-        ),
     ];
   }
 }

@@ -2,6 +2,8 @@ import 'package:auth0_flutter/auth0_flutter.dart';
 import 'package:injectable/injectable.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 
+import '../util/permissions.dart';
+
 @lazySingleton
 class AuthService {
   Credentials? credentials;
@@ -17,6 +19,8 @@ class AuthService {
     }
     return credentials;
   }
+
+  bool get isAdmin => permissions.contains(Permissions.manageAllConventions);
 
   Future<void> logout() async {
     await _auth0.webAuthentication(scheme: 'app').logout();

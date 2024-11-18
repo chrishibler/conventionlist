@@ -51,8 +51,11 @@ class Api {
     print(response);
   }
 
-  Future<ResponsePage> getUserConventions({required int pageKey}) async {
-    final String url = '$apiBaseUrl/user/conventions?page=$pageKey';
+  Future<ResponsePage> getUserConventions({
+    required int pageKey,
+    String? search,
+  }) async {
+    final String url = '$apiBaseUrl/user/conventions?page=$pageKey${SearchParams(search: search).toQueryString()}';
     String accessToken = authService.credentials!.accessToken;
     Options options = Options(headers: {'Authorization': 'Bearer $accessToken'});
     var response = await dio.get(
