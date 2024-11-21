@@ -21,7 +21,8 @@ public class UserController(
     [Authorize("manage:myconventions")]
     public async Task<ActionResult<ConventionsResult>> GetConventions(
         [FromQuery] int page = 1,
-        [FromQuery] int pageSize = 20
+        [FromQuery] int pageSize = 20,
+        [FromQuery] SearchParams? searchParams = null
     )
     {
         string? userId = HttpContext.User.SubjectId();
@@ -31,6 +32,7 @@ public class UserController(
         }
 
         var query = db.Conventions.AsQueryable();
+        query = searchParams?.ApplyFilter(query) ?? query;
         query = query.Where(c => c.SubmitterId == HttpContext.User.SubjectId());
         query = query.OrderBy(c => c.StartDate).ThenBy(c => c.Name);
 
