@@ -18,9 +18,11 @@ import 'package:convention_list/register_module.dart' as _i821;
 import 'package:convention_list/services/api.dart' as _i367;
 import 'package:convention_list/services/auth_service.dart' as _i781;
 import 'package:convention_list/services/geo_service.dart' as _i598;
+import 'package:convention_list/widgets/drawer/app_drawer_cubit.dart' as _i329;
 import 'package:dio/dio.dart' as _i361;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
+import 'package:logger/logger.dart' as _i974;
 
 extension GetItInjectableX on _i174.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -36,6 +38,11 @@ extension GetItInjectableX on _i174.GetIt {
     final registerModule = _$RegisterModule();
     gh.lazySingleton<_i781.AuthService>(() => _i781.AuthService());
     gh.lazySingleton<_i598.GeoService>(() => _i598.GeoService());
+    gh.lazySingleton<_i974.Logger>(() => registerModule.logger);
+    gh.factory<_i329.AppDrawerCubit>(() => _i329.AppDrawerCubit(
+          authService: gh<_i781.AuthService>(),
+          logger: gh<_i974.Logger>(),
+        ));
     gh.factory<String>(
       () => registerModule.baseUrl,
       instanceName: 'BaseUrl',

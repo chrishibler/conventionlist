@@ -3,8 +3,10 @@ import 'dart:math' as math;
 import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:logger/logger.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../injection.dart';
 import '../../models/convention.dart';
 import '../../theme/mocha.dart';
 import '../../theme/text_styles.dart';
@@ -32,7 +34,7 @@ class ConventionInfo extends StatelessWidget {
                   Uri uri = Uri.parse(convention.websiteAddress!);
                   launchUrl(uri);
                 } catch (e) {
-                  print(e);
+                  getIt<Logger>().e('Error launching url', error: e);
                   return;
                 }
               }

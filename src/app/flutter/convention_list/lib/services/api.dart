@@ -48,12 +48,11 @@ class Api {
     }
     String accessToken = authService.credentials!.accessToken;
     Options options = Options(headers: {'Authorization': 'Bearer $accessToken'});
-    var response = await dio.post(
+    await dio.post(
       '/conventions',
       data: newConvention.toJson(),
       options: options,
     );
-    print(response);
   }
 
   Future<ResponsePage> getUserConventions({

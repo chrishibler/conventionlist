@@ -1,6 +1,6 @@
 import 'package:convention_list/util/tile_providers.dart';
 import 'package:convention_list/widgets/convention_list/convention_info.dart';
-import 'package:convention_list/widgets/drawer.dart';
+import 'package:convention_list/widgets/drawer/app_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';

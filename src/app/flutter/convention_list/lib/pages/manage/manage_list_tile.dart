@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
+import 'package:logger/logger.dart';
 
 import '../../injection.dart';
 import '../../models/convention.dart';
@@ -71,7 +72,7 @@ class ManageListTile extends StatelessWidget {
                                 }
                               }
                             } catch (e) {
-                              print(e);
+                              getIt<Logger>().e('Problem deleting convention', error: e);
                             }
                           },
                         ),
