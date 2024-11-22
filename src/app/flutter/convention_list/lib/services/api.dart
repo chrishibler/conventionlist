@@ -12,10 +12,10 @@ import '../models/search_params.dart';
 
 @lazySingleton
 class Api {
-  static final Dio dio = Dio();
+  final Dio dio;
   final AuthService authService;
 
-  Api({required this.authService});
+  Api({required this.authService, required this.dio});
 
   Future<ResponsePage> getConventions({
     required OrderBy orderBy,
@@ -36,7 +36,7 @@ class Api {
   }
 
   Future<Convention> getConvention({required String id}) async {
-    final String url = '$apiBaseUrl/conventions/$id';
+    final String url = '/conventions/$id';
     var response = await dio.get(url);
     Convention convention = Convention.fromJson(response.data);
     return convention;
@@ -49,7 +49,7 @@ class Api {
     String accessToken = authService.credentials!.accessToken;
     Options options = Options(headers: {'Authorization': 'Bearer $accessToken'});
     var response = await dio.post(
-      '$apiBaseUrl/conventions',
+      '/conventions',
       data: newConvention.toJson(),
       options: options,
     );
@@ -60,7 +60,7 @@ class Api {
     required int pageKey,
     String? search,
   }) async {
-    final String url = '$apiBaseUrl/user/conventions?page=$pageKey${SearchParams(search: search).toQueryString()}';
+    final String url = '/user/conventions?page=$pageKey${SearchParams(search: search).toQueryString()}';
     String accessToken = authService.credentials!.accessToken;
     Options options = Options(headers: {'Authorization': 'Bearer $accessToken'});
     var response = await dio.get(
@@ -77,7 +77,7 @@ class Api {
     List<Convention> conventions = [];
     while (hasMore) {
       final String url =
-          '$apiBaseUrl/conventions/bounds?north=${bounds.north}&east=${bounds.east}&south=${bounds.south}&west=${bounds.west}&page=$pageKey';
+          '/conventions/bounds?north=${bounds.north}&east=${bounds.east}&south=${bounds.south}&west=${bounds.west}&page=$pageKey';
       var response = await dio.get(url);
       ResponsePage page = ResponsePage.fromJson(response.data);
       conventions.addAll(page.conventions);
@@ -92,14 +92,14 @@ class Api {
     required Bounds bounds,
   }) async {
     final String url =
-        '$apiBaseUrl/conventions/bounds?north=${bounds.north}&east=${bounds.east}&south=${bounds.south}&west=${bounds.west}&page=$pageKey';
+        '/conventions/bounds?north=${bounds.north}&east=${bounds.east}&south=${bounds.south}&west=${bounds.west}&page=$pageKey';
     var response = await dio.get(url);
     ResponsePage page = ResponsePage.fromJson(response.data);
     return page;
   }
 
   Future<void> deleteConvention(Convention convention) async {
-    final String url = '$apiBaseUrl/conventions/${convention.id}';
+    final String url = '/conventions/${convention.id}';
     String accessToken = authService.credentials!.accessToken;
     Options options = Options(headers: {'Authorization': 'Bearer $accessToken'});
     await dio.delete(
@@ -109,7 +109,7 @@ class Api {
   }
 
   Future<void> putConvention(Convention convention) async {
-    final String url = '$apiBaseUrl/conventions/${convention.id}';
+    final String url = '/conventions/${convention.id}';
     String accessToken = authService.credentials!.accessToken;
     Options options = Options(headers: {'Authorization': 'Bearer $accessToken'});
     await dio.put(
