@@ -6,17 +6,13 @@ import '../../injection.dart';
 import 'manage_view.dart';
 
 class ManagePage extends StatelessWidget {
-  final bool showSearchField;
-
-  const ManagePage({super.key, required this.showSearchField});
+  const ManagePage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => getIt<ManageCubit>(),
-      child: ManageView(
-        showSearchField: showSearchField,
-      ),
+      child: const ManageView(),
     );
   }
 }

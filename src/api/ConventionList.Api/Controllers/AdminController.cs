@@ -22,15 +22,12 @@ public class AdminController(
     public async Task<ActionResult<ConventionsResult>> GetConventions(
         [FromQuery] int page = 1,
         [FromQuery] int pageSize = 20,
-        [FromQuery] bool? approved = false
+        [FromQuery] SearchParams? searchParams = null
     )
     {
         var query = db.Conventions.AsQueryable();
+        query = searchParams?.ApplyFilter(query) ?? query;
         query = query.OrderByDescending(c => c.StartDate).ThenBy(c => c.Name);
-        if (approved != null)
-        {
-            query = query.Where(c => c.IsApproved == approved);
-        }
 
         int totalCount = query.Count();
         int totalPages = (int)Math.Ceiling((double)totalCount / pageSize);

@@ -14,6 +14,7 @@ _$SearchParamsImpl _$$SearchParamsImplFromJson(Map<String, dynamic> json) =>
       position: json['position'] == null
           ? null
           : Position.fromJson(json['position'] as Map<String, dynamic>),
+      approved: json['approved'] as bool?,
     );
 
 Map<String, dynamic> _$$SearchParamsImplToJson(_$SearchParamsImpl instance) =>
@@ -21,6 +22,7 @@ Map<String, dynamic> _$$SearchParamsImplToJson(_$SearchParamsImpl instance) =>
       'orderBy': _$OrderByEnumMap[instance.orderBy]!,
       'search': instance.search,
       'position': instance.position,
+      'approved': instance.approved,
     };
 
 const _$OrderByEnumMap = {

@@ -16,31 +16,24 @@ final router = GoRouter(
           path: '/add',
           builder: (context, state) => const AddEditPage(),
         ),
-        GoRoute(
-            path: '/manage',
-            builder: (context, state) => const ManagePage(
-                  showSearchField: false,
-                ),
-            routes: [
-              GoRoute(
-                path: '/edit',
-                builder: (context, state) {
-                  EditExtraParameter param = state.extra as EditExtraParameter;
-                  return AddEditPage(
-                    convention: param.convention,
-                  );
-                },
-              ),
-            ]),
+        GoRoute(path: '/manage', builder: (context, state) => const ManagePage(), routes: [
+          GoRoute(
+            path: '/edit',
+            builder: (context, state) {
+              EditExtraParameter param = state.extra as EditExtraParameter;
+              return AddEditPage(
+                convention: param.convention,
+              );
+            },
+          ),
+        ]),
         GoRoute(
           path: '/map',
           builder: (context, state) => MapPage(),
         ),
         GoRoute(
           path: '/admin',
-          builder: (context, state) => const ManagePage(
-            showSearchField: false,
-          ),
+          builder: (context, state) => const ManagePage(),
         ),
       ],
     ),

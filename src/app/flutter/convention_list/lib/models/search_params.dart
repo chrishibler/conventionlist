@@ -10,6 +10,7 @@ class SearchParams with _$SearchParams {
     @Default(OrderBy.distance) OrderBy orderBy,
     String? search,
     Position? position,
+    bool? approved,
   }) = _SearchParams;
 
   const SearchParams._();
@@ -22,6 +23,10 @@ class SearchParams with _$SearchParams {
 
     if (position != null) {
       queryString += '&lat=${position!.latitude}&lon=${position!.longitude}';
+    }
+
+    if (approved != null) {
+      queryString += '&approved=$approved';
     }
     return queryString;
   }

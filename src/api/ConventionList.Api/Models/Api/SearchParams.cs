@@ -1,11 +1,16 @@
 namespace ConventionList.Api.Models.Api;
 
-public record class SearchParams(string? Search, OrderBy OrderBy = OrderBy.Distance)
+public record class SearchParams(string? Search, bool? approved, OrderBy OrderBy = OrderBy.Distance)
 {
     public bool HasSearchFilter => !string.IsNullOrWhiteSpace(Search);
 
     public IQueryable<Convention> ApplyFilter(IQueryable<Convention> query)
     {
+        if (approved != null)
+        {
+            query = query.Where(c => c.IsApproved == approved);
+        }
+
         if (HasSearchFilter)
         {
             // Using ToLower instead of standard CurrentCultureIgnoreCase

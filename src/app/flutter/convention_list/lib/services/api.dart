@@ -22,9 +22,14 @@ class Api {
     required int pageKey,
     String? search,
     Position? position,
+    bool? approved,
   }) async {
-    final String url =
-        '$apiBaseUrl/conventions?page=$pageKey${SearchParams(orderBy: orderBy, search: search, position: position).toQueryString()}';
+    final String url = '$apiBaseUrl/conventions?page=$pageKey${SearchParams(
+      orderBy: orderBy,
+      search: search,
+      position: position,
+      approved: approved,
+    ).toQueryString()}';
     var response = await dio.get(url);
     ResponsePage page = ResponsePage.fromJson(response.data);
     return page;

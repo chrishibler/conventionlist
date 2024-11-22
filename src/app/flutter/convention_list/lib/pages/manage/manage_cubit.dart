@@ -19,8 +19,9 @@ class ManageCubit extends Cubit<ManageState> {
   final Api api;
   final AuthService authService;
   String? search;
+  bool? approved;
 
-  ManageCubit(this.api, this.authService) : super(const ManageState()) {
+  ManageCubit(this.api, this.authService) : super(ManageState(isAdmin: authService.isAdmin)) {
     pagingController.addPageRequestListener((pageKey) async {
       await _fetchPage(pageKey);
     });
@@ -31,6 +32,11 @@ class ManageCubit extends Cubit<ManageState> {
     });
   }
 
+  void setApproved(bool? approved) {
+    this.approved = approved;
+    pagingController.refresh();
+  }
+
   Future<void> _fetchPage(int pageKey) async {
     try {
       ResponsePage page = authService.isAdmin
@@ -38,6 +44,7 @@ class ManageCubit extends Cubit<ManageState> {
               orderBy: OrderBy.startDate,
               pageKey: pageKey,
               search: search,
+              approved: approved,
             )
           : await api.getUserConventions(pageKey: pageKey, search: search);
       bool isLastPage = page.totalPages == page.currentPage;
@@ -54,5 +61,5 @@ class ManageCubit extends Cubit<ManageState> {
 
 @freezed
 class ManageState with _$ManageState {
-  const factory ManageState() = _ManageState;
+  const factory ManageState({required bool isAdmin}) = _ManageState;
 }

@@ -23,6 +23,7 @@ mixin _$SearchParams {
   OrderBy get orderBy => throw _privateConstructorUsedError;
   String? get search => throw _privateConstructorUsedError;
   Position? get position => throw _privateConstructorUsedError;
+  bool? get approved => throw _privateConstructorUsedError;
 
   /// Serializes this SearchParams to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -40,7 +41,8 @@ abstract class $SearchParamsCopyWith<$Res> {
           SearchParams value, $Res Function(SearchParams) then) =
       _$SearchParamsCopyWithImpl<$Res, SearchParams>;
   @useResult
-  $Res call({OrderBy orderBy, String? search, Position? position});
+  $Res call(
+      {OrderBy orderBy, String? search, Position? position, bool? approved});
 
   $PositionCopyWith<$Res>? get position;
 }
@@ -63,6 +65,7 @@ class _$SearchParamsCopyWithImpl<$Res, $Val extends SearchParams>
     Object? orderBy = null,
     Object? search = freezed,
     Object? position = freezed,
+    Object? approved = freezed,
   }) {
     return _then(_value.copyWith(
       orderBy: null == orderBy
@@ -77,6 +80,10 @@ class _$SearchParamsCopyWithImpl<$Res, $Val extends SearchParams>
           ? _value.position
           : position // ignore: cast_nullable_to_non_nullable
               as Position?,
+      approved: freezed == approved
+          ? _value.approved
+          : approved // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ) as $Val);
   }
 
@@ -103,7 +110,8 @@ abstract class _$$SearchParamsImplCopyWith<$Res>
       __$$SearchParamsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({OrderBy orderBy, String? search, Position? position});
+  $Res call(
+      {OrderBy orderBy, String? search, Position? position, bool? approved});
 
   @override
   $PositionCopyWith<$Res>? get position;
@@ -125,6 +133,7 @@ class __$$SearchParamsImplCopyWithImpl<$Res>
     Object? orderBy = null,
     Object? search = freezed,
     Object? position = freezed,
+    Object? approved = freezed,
   }) {
     return _then(_$SearchParamsImpl(
       orderBy: null == orderBy
@@ -139,6 +148,10 @@ class __$$SearchParamsImplCopyWithImpl<$Res>
           ? _value.position
           : position // ignore: cast_nullable_to_non_nullable
               as Position?,
+      approved: freezed == approved
+          ? _value.approved
+          : approved // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 }
@@ -147,7 +160,10 @@ class __$$SearchParamsImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$SearchParamsImpl extends _SearchParams {
   const _$SearchParamsImpl(
-      {this.orderBy = OrderBy.distance, this.search, this.position})
+      {this.orderBy = OrderBy.distance,
+      this.search,
+      this.position,
+      this.approved})
       : super._();
 
   factory _$SearchParamsImpl.fromJson(Map<String, dynamic> json) =>
@@ -160,10 +176,12 @@ class _$SearchParamsImpl extends _SearchParams {
   final String? search;
   @override
   final Position? position;
+  @override
+  final bool? approved;
 
   @override
   String toString() {
-    return 'SearchParams(orderBy: $orderBy, search: $search, position: $position)';
+    return 'SearchParams(orderBy: $orderBy, search: $search, position: $position, approved: $approved)';
   }
 
   @override
@@ -174,12 +192,15 @@ class _$SearchParamsImpl extends _SearchParams {
             (identical(other.orderBy, orderBy) || other.orderBy == orderBy) &&
             (identical(other.search, search) || other.search == search) &&
             (identical(other.position, position) ||
-                other.position == position));
+                other.position == position) &&
+            (identical(other.approved, approved) ||
+                other.approved == approved));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, orderBy, search, position);
+  int get hashCode =>
+      Object.hash(runtimeType, orderBy, search, position, approved);
 
   /// Create a copy of SearchParams
   /// with the given fields replaced by the non-null parameter values.
@@ -201,7 +222,8 @@ abstract class _SearchParams extends SearchParams {
   const factory _SearchParams(
       {final OrderBy orderBy,
       final String? search,
-      final Position? position}) = _$SearchParamsImpl;
+      final Position? position,
+      final bool? approved}) = _$SearchParamsImpl;
   const _SearchParams._() : super._();
 
   factory _SearchParams.fromJson(Map<String, dynamic> json) =
@@ -213,6 +235,8 @@ abstract class _SearchParams extends SearchParams {
   String? get search;
   @override
   Position? get position;
+  @override
+  bool? get approved;
 
   /// Create a copy of SearchParams
   /// with the given fields replaced by the non-null parameter values.
