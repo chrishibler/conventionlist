@@ -15,7 +15,8 @@ export default function ConventionDetails({ convention }) {
       {convention.venuName && <div>{convention.venuName}</div>}
       {convention.city && (
         <div>
-          {convention.city} {convention.state && `, ${convention.state}`}
+          {convention.city}
+          {convention.state && `, ${convention.state}`}
         </div>
       )}
       <Description description={convention.description} />
