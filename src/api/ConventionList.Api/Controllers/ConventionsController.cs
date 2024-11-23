@@ -121,14 +121,7 @@ public class ConventionsController(
         con.SubmitterId = userId;
         await GeocodeCon(con);
         _ = db.Conventions.Add(con);
-        try
-        {
-            _ = await db.SaveChangesAsync();
-        }
-        catch (Exception ex)
-        {
-            log.LogError("Error saving convention", ex);
-        }
+        _ = await db.SaveChangesAsync();
         var apiConvention = mapper.Map<ApiConvention>(con);
 
         return Created($"~conventions/{con.Id}", apiConvention);
@@ -144,27 +137,15 @@ public class ConventionsController(
             return NotFound();
         }
 
-        if (!ModelState.IsValid)
-        {
-            return BadRequest(ModelState);
-        }
-
         var user = HttpContext.User;
         if (!user.IsSubmitterOrAdmin(existingCon))
         {
             return Forbid("User did not submit this convention.");
         }
 
-        try
-        {
-            mapper.Map(updatedCon, existingCon);
-            existingCon.Editor = user.SubjectId()!;
-            db.SaveChanges();
-        }
-        catch (Exception ex)
-        {
-            log.LogError("Error updating convention", ex);
-        }
+        mapper.Map(updatedCon, existingCon);
+        existingCon.Editor = user.SubjectId()!;
+        db.SaveChanges();
 
         return NoContent();
     }
@@ -185,14 +166,7 @@ public class ConventionsController(
         }
 
         _ = db.Conventions.Remove(existingCon);
-        try
-        {
-            _ = await db.SaveChangesAsync();
-        }
-        catch (Exception ex)
-        {
-            log.LogError("Error deleting convention", ex);
-        }
+        _ = await db.SaveChangesAsync();
 
         db.SaveChanges();
         return NoContent();

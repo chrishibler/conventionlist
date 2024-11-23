@@ -1,9 +1,5 @@
 using AutoMapper;
-using Azure;
-using Azure.Maps.Search;
 using ConventionList.Api.Services;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.Identity.Web;
 
 namespace ConventionList.Api.Extensions;
 
@@ -11,7 +7,7 @@ public static class ServiceCollectionExtensions
 {
     private const string GoogleMapsApiKey = "GoogleMaps:ApiKey";
 
-    public static void AddGeocodingService(this IServiceCollection services)
+    public static IServiceCollection AddGeocodingService(this IServiceCollection services)
     {
         services.AddSingleton<GeocodingService>();
         services.AddHostedService(
@@ -26,9 +22,10 @@ public static class ServiceCollectionExtensions
                 return service;
             }
         );
+        return services;
     }
 
-    public static void AddConventionSceneSync(this IServiceCollection services)
+    public static IServiceCollection AddConventionSceneSync(this IServiceCollection services)
     {
         services.AddHostedService(
             (serviceProvider) =>
@@ -44,9 +41,10 @@ public static class ServiceCollectionExtensions
                 return service;
             }
         );
+        return services;
     }
 
-    public static void AddFanConsSync(this IServiceCollection services)
+    public static IServiceCollection AddFanConsSync(this IServiceCollection services)
     {
         services.AddHostedService(
             (serviceProvider) =>
@@ -61,9 +59,10 @@ public static class ServiceCollectionExtensions
                 return service;
             }
         );
+        return services;
     }
 
-    public static void AddGoogleMapsSearchClient(
+    public static IServiceCollection AddGoogleMapsSearchClient(
         this IServiceCollection services,
         WebApplicationBuilder builder
     )
@@ -76,9 +75,10 @@ public static class ServiceCollectionExtensions
 
         GoogleMapsSearchClient clClient = new(key);
         services.AddSingleton<IMapsSearchClient>(clClient);
+        return services;
     }
 
-    public static void AddHtmlFixService(this IServiceCollection services)
+    public static IServiceCollection AddHtmlFixService(this IServiceCollection services)
     {
         services.AddHostedService<HtmlFixService>(
             (factory) =>
@@ -87,5 +87,6 @@ public static class ServiceCollectionExtensions
                     factory.GetRequiredService<ILogger<HtmlFixService>>()
                 )
         );
+        return services;
     }
 }

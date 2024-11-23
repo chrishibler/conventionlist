@@ -74,22 +74,25 @@ builder.Services.AddAuthorization(options =>
         policy => policy.Requirements.Add(new HasScopeRequirement("manage:allconventions", domain))
     );
 });
-builder.Services.AddSingleton<IAuthorizationHandler, HasScopeHandler>();
-builder.Services.AddAutoMapper(typeof(Program));
-builder.Services.AddHttpClient();
-builder.Services.AddGoogleMapsSearchClient(builder);
-builder.Services.AddGeocodingService();
-builder.Services.AddConventionSceneSync();
-builder.Services.AddFanConsSync();
-builder.Services.AddHtmlFixService();
 builder
-    .Services.AddControllers()
+    .Services.AddSingleton<IAuthorizationHandler, HasScopeHandler>()
+    .AddAutoMapper(typeof(Program))
+    .AddHttpClient()
+    .AddGoogleMapsSearchClient(builder)
+    .AddGeocodingService()
+    .AddConventionSceneSync()
+    .AddFanConsSync()
+    .AddHtmlFixService()
+    .AddProblemDetails()
+    .AddControllers()
     .AddJsonOptions(x =>
     {
         x.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
     });
 
 var app = builder.Build();
+app.UseExceptionHandler();
+app.UseStatusCodePages();
 app.Migrate();
 app.UseMiddleware<RequestLoggingMiddleware>();
 app.UseCors();
