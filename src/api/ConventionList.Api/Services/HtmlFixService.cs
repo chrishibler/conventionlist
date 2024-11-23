@@ -1,6 +1,5 @@
+using System.Web;
 using ConventionList.Api.Data;
-using ConventionList.Api.Models;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace ConventionList.Api.Services;
 
@@ -53,6 +52,6 @@ public class HtmlFixService(IServiceScopeFactory scopeFactory, ILogger<HtmlFixSe
 
     public static string ReplaceHtmlChars(string input)
     {
-        return input.Trim().Replace("&amp;", "&").Replace("&#039;", "'");
+        return HttpUtility.HtmlDecode(input);
     }
 }
