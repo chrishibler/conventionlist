@@ -1,0 +1,13 @@
+.convention-name {
+    font-size: 1.3em;
+  }
+  
+  .convention-name-link {
+    text-decoration: none;
+    color: var(--green);
+    transition: color 0.4s ease;
+  }
+  
+  .convention-name-link:hover {
+    color: var(--blue);
+  }

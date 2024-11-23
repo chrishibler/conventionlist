@@ -54,25 +54,6 @@ fieldset {
   border: 0;
 }
 
-.convention-name {
-  font-size: 1.3em;
-}
-
-.convention-name-link {
-  text-decoration: none;
-  color: var(--green);
-  transition: color 0.4s ease;
-}
-
-.convention-name-link:hover {
-  color: var(--blue);
-}
-
-.loading-spinner-container {
-  display: table;
-  margin: 0 auto;
-}
-
 .app {
   display: flex;
   flex-direction: column;
@@ -89,43 +70,4 @@ fieldset {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-}
-
-.convention-list {
-  margin-top: 0px;
-}
-
-.details {
-  line-height: 1.5em;
-  color: var(--subtext0);
-  margin-bottom: 12px;
-}
-
-.name-container {
-  display: flex;
-  flex-direction: row;
-  font-size: 1.3em;
-  justify-content: start;
-  align-items: flex-start;
-  margin-bottom: 6px;
-}
-
-.convention-link-image {
-  filter: brightness(0) saturate(100%) invert(83%) sepia(38%) saturate(337%)
-    hue-rotate(192deg) brightness(99%) contrast(93%);
-  width: 12px;
-  margin: 0px 0px 3px 12px;
-}
-
-.convention-description {
-  cursor: pointer;
-}
-
-.convention-item-container {
-  border-radius: 12px;
-  padding: 12px;
-}
-
-.convention-item-container-odd {
-  background-color: var(--mantle);
 }

@@ -1,5 +1,6 @@
-import ConventionDetails from "./ConventionDetails";
-import ConventionName from "./ConventionName";
+import "./ConventionItem.css"
+import ConventionDetails from "./ConventionDetails"
+import ConventionName from "./ConventionName"
 
 export default function ConventionItem({ convention, index }) {
   const isOdd = index % 2 === 1;

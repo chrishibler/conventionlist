@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import "./Description.css";
+import { useState } from "react";
 import { useMediaQuery } from "@uidotdev/usehooks";
 
 export default function Description({ description }) {

@@ -1,0 +1,8 @@
+.convention-item-container {
+  border-radius: 12px;
+  padding: 12px;
+}
+
+.convention-item-container-odd {
+  background-color: var(--mantle);
+}

@@ -1,3 +1,5 @@
+import "./ConventionName.css";
+
 export default function ConventionName({ conventionName, conventionUrl }) {
   return conventionUrl ? (
     <a
