@@ -30,7 +30,15 @@ public class ConventionProfile : Profile
             );
 
         CreateMap<ApiConvention, Convention>()
-            .ForMember(dest => dest.Position, opt => opt.MapFrom(src => src.Position.ToPoint()));
+            .ForMember(dest => dest.Position, opt => opt.MapFrom(src => src.Position.ToPoint()))
+            .ForMember(
+                dest => dest.StartDate,
+                opt => opt.MapFrom(src => src.StartDate.ToUniversalTime())
+            )
+            .ForMember(
+                dest => dest.EndDate,
+                opt => opt.MapFrom(src => src.EndDate.ToUniversalTime())
+            );
 
         CreateMap<NewApiConvention, Convention>()
             .ForMember(

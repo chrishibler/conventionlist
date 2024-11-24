@@ -91,8 +91,7 @@ builder
     });
 
 var app = builder.Build();
-app.UseExceptionHandler();
-app.UseStatusCodePages();
+app.ConfigureExceptionHandler(app.Logger);
 app.Migrate();
 app.UseMiddleware<RequestLoggingMiddleware>();
 app.UseCors();
