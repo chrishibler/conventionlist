@@ -70,11 +70,7 @@ export default function ConventionList({ searchInfo }) {
           <ConventionItem convention={convention} index={index} />
         </div>
       ))}
-      {isFetching && !isLoading && (
-        <div className="loader-container">
-          <Loader />
-        </div>
-      )}
+      {isFetching && <Loader />}
     </div>
   );
 }

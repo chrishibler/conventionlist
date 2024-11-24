@@ -1,0 +1,14 @@
+{
+  "record": {
+    "hosts": [
+      "localhost",
+      "127.0.0.1",
+      "10.0.0.171"
+    ],
+    "hash": {
+      "key": "44aac6624d78a14ce966da1600dd8f5689d9bb9ba9a8a21826a12ed4ee846bcf",
+      "cert": "acf631fffa350a7158e682d8dcab402c21b59992df0b95e5ea1b0d479914d3b7"
+    }
+  },
+  "configFilePath": "/Users/chris/repos/conventionlist/src/webclient/certs/config.json"
+}
