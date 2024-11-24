@@ -1,19 +1,17 @@
 import PropTypes from "prop-types";
-import NavBar from "../Components/NavBar";
-import Logo from "../Components/Logo";
-import "./ConventionMap.css";
-
 import mapboxgl from "mapbox-gl";
-mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_API_TOKEN;
-
+import "mapbox-gl/dist/mapbox-gl.css";
 import { useState, useRef, useEffect } from "react";
 import { useDebounce } from "@uidotdev/usehooks";
 import { useQuery } from "@tanstack/react-query";
 import ApiService from "../Services/ApiService";
 import Locator from "../Services/Locator";
-import "mapbox-gl/dist/mapbox-gl.css";
+import Page from "../Components/Page";
+import "./MapPage.css";
 
-export default function ConventionMap() {
+mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_API_TOKEN;
+
+export default function MapPage() {
   const apiService = new ApiService(import.meta.env.VITE_API_URL);
   const mapContainer = useRef(null);
   const map = useRef(null);
@@ -117,16 +115,11 @@ export default function ConventionMap() {
   }
 
   return (
-    <div className="app">
-      <header className="header">
-        <NavBar>
-          <Logo />
-        </NavBar>
-      </header>
+    <Page>
       <div className="map-body-container">
         <div ref={mapContainer} className="map-container" />
       </div>
-    </div>
+    </Page>
   );
 }
 

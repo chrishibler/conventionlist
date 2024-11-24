@@ -1,13 +1,12 @@
-import "./App.css";
-import Home from "./Home/Home";
-import MapBoxConventionMap from "./Map/MapBoxConventionMap";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import AddEditConventionForm from "./Manage/AddEditConventionForm";
-import Page from "./Components/Page";
+import "./App.css";
+import Home from "./Home/Home";
+import MapBoxConventionMap from "./Map/MapPage.jsx";
+import AddEditConventionPage from "./AddEdit/AddEditConventionPage.jsx";
 import ProtectedRoute from "./Auth/ProtectedRoute.jsx";
 import Auth0ProviderWithRedirectCallback from "./Auth/Auth0ProviderWithRedirectCallback.jsx";
-import ManageConventionsTable from "./Manage/ManageConventionsTable.jsx";
+import ManageConventionsPage from "./Manage/ManageConventionsPage.jsx";
 
 export default function App() {
   const queryClient = new QueryClient({
@@ -31,48 +30,21 @@ export default function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/map" element={<MapBoxConventionMap />} />
-            <Route path="/add" element={<SecureAddPage />} />
-            <Route path="/manage" element={<SecureManageConventionsPage />} />
-            <Route path="/edit" element={<SecureEditPage />} />
+            <Route
+              path="/add"
+              element={<ProtectedRoute component={AddEditConventionPage} />}
+            />
+            <Route
+              path="/manage"
+              element={<ProtectedRoute component={ManageConventionsPage} />}
+            />
+            <Route
+              path="/edit"
+              element={<ProtectedRoute component={AddEditConventionPage} />}
+            />
           </Routes>
         </Auth0ProviderWithRedirectCallback>
       </Router>
     </QueryClientProvider>
-  );
-}
-
-function SecureAddPage() {
-  return <ProtectedRoute component={AddEditConventionPage} />;
-}
-
-function AddEditConventionPage() {
-  return (
-    <Page>
-      <AddEditConventionForm />
-    </Page>
-  );
-}
-
-function SecureEditPage() {
-  return <ProtectedRoute component={EditConventionPage} />;
-}
-
-function EditConventionPage() {
-  return (
-    <Page>
-      <AddEditConventionForm />
-    </Page>
-  );
-}
-
-function SecureManageConventionsPage() {
-  return <ProtectedRoute component={ManageConventionsPage} />;
-}
-
-function ManageConventionsPage() {
-  return (
-    <Page>
-      <ManageConventionsTable />
-    </Page>
   );
 }

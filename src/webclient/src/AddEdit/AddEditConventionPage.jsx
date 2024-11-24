@@ -1,10 +1,11 @@
-import "./AddEditConventionForm.css";
 import { useForm } from "react-hook-form";
-import ApiService from "../Services/ApiService";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useNavigate, useLocation } from "react-router-dom";
+import "./AddEditConventionPage.css";
+import Page from "../Components/Page";
+import ApiService from "../Services/ApiService";
 
-export default function AddEditConventionForm() {
+export default function AddEditConventionPage() {
   const navigate = useNavigate();
   const location = useLocation();
   let convention = location.state ? location.state.convention : null;
@@ -52,8 +53,10 @@ export default function AddEditConventionForm() {
   }
 
   return (
-    <div>
-      <div className="add-edit-form-title">Add Convention</div>
+    <Page>
+      <div className="add-edit-form-title">
+        {convention == null ? "Add Convention" : "Edit Convention"}
+      </div>
       <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
         <fieldset disabled={isSubmitSuccessful}>
           <div className="form-group">
@@ -157,6 +160,6 @@ export default function AddEditConventionForm() {
           <button type="submit">Submit</button>
         </fieldset>
       </form>
-    </div>
+    </Page>
   );
 }

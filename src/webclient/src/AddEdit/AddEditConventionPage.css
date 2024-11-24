@@ -6,6 +6,7 @@ label {
 
 form {
   max-width: 500px;
+  width: 100%;
   padding: 36px;
   margin: 0 auto;
   background-color: var(--surface0);

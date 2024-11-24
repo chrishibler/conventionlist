@@ -14,9 +14,11 @@ const Profile = () => {
       onClick: () =>
         logout({ logoutParams: { returnTo: window.location.origin } }),
     },
-    { label: "Add", onClick: () => navigate("/add") },
+    {
+      label: "Add",
+      onClick: () => navigate("/add"),
+    },
     { label: "Manage", onClick: () => navigate("/manage") },
-    // { label: 'Option 3', onClick: () => console.log('Option 3 clicked') },
   ];
 
   useEffect(() => {
