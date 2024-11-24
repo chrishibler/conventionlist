@@ -59,107 +59,74 @@ export default function AddEditConventionPage() {
       </div>
       <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
         <fieldset disabled={isSubmitSuccessful}>
-          <div className="form-group">
-            <label htmlFor="name">Name:*</label>
-            <input
-              className="add-form-input"
-              type="text"
-              {...register("name", { required: true, maxLength: 100 })}
-            />
-            {errors.name && <span className="error">Name is required</span>}
-          </div>
+          <FormField label="name" displayLabel="Name:*" required={true} />
           <div className="form-group">
             <label htmlFor="description">Description:</label>
             <textarea className="add-form-input" {...register("description")} />
           </div>
-          <div className="form-group">
-            <label htmlFor="startDate">Start Date:*</label>
-            <input
-              className="add-form-input"
-              type="date"
-              {...register("startDate", { required: true })}
-            />
-            {errors.startDate && (
-              <span className="error">Start date is required</span>
-            )}
-          </div>
-          <div className="form-group">
-            <label htmlFor="endDate">End Date:*</label>
-            <input
-              className="add-form-input"
-              type="date"
-              {...register("endDate", { required: true })}
-            />
-            {errors.endDate && (
-              <span className="error">End date is required</span>
-            )}
-          </div>
-          <div className="form-group">
-            <label htmlFor="websiteAddress">URL:</label>
-            <input
-              className="add-form-input"
-              type="text"
-              {...register("websiteAddress")}
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="venueName">Venue Name:</label>
-            <input
-              className="add-form-input"
-              type="text"
-              {...register("venueName")}
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="address1">Address 1:</label>
-            <input
-              className="add-form-input"
-              type="text"
-              {...register("address1")}
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="address2">Address 2:</label>
-            <input
-              className="add-form-input"
-              type="text"
-              {...register("address2")}
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="city">City:*</label>
-            <input
-              className="add-form-input"
-              type="text"
-              {...register("city", { required: true })}
-            />
-            {errors.city && <span className="error">City is required</span>}
-          </div>
-          <div className="form-group">
-            <label htmlFor="city">Postal Code:*</label>
-            <input
-              className="add-form-input"
-              type="text"
-              {...register("postalCode", { required: true })}
-            />
-            {errors.postalCode && (
-              <span className="error">Postal code is required</span>
-            )}
-          </div>
-          <div className="form-group">
-            <label htmlFor="country">Country:*</label>
-            <input
-              className="add-form-input"
-              type="text"
-              {...register("country", { required: true })}
-            />
-            {errors.country && (
-              <span className="error">Country is required</span>
-            )}
-          </div>
+          <FormField
+            label="startDate"
+            displayLabel="Start Date:*"
+            type="date"
+            required={true}
+          />
+          <FormField
+            label="endDate"
+            displayLabel="End Date:*"
+            type="date"
+            required={true}
+          />
+          <FormField
+            label="websiteAddress"
+            displayLabel="Website Address:"
+            required={true}
+          />
+          <FormField
+            label="venueName"
+            displayLabel="Venue Name:"
+            required={false}
+          />
+          <FormField
+            label="address1"
+            displayLabel="Address:"
+            required={false}
+          />
+          <FormField
+            label="address2"
+            displayLabel="Address2:"
+            required={false}
+          />
+          <FormField label="city" displayLabel="City:*" required={true} />
+          <FormField
+            label="postalCode"
+            displayLabel="Postal Code*"
+            isRequired={true}
+          />
+          <FormField
+            label="country"
+            displayLabel="Country*"
+            isRequired={true}
+          />
           <button type="submit">Submit</button>
         </fieldset>
       </form>
     </Page>
   );
+
+  function FormField(props) {
+    let type = props.type === undefined ? "text" : props.type;
+    return (
+      <div className="form-group">
+        <label htmlFor={props.label}>{props.displayLabel}</label>
+        <input
+          className="add-form-input"
+          type={type}
+          {...register(props.label, { required: props.isRequired })}
+        />
+        {errors[props.label] && (
+          <span className="error">{props.displayLabel} is required</span>
+        )}
+      </div>
+    );
+  }
 }

@@ -6,8 +6,8 @@
       "10.0.0.171"
     ],
     "hash": {
-      "key": "44aac6624d78a14ce966da1600dd8f5689d9bb9ba9a8a21826a12ed4ee846bcf",
-      "cert": "acf631fffa350a7158e682d8dcab402c21b59992df0b95e5ea1b0d479914d3b7"
+      "key": "043481edbaf97c5c21d844e9530c5dc83218bd87a834fba24003cf2ee35a9af5",
+      "cert": "dad219671eaa7acfc06896af09b25bcca993460072d3a3bc4b0d9c97481bb94f"
     }
   },
   "configFilePath": "/Users/chris/repos/conventionlist/src/webclient/certs/config.json"
