@@ -1,4 +1,3 @@
-import "./Home.css";
 import { useState } from "react";
 import ConventionList from "../Components/ConventionList";
 import NavBar from "../Components/NavBar";

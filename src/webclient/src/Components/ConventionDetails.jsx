@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import Description from "./Description";
+import "./ConventionDetails.css";
 
 export default function ConventionDetails({ convention }) {
   return (

@@ -1,3 +1,4 @@
+import "./App.css";
 import Home from "./Home/Home";
 import MapBoxConventionMap from "./Map/MapBoxConventionMap";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
