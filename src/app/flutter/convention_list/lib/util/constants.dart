@@ -197,3 +197,7 @@ List<String> countryNames = [
 ];
 
 const Position defaultPosition = Position(latitude: 36.99, longitude: -119.79);
+
+const String auth0Domain = 'hiblermedia.us.auth0.com';
+
+const String auth0ClientId = 'Jc7oekVuHsEVL1ZvdCiCEy5Uui4NSrPz';

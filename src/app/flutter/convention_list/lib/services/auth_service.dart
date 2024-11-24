@@ -1,4 +1,5 @@
 import 'package:auth0_flutter/auth0_flutter.dart';
+import 'package:convention_list/util/constants.dart';
 import 'package:injectable/injectable.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 
@@ -8,7 +9,7 @@ import '../util/permissions.dart';
 class AuthService {
   Credentials? credentials;
   final List<String> permissions = [];
-  final _auth0 = Auth0('hiblermedia.us.auth0.com', 'Jc7oekVuHsEVL1ZvdCiCEy5Uui4NSrPz');
+  final _auth0 = Auth0(auth0Domain, auth0ClientId);
 
   Future<Credentials?> login() async {
     Credentials creds = await _auth0.webAuthentication(scheme: 'app').login(audience: 'https://api.conventionlist.org');
