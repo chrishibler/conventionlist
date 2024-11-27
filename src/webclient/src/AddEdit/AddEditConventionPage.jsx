@@ -3,13 +3,14 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./AddEditConventionPage.css";
 import Page from "../Components/Page";
-import ApiService from "../Services/ApiService";
+import { ApiServiceContext } from "../Services/ApiService";
+import { useContext } from "react";
 
 export default function AddEditConventionPage() {
   const navigate = useNavigate();
   const location = useLocation();
   let convention = location.state ? location.state.convention : null;
-  const apiService = new ApiService(import.meta.env.VITE_API_URL);
+  const apiService = useContext(ApiServiceContext);
   const { getAccessTokenSilently } = useAuth0();
   const {
     register,

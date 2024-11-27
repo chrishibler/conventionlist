@@ -1,11 +1,13 @@
-import axios from "axios";
 import SearchParams from "../SearchParams";
+import { createContext } from "react";
+
+export const ApiServiceContext = createContext(null);
 
 class ApiService {
-  constructor(baseUrl) {
+  constructor(client) {
     this.conventionsUrl = "conventions";
     this.userConventionsUrl = "user/conventions";
-    this.client = axios.create({ baseURL: baseUrl });
+    this.client = client;
     this.client.interceptors.request.use((request) => {
       //console.log("Starting Request", JSON.stringify(request, null, 2));
       return request;

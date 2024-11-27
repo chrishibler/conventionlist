@@ -1,14 +1,14 @@
+import { useInfiniteQuery } from "@tanstack/react-query";
+import { useEffect, useMemo, useContext } from "react";
+import { useInView } from "react-intersection-observer";
 import "./ConventionList.css";
 import PropTypes from "prop-types";
 import ConventionItem from "./ConventionItem";
-import ApiService from "../Services/ApiService";
+import { ApiServiceContext } from "../Services/ApiService";
 import Loader from "./Loader";
-import { useInfiniteQuery } from "@tanstack/react-query";
-import { useEffect, useMemo } from "react";
-import { useInView } from "react-intersection-observer";
 
 export default function ConventionList({ searchInfo }) {
-  const apiService = new ApiService(import.meta.env.VITE_API_URL);
+  const apiService = useContext(ApiServiceContext);
   const [ref, inView] = useInView({
     triggerOnce: true,
   });

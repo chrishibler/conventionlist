@@ -1,18 +1,18 @@
 import PropTypes from "prop-types";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useContext } from "react";
 import { useDebounce } from "@uidotdev/usehooks";
 import { useQuery } from "@tanstack/react-query";
-import ApiService from "../Services/ApiService";
 import Locator from "../Services/Locator";
 import Page from "../Components/Page";
 import "./MapPage.css";
+import { ApiServiceContext } from "../Services/ApiService";
 
 mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_API_TOKEN;
 
 export default function MapPage() {
-  const apiService = new ApiService(import.meta.env.VITE_API_URL);
+  const apiService = useContext(ApiServiceContext);
   const mapContainer = useRef(null);
   const map = useRef(null);
   const [lng, setLng] = useState(-119.79);

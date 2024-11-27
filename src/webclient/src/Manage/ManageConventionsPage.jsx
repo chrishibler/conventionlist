@@ -1,10 +1,10 @@
 import { useInView } from "react-intersection-observer";
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { useEffect, useMemo, useReducer } from "react";
+import { useEffect, useMemo, useReducer, useContext } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Edit, Trash2 } from "react-feather";
 import { useNavigate } from "react-router-dom";
-import ApiService from "../Services/ApiService";
+import { ApiServiceContext } from "../Services/ApiService";
 import Loader from "../Components/Loader";
 import Page from "../Components/Page";
 import "./ManageConventionsPage.css";
@@ -13,7 +13,7 @@ export default function ManageConventionsPage() {
   const navigate = useNavigate();
   const { getAccessTokenSilently } = useAuth0();
   const [, forceUpdate] = useReducer((x) => x + 1, 0);
-  const apiService = new ApiService(import.meta.env.VITE_API_URL);
+  const apiService = useContext(ApiServiceContext);
   const [ref, inView] = useInView({
     triggerOnce: true,
   });
