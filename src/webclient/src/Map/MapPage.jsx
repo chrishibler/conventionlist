@@ -4,7 +4,7 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import { useState, useRef, useEffect, useContext } from "react";
 import { useDebounce } from "@uidotdev/usehooks";
 import { useQuery } from "@tanstack/react-query";
-import Locator from "../Services/Locator";
+import { LocatorContext } from "../Services/Locator";
 import Page from "../Components/Page";
 import "./MapPage.css";
 import { ApiServiceContext } from "../Services/ApiService";
@@ -20,6 +20,7 @@ export default function MapPage() {
   const [zoom, setZoom] = useState(6);
   const [bounds, setBounds] = useState(null);
   const debouncedBounds = useDebounce(bounds, 750);
+  const locator = useContext(LocatorContext);
 
   useQuery({
     queryKey: [debouncedBounds],
@@ -42,7 +43,8 @@ export default function MapPage() {
     });
 
     if (!location) {
-      Locator.getLocation()
+      locator
+        .getLocation()
         .then((l) => {
           setLng(l.longitude);
           setLat(l.latitude);

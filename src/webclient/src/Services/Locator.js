@@ -1,5 +1,9 @@
+import { createContext } from "react";
+
+export const LocatorContext = createContext(null);
+
 export default class Locator {
-  static getLocation() {
+  getLocation() {
     const options = {
       maximumAge: 0, // Ensures that the browser doesn't return a cached location
     };
