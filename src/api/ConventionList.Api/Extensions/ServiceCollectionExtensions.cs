@@ -1,11 +1,22 @@
+using System.Reflection;
+using System.Security.Claims;
 using AutoMapper;
+using ConventionList.Api.Auth;
+using ConventionList.Api.Data;
 using ConventionList.Api.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using Serilog;
 
 namespace ConventionList.Api.Extensions;
 
 public static class ServiceCollectionExtensions
 {
     private const string GoogleMapsApiKey = "GoogleMaps:ApiKey";
+    private const string AuthDomainKey = "Auth0:Domain";
+    private const string AuthAudienceKey = "Auth0:Audience";
+    private const string DbConnectionKey = "PostgresDatabaseConventionList";
 
     public static IServiceCollection AddGeocodingService(this IServiceCollection services)
     {
@@ -64,10 +75,10 @@ public static class ServiceCollectionExtensions
 
     public static IServiceCollection AddGoogleMapsSearchClient(
         this IServiceCollection services,
-        WebApplicationBuilder builder
+        ConfigurationManager config
     )
     {
-        string? key = builder.Configuration[GoogleMapsApiKey];
+        string? key = config[GoogleMapsApiKey];
         if (key is null or "")
         {
             throw new InvalidOperationException("No Google maps subscription key found.");
@@ -87,6 +98,101 @@ public static class ServiceCollectionExtensions
                     factory.GetRequiredService<ILogger<HtmlFixService>>()
                 )
         );
+        return services;
+    }
+
+    public static IServiceCollection AddAppLogging(this IServiceCollection services)
+    {
+        string logFileLocation =
+            $"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}/logs/conventionlist.log";
+        Log.Logger = new LoggerConfiguration()
+            .MinimumLevel.Debug()
+            .WriteTo.File(logFileLocation)
+            .CreateLogger();
+
+        services.AddSerilog();
+
+        return services;
+    }
+
+    public static IServiceCollection AddAppAuthentication(
+        this IServiceCollection services,
+        ConfigurationManager config
+    )
+    {
+        var domain = $"https://{config[AuthDomainKey]}";
+        services
+            .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(options =>
+            {
+                options.Authority = domain;
+                options.Audience = config[AuthAudienceKey];
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    NameClaimType = ClaimTypes.NameIdentifier,
+                };
+            });
+
+        return services;
+    }
+
+    public static IServiceCollection AddCorsPolicy(this IServiceCollection services)
+    {
+        services.AddCors(options =>
+        {
+            options.AddDefaultPolicy(policy =>
+            {
+                policy.AllowAnyOrigin();
+                policy.AllowAnyHeader();
+                policy.AllowAnyMethod();
+            });
+        });
+        return services;
+    }
+
+    public static IServiceCollection AddDb(
+        this IServiceCollection services,
+        ConfigurationManager config
+    )
+    {
+        string? connectionString = config.GetConnectionString(DbConnectionKey);
+
+        services.AddDbContext<ConventionListDbContext>(options =>
+            options.UseNpgsql(connectionString, x => x.UseNetTopologySuite())
+        );
+
+        return services;
+    }
+
+    public static IServiceCollection AddAppAuthorization(
+        this IServiceCollection services,
+        ConfigurationManager config
+    )
+    {
+        services.AddAuthorization(options =>
+        {
+            options.AddPolicy(
+                Permissions.ManageMyConventions,
+                policy =>
+                    policy.Requirements.Add(
+                        new HasScopeRequirement(
+                            Permissions.ManageMyConventions,
+                            config[AuthDomainKey]!
+                        )
+                    )
+            );
+            options.AddPolicy(
+                Permissions.ManageAllConventions,
+                policy =>
+                    policy.Requirements.Add(
+                        new HasScopeRequirement(
+                            Permissions.ManageAllConventions,
+                            config[AuthDomainKey]!
+                        )
+                    )
+            );
+        });
+
         return services;
     }
 }
