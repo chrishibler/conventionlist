@@ -1,0 +1,1 @@
+docker run -it --rm -p 8080 -e ConnectionStrings__PostgresDatabaseConventionList='User ID=postgres;Host=localhost;Port=5432;Database=ConventionList;' -e GoogleMaps__ApiKey=$1 --name conventionlist_app conventionlist

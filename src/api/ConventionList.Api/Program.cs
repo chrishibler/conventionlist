@@ -22,6 +22,7 @@ Log.Logger = new LoggerConfiguration()
     .CreateLogger();
 
 builder.Services.AddSerilog();
+builder.Configuration.AddEnvironmentVariables();
 
 string? connectionString = builder.Configuration.GetConnectionString(
     "PostgresDatabaseConventionList"
