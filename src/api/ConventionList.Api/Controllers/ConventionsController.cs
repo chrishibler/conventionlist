@@ -1,25 +1,16 @@
-using AutoMapper;
 using ConventionList.Api.Auth;
-using ConventionList.Api.Data;
-using ConventionList.Api.Models;
+using ConventionList.Api.Commands;
 using ConventionList.Api.Models.Api;
-using ConventionList.Api.Services;
+using ConventionList.Api.Queries;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using NetTopologySuite;
-using NetTopologySuite.Geometries;
 
 namespace ConventionList.Api.Controllers;
 
 [Route("[controller]")]
 [ApiController]
-public class ConventionsController(
-    ConventionListDbContext db,
-    IMapper mapper,
-    ILogger<ConventionsController> log,
-    GeocodingService geocoder
-) : ControllerBase
+public class ConventionsController(IMediator mediator) : ControllerBase
 {
     // Conventions
     [HttpGet]
@@ -32,32 +23,11 @@ public class ConventionsController(
         [FromQuery] SearchParams? searchParams = null
     )
     {
-        var query = db.Conventions.AsQueryable();
-        query = searchParams?.ApplyFilter(query) ?? query;
+        ConventionsResult cons = await mediator.Send(
+            new GetConventionsQuery(page, pageSize, lat, lon, searchParams)
+        );
 
-        if (lat is not null && lon is not null && searchParams?.OrderBy == OrderBy.Distance)
-        {
-            var geoFactory = NtsGeometryServices.Instance.CreateGeometryFactory(srid: 4326);
-            var location = geoFactory.CreatePoint(new Coordinate((double)lon!, (double)lat!));
-            query = query.OrderBy(c =>
-                c.Position == null ? double.MaxValue : c.Position.Distance(location)
-            );
-        }
-        else
-        {
-            query = query.OrderBy(c => c.StartDate).ThenBy(c => c.Name);
-        }
-
-        query = query.Where(c => c.StartDate >= DateTime.UtcNow.Date);
-        int totalCount = query.Count();
-        int totalPages = (int)Math.Ceiling((double)totalCount / pageSize);
-
-        var cons = await query
-            .Skip((page - 1) * pageSize)
-            .Take(pageSize)
-            .Select(c => mapper.Map<ApiConvention>(c))
-            .ToListAsync();
-        return Ok(new ConventionsResult(totalCount, totalPages, page, pageSize, cons));
+        return Ok(cons);
     }
 
     // GET: conventions/bounds
@@ -69,119 +39,65 @@ public class ConventionsController(
         [FromQuery] int pageSize = 20
     )
     {
-        var points = new[]
-        {
-            new Coordinate(bounds.West, bounds.North), // TR
-            new Coordinate(bounds.West, bounds.South), // BR
-            new Coordinate(bounds.East, bounds.South), // BL
-            new Coordinate(bounds.East, bounds.North), // TL
-            new Coordinate(bounds.West, bounds.North), // TR
-        };
+        var cons = await mediator.Send(new GetConventionsByBoundsQuery(bounds, page, pageSize));
 
-        var query = db.Conventions.AsQueryable();
-        var geoFactory = NtsGeometryServices.Instance.CreateGeometryFactory(srid: 4326);
-        var polygon = geoFactory.CreatePolygon(points).Normalized().Reverse();
-        query = query.Where(c => c.Position!.Within(polygon));
-
-        int totalCount = query.Count();
-        int totalPages = (int)Math.Ceiling((double)totalCount / pageSize);
-
-        var cons = await query
-            .Skip((page - 1) * pageSize)
-            .Take(pageSize)
-            .Select(c => mapper.Map<ApiConvention>(c))
-            .ToListAsync();
-        return Ok(new ConventionsResult(totalCount, totalPages, page, pageSize, cons));
+        return Ok(cons);
     }
 
     // conventions/key
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiConvention>> Get([FromRoute] Guid id)
     {
-        var convention = await db.Conventions.FindAsync(id);
-        if (convention == null)
+        var (Result, Convention) = await mediator.Send(new GetConventionQuery(id));
+
+        if (Result is ConventionNotFoundEvent)
         {
             return NotFound();
         }
 
-        return Ok(mapper.Map<ApiConvention>(convention));
+        return Ok(Convention);
     }
 
     [HttpPost]
-    [Authorize("manage:myconventions")]
+    [Authorize(Permissions.ManageMyConventions)]
     public async Task<ActionResult<ApiConvention>> Post([FromBody] NewApiConvention newCon)
     {
         string? userId = HttpContext.User.SubjectId();
         if (userId is null)
             return Unauthorized("No user ID found");
 
-        var con = mapper.Map<Convention>(newCon);
-        con.Id = Guid.NewGuid();
-        con.Editor = userId;
-        con.SubmitterId = userId;
-        await GeocodeCon(con);
-        _ = db.Conventions.Add(con);
-        _ = await db.SaveChangesAsync();
-        var apiConvention = mapper.Map<ApiConvention>(con);
+        ApiConvention apiConvention = await mediator.Send(new AddConventionCommand(newCon, userId));
 
-        return Created($"~conventions/{con.Id}", apiConvention);
+        return Created($"~conventions/{apiConvention.Id}", apiConvention);
     }
 
-    [Authorize("manage:myconventions")]
+    [Authorize(Permissions.ManageMyConventions)]
     [HttpPut("{id}")]
     public async Task<ActionResult> Put([FromRoute] Guid id, [FromBody] ApiConvention updatedCon)
     {
-        var existingCon = await db.Conventions.SingleOrDefaultAsync(d => d.Id == id);
-        if (existingCon == null)
+        var result = await mediator.Send(
+            new UpdateConventionCommand(id, updatedCon, HttpContext.User)
+        );
+
+        return result switch
         {
-            return NotFound();
-        }
-
-        var user = HttpContext.User;
-        if (!user.IsSubmitterOrAdmin(existingCon))
-        {
-            return Forbid("User did not submit this convention.");
-        }
-
-        mapper.Map(updatedCon, existingCon);
-        existingCon.Editor = user.SubjectId()!;
-        db.SaveChanges();
-
-        return NoContent();
+            ConventionNotFoundEvent => NotFound(),
+            InvalidUserEvent => Forbid("User did not submit this convention"),
+            _ => NoContent(),
+        };
     }
 
-    [Authorize("manage:myconventions")]
+    [Authorize(Permissions.ManageMyConventions)]
     [HttpDelete("{id}")]
     public async Task<ActionResult> Delete([FromRoute] Guid id)
     {
-        var existingCon = await db.Conventions.SingleOrDefaultAsync(d => d.Id == id);
-        if (existingCon == null)
-        {
-            return NotFound();
-        }
+        var result = await mediator.Send(new DeleteConventionCommand(id, HttpContext.User));
 
-        if (!HttpContext.User.IsSubmitterOrAdmin(existingCon))
+        return result switch
         {
-            return Forbid("User did not submit this convention.");
-        }
-
-        _ = db.Conventions.Remove(existingCon);
-        _ = await db.SaveChangesAsync();
-
-        db.SaveChanges();
-        return NoContent();
-    }
-
-    private async Task GeocodeCon(Convention con)
-    {
-        try
-        {
-            var position = await geocoder.Geocode(con);
-            con.Position = position.ToPoint();
-        }
-        catch (Exception ex)
-        {
-            log.LogError(ex, "Could not geocode con {ConName}", con.Name);
-        }
+            ConventionNotFoundEvent => NotFound(),
+            InvalidUserEvent => Forbid("User did not submit this convention"),
+            _ => NoContent(),
+        };
     }
 }

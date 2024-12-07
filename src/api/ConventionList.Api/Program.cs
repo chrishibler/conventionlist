@@ -28,13 +28,6 @@ string? connectionString = builder.Configuration.GetConnectionString(
     "PostgresDatabaseConventionList"
 );
 
-// Console.WriteLine($"*************************");
-// Console.WriteLine($"*** Connection string = {connectionString}");
-// Console.WriteLine($"*************************");
-Console.WriteLine($"*********{builder.Configuration["Auth0:Domain"]}");
-Console.WriteLine($"*********{builder.Configuration["Auth0:Audience"]}");
-Console.WriteLine($"*********{logFileLocation}");
-
 // Program.cs
 var domain = $"https://{builder.Configuration["Auth0:Domain"]}";
 builder
@@ -67,16 +60,23 @@ builder.Services.AddCors(options =>
 builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy(
-        "manage:myconventions",
-        policy => policy.Requirements.Add(new HasScopeRequirement("manage:myconventions", domain))
+        Permissions.ManageMyConventions,
+        policy =>
+            policy.Requirements.Add(
+                new HasScopeRequirement(Permissions.ManageMyConventions, domain)
+            )
     );
     options.AddPolicy(
-        "manage:allconventions",
-        policy => policy.Requirements.Add(new HasScopeRequirement("manage:allconventions", domain))
+        Permissions.ManageAllConventions,
+        policy =>
+            policy.Requirements.Add(
+                new HasScopeRequirement(Permissions.ManageAllConventions, domain)
+            )
     );
 });
 builder
     .Services.AddSingleton<IAuthorizationHandler, HasScopeHandler>()
+    .AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly))
     .AddAutoMapper(typeof(Program))
     .AddHttpClient()
     .AddGoogleMapsSearchClient(builder)
