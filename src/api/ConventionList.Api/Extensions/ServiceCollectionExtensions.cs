@@ -175,7 +175,7 @@ public static class ServiceCollectionExtensions
                 Permissions.ManageMyConventions,
                 policy =>
                     policy.Requirements.Add(
-                        new HasScopeRequirement(
+                        new HasPermissionRequirement(
                             Permissions.ManageMyConventions,
                             config[AuthDomainKey]!
                         )
@@ -185,7 +185,7 @@ public static class ServiceCollectionExtensions
                 Permissions.ManageAllConventions,
                 policy =>
                     policy.Requirements.Add(
-                        new HasScopeRequirement(
+                        new HasPermissionRequirement(
                             Permissions.ManageAllConventions,
                             config[AuthDomainKey]!
                         )

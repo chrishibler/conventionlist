@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+using ConventionList.Api.Auth;
 using ConventionList.Api.Extensions;
 using ConventionList.Api.Middleware;
 using Microsoft.AspNetCore.Authorization;
@@ -10,7 +11,7 @@ Host.CreateDefaultBuilder(args).UseSystemd();
 builder.Configuration.AddEnvironmentVariables();
 
 builder
-    .Services.AddSingleton<IAuthorizationHandler, HasScopeHandler>()
+    .Services.AddSingleton<IAuthorizationHandler, HasPermissionHandler>()
     .AddDb(builder.Configuration)
     .AddAppAuthorization(builder.Configuration)
     .AddCorsPolicy()
