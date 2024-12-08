@@ -14,7 +14,7 @@ export default function AddEditConventionPage() {
   const { getAccessTokenSilently } = useAuth0();
   const {
     register,
-    formState: { errors, isSubmitSuccessful },
+    formState: { errors, isSubmitting },
     handleSubmit,
   } = useForm({
     defaultValues: {
@@ -59,7 +59,7 @@ export default function AddEditConventionPage() {
         {convention == null ? "Add Convention" : "Edit Convention"}
       </div>
       <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
-        <fieldset disabled={isSubmitSuccessful}>
+        <fieldset disabled={isSubmitting ? "disabled" : ""}>
           <FormField label="name" displayLabel="Name:*" required={true} />
           <div className="form-group">
             <label htmlFor="description">Description:</label>
