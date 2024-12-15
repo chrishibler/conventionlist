@@ -1,13 +1,15 @@
 using ConventionList.Api.Data;
+using ConventionList.Api.Mapping;
 using ConventionList.Api.Models;
 
 namespace ConventionList.Api.Services;
 
-public class GeocodingService(IMapsSearchClient client,
-                              ILogger<GeocodingService> logger,
-                              IServiceScopeFactory scopeFactory) : HostedService
+public class GeocodingService(
+    IMapsSearchClient client,
+    ILogger<GeocodingService> logger,
+    IServiceScopeFactory scopeFactory
+) : HostedService
 {
-
     public override Task StartAsync(CancellationToken cancellationToken)
     {
         logger.LogInformation("GeocodingService running");
@@ -29,7 +31,7 @@ public class GeocodingService(IMapsSearchClient client,
                 try
                 {
                     var position = await Geocode(con);
-                    con.Position = position.ToPoint();
+                    con.Position = GeocoordinateTypeConverter.ToPoint(position);
                     await db.SaveChangesAsync();
                 }
                 catch (Exception ex)
@@ -56,7 +58,9 @@ public class GeocodingService(IMapsSearchClient client,
         if (con.PostalCode == null && con.City == null)
             throw new InvalidOperationException("No location data.");
 
-        var position = await client.SearchAddressAsync($"{con.PostalCode} {con.City} {con.State} {con.Country}");
+        var position = await client.SearchAddressAsync(
+            $"{con.PostalCode} {con.City} {con.State} {con.Country}"
+        );
 
         return new Geocoordinate(position.Latitude, position.Longitude);
     }

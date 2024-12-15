@@ -1,5 +1,6 @@
 using AutoMapper;
 using ConventionList.Api.Data;
+using ConventionList.Api.Mapping;
 using ConventionList.Api.Models;
 using ConventionList.Api.Models.Api;
 using ConventionList.Api.Services;
@@ -29,7 +30,7 @@ public class AddConventionHandler(
         try
         {
             var position = await geocoder.Geocode(con);
-            con.Position = position.ToPoint();
+            con.Position = GeocoordinateTypeConverter.ToPoint(position);
         }
         catch (Exception ex)
         {

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using ConventionList.Api.Data;
+using ConventionList.Api.Mapping;
 using ConventionList.Api.Mapping.FanCons;
 using ConventionList.Api.Models;
 using HtmlAgilityPack;
@@ -48,7 +49,7 @@ public sealed class FanConsSync(
                         try
                         {
                             var position = await geocodingService.Geocode(fanConsCon);
-                            fanConsCon.Position = position.ToPoint();
+                            fanConsCon.Position = GeocoordinateTypeConverter.ToPoint(position);
                         }
                         catch (Exception ex)
                         {

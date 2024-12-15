@@ -1,5 +1,6 @@
 using AutoMapper;
 using ConventionList.Api.Data;
+using ConventionList.Api.Mapping;
 using ConventionList.Api.Models;
 using Ical.Net;
 
@@ -51,7 +52,9 @@ public sealed class ConventinSceneCalendarSync(
                         try
                         {
                             var position = await geocodingService.Geocode(conventionSceneCon);
-                            conventionSceneCon.Position = position.ToPoint();
+                            conventionSceneCon.Position = GeocoordinateTypeConverter.ToPoint(
+                                position
+                            );
                         }
                         catch (Exception ex)
                         {

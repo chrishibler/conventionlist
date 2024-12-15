@@ -15,10 +15,10 @@ public static class PointExtensions
 
     public static Point? ToPoint(this Geocoordinate? coord)
     {
-        if (!coord.HasValue)
+        if (coord is null)
             return null;
 
-        Coordinate c = new(coord.Value!.Longitude, coord.Value!.Latitude);
+        Coordinate c = new(coord.Longitude, coord.Latitude);
         return new Point(c);
     }
 }

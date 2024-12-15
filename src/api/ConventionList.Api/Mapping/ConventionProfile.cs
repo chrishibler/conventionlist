@@ -1,7 +1,7 @@
 using AutoMapper;
-using ConventionList.Api.Extensions;
 using ConventionList.Api.Models;
 using ConventionList.Api.Models.Api;
+using NetTopologySuite.Geometries;
 
 namespace ConventionList.Api.Mapping;
 
@@ -23,14 +23,13 @@ public class ConventionProfile : Profile
                 opt => opt.MapFrom(src => src.EndDate.ToUniversalTime())
             );
 
-        CreateMap<Convention, ApiConvention>()
-            .ForMember(
-                dest => dest.Position,
-                opt => opt.MapFrom(src => src.Position.ToGeocoordinate())
-            );
+        CreateMap<Point, Geocoordinate>().ConvertUsing(typeof(PointTypeConverter));
+
+        CreateMap<Convention, ApiConvention>();
+
+        CreateMap<Geocoordinate, Point>().ConvertUsing(typeof(GeocoordinateTypeConverter));
 
         CreateMap<ApiConvention, Convention>()
-            .ForMember(dest => dest.Position, opt => opt.MapFrom(src => src.Position.ToPoint()))
             .ForMember(
                 dest => dest.StartDate,
                 opt => opt.MapFrom(src => src.StartDate.ToUniversalTime())
