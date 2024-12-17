@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using ConventionList.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using NetTopologySuite.Geometries;
 

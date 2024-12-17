@@ -3,6 +3,7 @@ using ConventionList.Api.Data;
 using ConventionList.Api.Mapping;
 using ConventionList.Api.Mapping.FanCons;
 using ConventionList.Api.Models;
+using ConventionList.Domain.Models;
 using HtmlAgilityPack;
 using Newtonsoft.Json;
 
@@ -81,10 +82,7 @@ public sealed class FanConsSync(
                             await PoulateConventionUrl(fanConsCon);
                         }
                         autoMapper.Map(fanConsCon, existingCon);
-                        if (existingCon.Category == null)
-                        {
-                            existingCon.Category = Category.Unlisted;
-                        }
+                        existingCon.Category ??= Category.Unlisted;
                         db.Conventions.Update(existingCon);
                     }
 

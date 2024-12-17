@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace ConventionList.Api.Models.Api;
+namespace ConventionList.Domain.Models;
 
 public record NewApiConvention(
     [Required] Category Category,

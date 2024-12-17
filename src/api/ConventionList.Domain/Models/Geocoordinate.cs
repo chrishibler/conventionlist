@@ -1,3 +1,3 @@
-namespace ConventionList.Api.Models;
+namespace ConventionList.Domain.Models;
 
 public record Geocoordinate(double Latitude, double Longitude);

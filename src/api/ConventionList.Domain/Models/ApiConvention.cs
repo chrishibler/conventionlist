@@ -1,4 +1,4 @@
-namespace ConventionList.Api.Models.Api;
+namespace ConventionList.Domain.Models;
 
 public record ApiConvention(
     Guid Id,

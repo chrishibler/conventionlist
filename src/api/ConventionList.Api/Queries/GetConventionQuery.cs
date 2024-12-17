@@ -1,5 +1,5 @@
 using ConventionList.Api.Data;
-using ConventionList.Api.Models.Api;
+using ConventionList.Domain.Models;
 using MediatR;
 
 namespace ConventionList.Api.Queries;
@@ -15,7 +15,7 @@ public class GetConventionHandler(IConventionRepository repo)
     )
     {
         var convention = await repo.GetConvention(request.Id, cancellationToken);
-        if (convention == null)
+        if (convention is null)
         {
             return (new ConventionNotFoundEvent(), null);
         }

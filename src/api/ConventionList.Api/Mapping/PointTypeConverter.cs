@@ -1,6 +1,6 @@
 using AutoMapper;
 using ConventionList.Api.Extensions;
-using ConventionList.Api.Models;
+using ConventionList.Domain.Models;
 using NetTopologySuite.Geometries;
 
 namespace ConventionList.Api.Mapping;

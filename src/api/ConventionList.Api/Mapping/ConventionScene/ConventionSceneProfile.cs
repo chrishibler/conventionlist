@@ -2,9 +2,10 @@ using AutoMapper;
 using ConventionList.Api.Models;
 using ConventionList.Api.Services;
 using ConventionList.Api.Services.Utils;
+using ConventionList.Domain.Models;
 using Ical.Net.CalendarComponents;
 
-namespace ConventionList.Api.Mapping.FanCons;
+namespace ConventionList.Api.Mapping.ConventionScene;
 
 public class ConventionSceneProfile : Profile
 {

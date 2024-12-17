@@ -1,7 +1,7 @@
 using ConventionList.Api.Auth;
 using ConventionList.Api.Commands;
-using ConventionList.Api.Models.Api;
 using ConventionList.Api.Queries;
+using ConventionList.Domain.Models;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

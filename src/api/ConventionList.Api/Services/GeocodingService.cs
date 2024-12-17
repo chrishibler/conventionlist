@@ -1,6 +1,7 @@
 using ConventionList.Api.Data;
 using ConventionList.Api.Mapping;
 using ConventionList.Api.Models;
+using ConventionList.Domain.Models;
 
 namespace ConventionList.Api.Services;
 

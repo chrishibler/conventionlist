@@ -1,9 +1,7 @@
 using System.Security.Claims;
-using AutoMapper;
 using ConventionList.Api.Auth;
 using ConventionList.Api.Data;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 
 namespace ConventionList.Api.Commands;
 

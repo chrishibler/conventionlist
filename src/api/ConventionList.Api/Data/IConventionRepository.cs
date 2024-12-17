@@ -1,4 +1,5 @@
-using ConventionList.Api.Models.Api;
+using ConventionList.Api.Models;
+using ConventionList.Domain.Models;
 
 namespace ConventionList.Api.Data;
 

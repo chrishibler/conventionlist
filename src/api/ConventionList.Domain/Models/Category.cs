@@ -1,4 +1,4 @@
-namespace ConventionList.Api.Models;
+namespace ConventionList.Domain.Models;
 
 public enum Category
 {

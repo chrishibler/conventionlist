@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConventionList.Api", "Conve
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConventionList.Tests", "ConventionList.Tests\ConventionList.Tests.csproj", "{A8C83008-2E0E-4DCE-90E0-F87C59E73E22}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConventionList.Domain", "ConventionList.Domain\ConventionList.Domain.csproj", "{9C30EA5A-3524-4B78-B52C-B0405F2353FD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{A8C83008-2E0E-4DCE-90E0-F87C59E73E22}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A8C83008-2E0E-4DCE-90E0-F87C59E73E22}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A8C83008-2E0E-4DCE-90E0-F87C59E73E22}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C30EA5A-3524-4B78-B52C-B0405F2353FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C30EA5A-3524-4B78-B52C-B0405F2353FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C30EA5A-3524-4B78-B52C-B0405F2353FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C30EA5A-3524-4B78-B52C-B0405F2353FD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

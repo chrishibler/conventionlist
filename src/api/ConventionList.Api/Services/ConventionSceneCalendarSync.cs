@@ -2,6 +2,7 @@ using AutoMapper;
 using ConventionList.Api.Data;
 using ConventionList.Api.Mapping;
 using ConventionList.Api.Models;
+using ConventionList.Domain.Models;
 using Ical.Net;
 
 namespace ConventionList.Api.Services;

@@ -1,5 +1,5 @@
 using ConventionList.Api.Exceptions;
-using ConventionList.Api.Models;
+using ConventionList.Domain.Models;
 using Geocoding;
 using Geocoding.Google;
 
@@ -15,8 +15,10 @@ public class GoogleMapsSearchClient(string apiKey) : IMapsSearchClient
         if (address.Length == 0)
             throw new NoAddressFoundException($"{address} not found.");
 
-        var position = new Geocoordinate(addresses.First().Coordinates.Latitude,
-                                         addresses.First().Coordinates.Longitude);
+        var position = new Geocoordinate(
+            addresses.First().Coordinates.Latitude,
+            addresses.First().Coordinates.Longitude
+        );
         return position;
     }
 }

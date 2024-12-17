@@ -1,21 +1,30 @@
-namespace ConventionList.Api.Models.Api;
+using ConventionList.Api.Models;
+using ConventionList.Domain.Models;
 
-public record class SearchParams(string? Search, bool? Approved, OrderBy OrderBy = OrderBy.Distance)
+namespace ConventionList.Api.Data;
+
+public static class SearchParamsExtensions
 {
-    public bool HasSearchFilter => !string.IsNullOrWhiteSpace(Search);
+    public static bool HasSearchFilter(this SearchParams searchParams) =>
+        !string.IsNullOrWhiteSpace(searchParams.Search);
 
-    public IQueryable<Convention> ApplyFilter(IQueryable<Convention> query)
+    public static IQueryable<Convention> ApplyFilter(
+        this SearchParams searchParams,
+        IQueryable<Convention> query
+    )
     {
-        if (Approved != null)
+        if (searchParams.Approved != null)
         {
-            query = query.Where(c => c.IsApproved == Approved);
+            query = query.Where(c => c.IsApproved == searchParams.Approved);
         }
 
-        if (HasSearchFilter)
+        if (searchParams.HasSearchFilter())
         {
             // Using ToLower instead of standard CurrentCultureIgnoreCase
             // because EF does not like CurrentCultureIgnoreCase
-            string lowerSearch = Search!.ToLower(System.Globalization.CultureInfo.CurrentCulture);
+            string lowerSearch = searchParams.Search!.ToLower(
+                System.Globalization.CultureInfo.CurrentCulture
+            );
 #pragma warning disable CA1304 // Specify CultureInfo
 #pragma warning disable CA1862 // Use the 'StringComparison' method overloads to perform case-insensitive string comparisons
 #pragma warning disable CA1311 // Specify a culture or use an invariant version

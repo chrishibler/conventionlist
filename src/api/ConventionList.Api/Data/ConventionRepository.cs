@@ -1,8 +1,8 @@
 using AutoMapper;
 using ConventionList.Api.Mapping;
 using ConventionList.Api.Models;
-using ConventionList.Api.Models.Api;
 using ConventionList.Api.Services;
+using ConventionList.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using NetTopologySuite;
 using NetTopologySuite.Geometries;
