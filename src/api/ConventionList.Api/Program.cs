@@ -1,5 +1,6 @@
 using System.Text.Json.Serialization;
 using ConventionList.Api.Auth;
+using ConventionList.Api.Data;
 using ConventionList.Api.Extensions;
 using ConventionList.Api.Middleware;
 using Microsoft.AspNetCore.Authorization;
@@ -12,6 +13,7 @@ builder.Configuration.AddEnvironmentVariables();
 
 builder
     .Services.AddSingleton<IAuthorizationHandler, HasPermissionHandler>()
+    .AddScoped<IConventionRepository, ConventionRepository>()
     .AddDb(builder.Configuration)
     .AddAppAuthorization(builder.Configuration)
     .AddCorsPolicy()

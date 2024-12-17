@@ -26,9 +26,9 @@ static class ClaimExtensions
         return hasPermission;
     }
 
-    public static bool IsSubmitterOrAdmin(this ClaimsPrincipal user, Convention con)
+    public static bool IsSubmitterOrAdmin(this ClaimsPrincipal user, string submitterId)
     {
-        return user.SubjectId() == con.SubmitterId || IsAdmin(user);
+        return user.SubjectId() == submitterId || IsAdmin(user);
     }
 
     public static bool IsAdmin(this ClaimsPrincipal user)

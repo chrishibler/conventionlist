@@ -9,7 +9,7 @@ namespace ConventionList.Api.Commands;
 
 public record DeleteConventionCommand(Guid Id, ClaimsPrincipal? User) : IRequest<IEvent>;
 
-public class DeleteConventionHandler(ConventionListDbContext db)
+public class DeleteConventionHandler(IConventionRepository repo)
     : IRequestHandler<DeleteConventionCommand, IEvent>
 {
     public async Task<IEvent> Handle(
@@ -17,24 +17,19 @@ public class DeleteConventionHandler(ConventionListDbContext db)
         CancellationToken cancellationToken
     )
     {
-        var existingCon = await db.Conventions.SingleOrDefaultAsync(
-            d => d.Id == request.Id,
-            cancellationToken
-        );
-
-        if (existingCon == null)
+        string? submitterId = await repo.GetSubmitterId(request.Id);
+        if (submitterId == null)
         {
             return new ConventionNotFoundEvent();
         }
 
         var user = request.User;
-        if (user == null || !user.IsSubmitterOrAdmin(existingCon))
+        if (user == null || !user.IsSubmitterOrAdmin(submitterId))
         {
             return new InvalidUserEvent();
         }
 
-        _ = db.Conventions.Remove(existingCon);
-        _ = await db.SaveChangesAsync(cancellationToken);
+        await repo.DeleteConvention(request.Id, cancellationToken);
 
         return new SuccessEvent();
     }
