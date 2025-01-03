@@ -1,4 +1,5 @@
 using ConventionList.Api.Auth;
+using ConventionList.Api.Events;
 using ConventionList.Api.Queries;
 using ConventionList.Domain.Models;
 using MediatR;

@@ -21,7 +21,7 @@ public static class WebApplicationExtensions
 
     public static void ConfigureExceptionHandler(this IApplicationBuilder app, ILogger logger)
     {
-        app.UseExceptionHandler(appError =>
+        _ = app.UseExceptionHandler(appError =>
         {
             appError.Run(async context =>
             {
@@ -30,12 +30,12 @@ public static class WebApplicationExtensions
                 var contextFeature = context.Features.Get<IExceptionHandlerFeature>();
                 if (contextFeature != null)
                 {
-                    logger.LogError($"Something went wrong: {contextFeature.Error}");
+                    logger.LogError("Something went wrong: {error}", contextFeature.Error);
                     await context.Response.WriteAsync(
                         new ErrorDetails()
                         {
                             StatusCode = context.Response.StatusCode,
-                            Message = $"Internal Server Error {contextFeature.Error}",
+                            Message = $"Internal Server Error: {contextFeature.Error}",
                         }.ToString()
                     );
                 }

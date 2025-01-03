@@ -5,6 +5,7 @@ using ConventionList.Api.Auth;
 using ConventionList.Repository;
 using ConventionList.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Serilog;
@@ -91,7 +92,7 @@ public static class ServiceCollectionExtensions
 
     public static IServiceCollection AddHtmlFixService(this IServiceCollection services)
     {
-        services.AddHostedService<HtmlFixService>(
+        services.AddHostedService(
             (factory) =>
                 new HtmlFixService(
                     factory.GetRequiredService<IServiceScopeFactory>(),
@@ -170,6 +171,7 @@ public static class ServiceCollectionExtensions
     )
     {
         _ = services
+            .AddSingleton<IAuthorizationHandler, HasPermissionHandler>()
             .AddAuthorizationBuilder()
             .AddPolicy(
                 Permissions.ManageMyConventions,
