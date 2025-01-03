@@ -1,6 +1,6 @@
 using System.Security.Claims;
 using ConventionList.Api.Auth;
-using ConventionList.Api.Data;
+using ConventionList.Repository;
 using MediatR;
 
 namespace ConventionList.Api.Commands;

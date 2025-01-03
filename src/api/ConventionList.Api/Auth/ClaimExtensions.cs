@@ -1,5 +1,4 @@
 using System.Security.Claims;
-using ConventionList.Api.Models;
 
 namespace ConventionList.Api.Auth;
 

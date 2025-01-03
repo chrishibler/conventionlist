@@ -1,5 +1,6 @@
-using ConventionList.Api.Data;
+using ConventionList.Api.Events;
 using ConventionList.Domain.Models;
+using ConventionList.Repository;
 using MediatR;
 
 namespace ConventionList.Api.Queries;

@@ -2,8 +2,8 @@ using System.Reflection;
 using System.Security.Claims;
 using AutoMapper;
 using ConventionList.Api.Auth;
-using ConventionList.Api.Data;
-using ConventionList.Api.Services;
+using ConventionList.Repository;
+using ConventionList.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -21,12 +21,12 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddGeocodingService(this IServiceCollection services)
     {
         services.AddSingleton<GeocodingService>();
-        services.AddHostedService(
+        _ = services.AddHostedService(
             (serviceProvider) =>
             {
                 GeocodingService service =
                     new(
-                        serviceProvider.GetRequiredService<IMapsSearchClient>(),
+                        serviceProvider.GetRequiredService<IGeocoder>(),
                         serviceProvider.GetRequiredService<ILogger<GeocodingService>>(),
                         serviceProvider.GetRequiredService<IServiceScopeFactory>()
                     );
@@ -44,10 +44,10 @@ public static class ServiceCollectionExtensions
                 ConventinSceneCalendarSync service =
                     new(
                         serviceProvider.GetRequiredService<ILogger<ConventinSceneCalendarSync>>(),
-                        serviceProvider.GetRequiredService<IServiceScopeFactory>(),
                         serviceProvider.GetRequiredService<IHttpClientFactory>(),
                         serviceProvider.GetRequiredService<IMapper>(),
-                        serviceProvider.GetRequiredService<GeocodingService>()
+                        serviceProvider.GetRequiredService<IGeocoder>(),
+                        serviceProvider.GetRequiredService<IServiceScopeFactory>()
                     );
                 return service;
             }
@@ -65,7 +65,7 @@ public static class ServiceCollectionExtensions
                         serviceProvider.GetRequiredService<ILogger<FanConsSync>>(),
                         serviceProvider.GetRequiredService<IServiceScopeFactory>(),
                         serviceProvider.GetRequiredService<IMapper>(),
-                        serviceProvider.GetRequiredService<GeocodingService>()
+                        serviceProvider.GetRequiredService<IGeocoder>()
                     );
                 return service;
             }
@@ -169,9 +169,9 @@ public static class ServiceCollectionExtensions
         ConfigurationManager config
     )
     {
-        services.AddAuthorization(options =>
-        {
-            options.AddPolicy(
+        _ = services
+            .AddAuthorizationBuilder()
+            .AddPolicy(
                 Permissions.ManageMyConventions,
                 policy =>
                     policy.Requirements.Add(
@@ -180,8 +180,8 @@ public static class ServiceCollectionExtensions
                             config[AuthDomainKey]!
                         )
                     )
-            );
-            options.AddPolicy(
+            )
+            .AddPolicy(
                 Permissions.ManageAllConventions,
                 policy =>
                     policy.Requirements.Add(
@@ -191,7 +191,6 @@ public static class ServiceCollectionExtensions
                         )
                     )
             );
-        });
 
         return services;
     }

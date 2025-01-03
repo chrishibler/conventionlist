@@ -1,5 +1,5 @@
 using ConventionList.Api.Extensions;
-using ConventionList.Api.Models;
+using ConventionList.Domain.Models;
 using NetTopologySuite;
 using NetTopologySuite.Geometries;
 
@@ -8,7 +8,7 @@ namespace ConventionList.Tests;
 public class ConventionTest
 {
     [Fact]
-    public void TestDistanceOrder()
+    public void ConventionsReturnedInDistanceOrder()
     {
         var geoFactory = NtsGeometryServices.Instance.CreateGeometryFactory(srid: 4326);
         var fresnoLocation = geoFactory.CreatePoint(new Coordinate(-119.7539328, 36.8508928));

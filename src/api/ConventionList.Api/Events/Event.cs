@@ -1,3 +1,5 @@
+namespace ConventionList.Api.Events;
+
 public interface IEvent { }
 
 public class SuccessEvent : IEvent { }

@@ -1,4 +1,4 @@
-using ConventionList.Api.Models;
+using ConventionList.Domain.Models;
 using NetTopologySuite.Geometries;
 
 namespace ConventionList.Api.Extensions;
@@ -12,4 +12,3 @@ public static class ConventionExtensions
         return con.Position?.Distance(location) ?? double.MaxValue;
     }
 }
-

@@ -1,8 +1,8 @@
 using System.Security.Claims;
 using ConventionList.Api.Auth;
-using ConventionList.Api.Data;
-using ConventionList.Api.Models;
+using ConventionList.Api.Events;
 using ConventionList.Domain.Models;
+using ConventionList.Repository;
 using MediatR;
 
 namespace ConventionList.Api.Queries;

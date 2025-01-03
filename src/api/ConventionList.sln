@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConventionList.Tests", "Con
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConventionList.Domain", "ConventionList.Domain\ConventionList.Domain.csproj", "{9C30EA5A-3524-4B78-B52C-B0405F2353FD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConventionList.Repository", "ConventionList.Repository\ConventionList.Repository.csproj", "{03F4D3E8-DFBD-4E23-B514-B62EF3F73AB8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConventionList.Services", "ConventionList.Services\ConventionList.Services.csproj", "{E3799072-0854-4966-8265-E6B1B6FA8BBD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{9C30EA5A-3524-4B78-B52C-B0405F2353FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9C30EA5A-3524-4B78-B52C-B0405F2353FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9C30EA5A-3524-4B78-B52C-B0405F2353FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03F4D3E8-DFBD-4E23-B514-B62EF3F73AB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03F4D3E8-DFBD-4E23-B514-B62EF3F73AB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03F4D3E8-DFBD-4E23-B514-B62EF3F73AB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03F4D3E8-DFBD-4E23-B514-B62EF3F73AB8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E3799072-0854-4966-8265-E6B1B6FA8BBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3799072-0854-4966-8265-E6B1B6FA8BBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3799072-0854-4966-8265-E6B1B6FA8BBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3799072-0854-4966-8265-E6B1B6FA8BBD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

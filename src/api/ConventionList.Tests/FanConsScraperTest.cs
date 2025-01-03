@@ -1,14 +1,14 @@
 ﻿using System.Diagnostics;
+using ConventionList.Repository.Mapping.FanCons;
 using HtmlAgilityPack;
 using Newtonsoft.Json;
-using ConventionList.Api.Mapping.FanCons;
 
 namespace ConventionList.Tests;
 
 public class FanConsScraperTest
 {
     [Fact]
-    public async Task GetJsonTest()
+    public async Task FanConsDataDeserializesProperly()
     {
         string url = "https://fancons.com/events/";
         using var httpClient = new HttpClient();
@@ -20,12 +20,7 @@ public class FanConsScraperTest
         Trace.WriteLine(node);
 
         string jsonData = node.InnerText;
-        // get all events
         var fanconEvents = JsonConvert.DeserializeObject<List<FanConEvent>>(jsonData);
-
-
-
-        Console.WriteLine(jsonData);
     }
 
     [Fact]
@@ -42,6 +37,5 @@ public class FanConsScraperTest
             string href = link.GetAttributeValue("href", null)
                            .Replace("fancons.com", "conventionlist.org", StringComparison.CurrentCultureIgnoreCase);
         }
-
     }
 }
