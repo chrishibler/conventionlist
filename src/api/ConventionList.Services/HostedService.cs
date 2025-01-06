@@ -4,16 +4,27 @@ namespace ConventionList.Services;
 
 public abstract class HostedService : IHostedService, IDisposable
 {
-    protected Timer? Timer { get; set; }
+    private readonly Timer timer;
 
-    public abstract Task StartAsync(CancellationToken cancellationToken);
+    public HostedService(TimeSpan dueTime, TimeSpan period)
+    {
+        timer = new Timer(async (state) => await DoWork(state), null, dueTime, period);
+    }
 
-    public abstract Task StopAsync(CancellationToken cancellationToken);
+    public virtual Task StartAsync(CancellationToken cancellationToken) => Task.CompletedTask;
+
+    public virtual Task StopAsync(CancellationToken cancellationToken)
+    {
+        timer.Change(Timeout.Infinite, 0);
+        return Task.CompletedTask;
+    }
+
+    protected abstract Task DoWork(object? state);
 
 #pragma warning disable CA1816 // Dispose methods should call SuppressFinalize
     public void Dispose()
 #pragma warning restore CA1816 // Dispose methods should call SuppressFinalize
     {
-        Timer?.Dispose();
+        timer.Dispose();
     }
 }

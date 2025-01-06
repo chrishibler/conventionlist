@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Web;
+using AutoMapper;
 using ConventionList.Domain;
 using ConventionList.Domain.Models;
 using ConventionList.Repository;
@@ -11,21 +12,20 @@ using Newtonsoft.Json;
 
 namespace ConventionList.Services;
 
-public sealed class FanConsSync(
-    ILogger<FanConsSync> logger,
+public sealed class FanConsSyncService(
+    ILogger<FanConsSyncService> logger,
     IServiceScopeFactory scopeFactory,
     IMapper autoMapper,
     IGeocoder geocoder
-) : HostedService
+) : HostedService(TimeSpan.FromSeconds(5), TimeSpan.FromDays(1))
 {
     public override Task StartAsync(CancellationToken cancellationToken)
     {
-        logger.LogInformation("FanCons sync running");
-        Timer = new Timer(DoWork, null, TimeSpan.FromSeconds(5), TimeSpan.FromDays(1));
-        return Task.CompletedTask;
+        logger.LogInformation($"{nameof(FanConsSyncService)} sync running");
+        return base.StartAsync(cancellationToken);
     }
 
-    private async void DoWork(object? state)
+    protected override async Task DoWork(object? state)
     {
         try
         {
@@ -39,7 +39,7 @@ public sealed class FanConsSync(
 
                 try
                 {
-                    fanConsCon.Name = HtmlFixService.ReplaceHtmlChars(fanConsCon.Name);
+                    fanConsCon.Name = HttpUtility.HtmlDecode(fanConsCon.Name);
                     var existingCon = await repo.GetLatestConventionByName(fanConsCon.Name);
                     if (existingCon == null || existingCon.StartDate >= fanConsCon.StartDate)
                     {
@@ -56,7 +56,7 @@ public sealed class FanConsSync(
                                 fanConsCon.Name
                             );
                         }
-                        fanConsCon.Name = HtmlFixService.ReplaceHtmlChars(fanConsCon.Name);
+                        fanConsCon.Name = HttpUtility.HtmlDecode(fanConsCon.Name);
                         fanConsCon.Category = Category.Unlisted;
                         await PoulateConventionUrl(fanConsCon);
                         fanConsCon.IsApproved = true;
@@ -94,13 +94,6 @@ public sealed class FanConsSync(
         {
             logger.LogError(ex, "Exception loading FanCons data");
         }
-    }
-
-    public override Task StopAsync(CancellationToken cancellationToken)
-    {
-        logger.LogInformation("CalendarSync service is stopping");
-        Timer?.Change(Timeout.Infinite, 0);
-        return Task.CompletedTask;
     }
 
     public async Task<List<Convention>> GetFanConsConventions()

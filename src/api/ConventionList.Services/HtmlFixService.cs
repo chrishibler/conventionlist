@@ -6,16 +6,15 @@ using Microsoft.Extensions.Logging;
 namespace ConventionList.Services;
 
 public class HtmlFixService(IServiceScopeFactory scopeFactory, ILogger<HtmlFixService> logger)
-    : HostedService
+    : HostedService(TimeSpan.FromSeconds(5), TimeSpan.FromDays(1))
 {
     public override Task StartAsync(CancellationToken cancellationToken)
     {
-        logger.LogInformation("HtmlFixService running");
-        Timer = new Timer(DoWork, null, TimeSpan.FromSeconds(30), TimeSpan.FromDays(1));
-        return Task.CompletedTask;
+        logger.LogInformation($"{nameof(HtmlFixService)} running");
+        return base.StartAsync(cancellationToken);
     }
 
-    private async void DoWork(object? state)
+    protected override async Task DoWork(object? state)
     {
         try
         {
@@ -27,7 +26,7 @@ public class HtmlFixService(IServiceScopeFactory scopeFactory, ILogger<HtmlFixSe
                 logger.LogInformation("Fixing {ConName}", con.Name);
                 try
                 {
-                    con.Name = ReplaceHtmlChars(con.Name);
+                    con.Name = HttpUtility.HtmlDecode(con.Name);
                     await repo.SaveChangesAsync();
                 }
                 catch (Exception ex)
@@ -44,13 +43,7 @@ public class HtmlFixService(IServiceScopeFactory scopeFactory, ILogger<HtmlFixSe
 
     public override Task StopAsync(CancellationToken cancellationToken)
     {
-        logger.LogInformation("HtmlFixService is stopping");
-        Timer?.Change(Timeout.Infinite, 0);
-        return Task.CompletedTask;
-    }
-
-    public static string ReplaceHtmlChars(string input)
-    {
-        return HttpUtility.HtmlDecode(input);
+        logger.LogInformation($"{nameof(HtmlFixService)} is stopping");
+        return base.StopAsync(cancellationToken);
     }
 }

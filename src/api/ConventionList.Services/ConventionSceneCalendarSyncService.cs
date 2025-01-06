@@ -1,3 +1,4 @@
+using System.Web;
 using AutoMapper;
 using ConventionList.Domain.Models;
 using ConventionList.Repository;
@@ -8,24 +9,23 @@ using Microsoft.Extensions.Logging;
 
 namespace ConventionList.Services;
 
-public sealed class ConventinSceneCalendarSync(
-    ILogger<ConventinSceneCalendarSync> logger,
+public sealed class ConventinSceneCalendarSyncService(
+    ILogger<ConventinSceneCalendarSyncService> logger,
     IHttpClientFactory clientFactory,
     IMapper autoMapper,
     IGeocoder geocoder,
     IServiceScopeFactory scopeFactory
-) : HostedService
+) : HostedService(TimeSpan.FromSeconds(5), TimeSpan.FromDays(1))
 {
     private const string IcalUrl = "https://www.conventionscene.com/?feed=gigpress-ical";
 
     public override Task StartAsync(CancellationToken cancellationToken)
     {
-        logger.LogInformation("Calendar sync running");
-        Timer = new Timer(DoWork, null, TimeSpan.FromSeconds(20), TimeSpan.FromDays(1));
-        return Task.CompletedTask;
+        logger.LogInformation($"{nameof(ConventinSceneCalendarSyncService)} is starting");
+        return base.StartAsync(cancellationToken);
     }
 
-    private async void DoWork(object? state)
+    protected override async Task DoWork(object? state)
     {
         try
         {
@@ -39,9 +39,7 @@ public sealed class ConventinSceneCalendarSync(
                 try
                 {
                     var conventionSceneCon = autoMapper.Map<Convention>(evnt);
-                    conventionSceneCon.Name = HtmlFixService.ReplaceHtmlChars(
-                        conventionSceneCon.Name
-                    );
+                    conventionSceneCon.Name = HttpUtility.HtmlDecode(conventionSceneCon.Name);
 
                     var existingCon = await repo.GetLatestConventionByName(conventionSceneCon.Name);
                     if (existingCon == null && conventionSceneCon.EndDate >= DateTime.UtcNow.Date)
@@ -61,9 +59,7 @@ public sealed class ConventinSceneCalendarSync(
                                 conventionSceneCon.Name
                             );
                         }
-                        conventionSceneCon.Name = HtmlFixService.ReplaceHtmlChars(
-                            conventionSceneCon.Name
-                        );
+                        conventionSceneCon.Name = HttpUtility.HtmlDecode(conventionSceneCon.Name);
 
                         conventionSceneCon.Category ??= Category.Unlisted;
 
@@ -98,9 +94,8 @@ public sealed class ConventinSceneCalendarSync(
 
     public override Task StopAsync(CancellationToken cancellationToken)
     {
-        logger.LogInformation("CalendarSync service is stopping");
-        Timer?.Change(Timeout.Infinite, 0);
-        return Task.CompletedTask;
+        logger.LogInformation($"{nameof(ConventinSceneCalendarSyncService)} is starting");
+        return base.StopAsync(cancellationToken);
     }
 
     public async Task<Calendar> LoadCalendar()

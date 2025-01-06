@@ -21,7 +21,6 @@ public static class ServiceCollectionExtensions
 
     public static IServiceCollection AddGeocodingService(this IServiceCollection services)
     {
-        services.AddSingleton<GeocodingService>();
         _ = services.AddHostedService(
             (serviceProvider) =>
             {
@@ -42,9 +41,11 @@ public static class ServiceCollectionExtensions
         services.AddHostedService(
             (serviceProvider) =>
             {
-                ConventinSceneCalendarSync service =
+                ConventinSceneCalendarSyncService service =
                     new(
-                        serviceProvider.GetRequiredService<ILogger<ConventinSceneCalendarSync>>(),
+                        serviceProvider.GetRequiredService<
+                            ILogger<ConventinSceneCalendarSyncService>
+                        >(),
                         serviceProvider.GetRequiredService<IHttpClientFactory>(),
                         serviceProvider.GetRequiredService<IMapper>(),
                         serviceProvider.GetRequiredService<IGeocoder>(),
@@ -61,9 +62,9 @@ public static class ServiceCollectionExtensions
         services.AddHostedService(
             (serviceProvider) =>
             {
-                FanConsSync service =
+                FanConsSyncService service =
                     new(
-                        serviceProvider.GetRequiredService<ILogger<FanConsSync>>(),
+                        serviceProvider.GetRequiredService<ILogger<FanConsSyncService>>(),
                         serviceProvider.GetRequiredService<IServiceScopeFactory>(),
                         serviceProvider.GetRequiredService<IMapper>(),
                         serviceProvider.GetRequiredService<IGeocoder>()
