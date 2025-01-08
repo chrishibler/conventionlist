@@ -1,10 +1,9 @@
 ﻿using System.Web;
 using AutoMapper;
-using ConventionList.Domain;
-using ConventionList.Domain.Models;
-using ConventionList.Repository;
-using ConventionList.Repository.Mapping;
-using ConventionList.Repository.Mapping.FanCons;
+using ConventionList.Core;
+using ConventionList.Core.Interfaces;
+using ConventionList.Core.Models;
+using ConventionList.Services.Mapping.FanCons;
 using HtmlAgilityPack;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -39,14 +38,14 @@ public sealed class FanConsSyncService(
 
                 try
                 {
+                    Geocoordinate? position = null;
                     fanConsCon.Name = HttpUtility.HtmlDecode(fanConsCon.Name);
                     var existingCon = await repo.GetLatestConventionByName(fanConsCon.Name);
                     if (existingCon == null || existingCon.StartDate >= fanConsCon.StartDate)
                     {
                         try
                         {
-                            var position = await geocoder.Geocode(fanConsCon);
-                            fanConsCon.Position = GeocoordinateTypeConverter.ToPoint(position);
+                            position = await geocoder.Geocode(fanConsCon);
                         }
                         catch (Exception ex)
                         {
@@ -60,7 +59,7 @@ public sealed class FanConsSyncService(
                         fanConsCon.Category = Category.Unlisted;
                         await PoulateConventionUrl(fanConsCon);
                         fanConsCon.IsApproved = true;
-                        await repo.Add(fanConsCon);
+                        await repo.Add(fanConsCon, position);
                     }
                     else if (
                         UserIds.FanConsSyncUserId == existingCon.SubmitterId

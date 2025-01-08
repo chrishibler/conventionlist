@@ -7,9 +7,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConventionList.Api", "Conve
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConventionList.Tests", "ConventionList.Tests\ConventionList.Tests.csproj", "{A8C83008-2E0E-4DCE-90E0-F87C59E73E22}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConventionList.Domain", "ConventionList.Domain\ConventionList.Domain.csproj", "{9C30EA5A-3524-4B78-B52C-B0405F2353FD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConventionList.Core", "ConventionList.Core\ConventionList.Core.csproj", "{9C30EA5A-3524-4B78-B52C-B0405F2353FD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConventionList.Repository", "ConventionList.Repository\ConventionList.Repository.csproj", "{03F4D3E8-DFBD-4E23-B514-B62EF3F73AB8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConventionList.Infrastructure", "ConventionList.Infrastructure\ConventionList.Infrastructure.csproj", "{03F4D3E8-DFBD-4E23-B514-B62EF3F73AB8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConventionList.Services", "ConventionList.Services\ConventionList.Services.csproj", "{E3799072-0854-4966-8265-E6B1B6FA8BBD}"
 EndProject

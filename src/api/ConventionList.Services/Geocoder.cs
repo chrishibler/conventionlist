@@ -1,4 +1,5 @@
-using ConventionList.Domain.Models;
+using ConventionList.Core.Interfaces;
+using ConventionList.Core.Models;
 
 namespace ConventionList.Services;
 

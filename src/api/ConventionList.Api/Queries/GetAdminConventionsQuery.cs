@@ -1,5 +1,5 @@
-using ConventionList.Domain.Models;
-using ConventionList.Repository;
+using ConventionList.Core.Interfaces;
+using ConventionList.Core.Models;
 using MediatR;
 
 namespace ConventionList.Api.Queries;

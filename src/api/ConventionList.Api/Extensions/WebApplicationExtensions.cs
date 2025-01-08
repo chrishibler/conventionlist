@@ -1,6 +1,6 @@
 using System.Net;
 using ConventionList.Api.Models;
-using ConventionList.Repository;
+using ConventionList.Infrastructure;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 

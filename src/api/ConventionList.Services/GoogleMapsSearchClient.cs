@@ -1,5 +1,6 @@
-using ConventionList.Domain.Exceptions;
-using ConventionList.Domain.Models;
+using ConventionList.Core.Exceptions;
+using ConventionList.Core.Interfaces;
+using ConventionList.Core.Models;
 using Geocoding.Google;
 
 namespace ConventionList.Services;

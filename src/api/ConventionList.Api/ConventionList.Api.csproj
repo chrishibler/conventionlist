@@ -19,8 +19,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="../ConventionList.Core/ConventionList.Core.csproj" />
     <ProjectReference Include="../ConventionList.Services/ConventionList.Services.csproj" />
-    <ProjectReference Include="..\ConventionList.Repository\ConventionList.Repository.csproj" />
-    <ProjectReference Include="..\ConventionList.Domain\ConventionList.Domain.csproj" />
+    <ProjectReference
+      Include="..\ConventionList.Infrastructure\ConventionList.Infrastructure.csproj" />
   </ItemGroup>
 </Project>

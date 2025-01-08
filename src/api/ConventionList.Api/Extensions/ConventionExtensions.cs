@@ -1,4 +1,4 @@
-using ConventionList.Domain.Models;
+using ConventionList.Core.Models;
 using NetTopologySuite.Geometries;
 
 namespace ConventionList.Api.Extensions;

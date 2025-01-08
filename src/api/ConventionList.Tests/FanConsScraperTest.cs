@@ -1,5 +1,5 @@
 ﻿using System.Diagnostics;
-using ConventionList.Repository.Mapping.FanCons;
+using ConventionList.Services.Mapping.FanCons;
 using HtmlAgilityPack;
 using Newtonsoft.Json;
 

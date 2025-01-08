@@ -1,9 +1,9 @@
 using System.Web;
 using AutoMapper;
-using ConventionList.Domain.Models;
-using ConventionList.Repository;
-using ConventionList.Repository.Mapping;
+using ConventionList.Core.Interfaces;
+using ConventionList.Core.Models;
 using Ical.Net;
+using Ical.Net.CalendarComponents;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
@@ -29,12 +29,13 @@ public sealed class ConventinSceneCalendarSyncService(
     {
         try
         {
-            using var scope = scopeFactory.CreateScope();
-            var repo = scope.ServiceProvider.GetRequiredService<IConventionRepository>();
-
-            var calendar = await LoadCalendar();
-            foreach (var evnt in calendar.Events)
+            using IServiceScope scope = scopeFactory.CreateScope();
+            IConventionRepository repo =
+                scope.ServiceProvider.GetRequiredService<IConventionRepository>();
+            Calendar calendar = await LoadCalendar();
+            foreach (CalendarEvent evnt in calendar.Events)
             {
+                Geocoordinate? position = null;
                 logger.LogInformation("Event id: {CalendarEventId}", evnt.Uid);
                 try
                 {
@@ -46,10 +47,7 @@ public sealed class ConventinSceneCalendarSyncService(
                     {
                         try
                         {
-                            var position = await geocoder.Geocode(conventionSceneCon);
-                            conventionSceneCon.Position = GeocoordinateTypeConverter.ToPoint(
-                                position
-                            );
+                            position = await geocoder.Geocode(conventionSceneCon);
                         }
                         catch (Exception ex)
                         {
@@ -64,7 +62,7 @@ public sealed class ConventinSceneCalendarSyncService(
                         conventionSceneCon.Category ??= Category.Unlisted;
 
                         conventionSceneCon.IsApproved = true;
-                        await repo.Add(conventionSceneCon);
+                        await repo.Add(conventionSceneCon, position);
                     }
                     else if (
                         existingCon is not null

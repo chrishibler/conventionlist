@@ -1,5 +1,5 @@
 using ConventionList.Api.Extensions;
-using ConventionList.Domain.Models;
+using ConventionList.Core.Models;
 using NetTopologySuite;
 using NetTopologySuite.Geometries;
 

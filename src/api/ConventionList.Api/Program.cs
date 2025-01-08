@@ -2,7 +2,8 @@ using System.Text.Json.Serialization;
 using ConventionList.Api.Auth;
 using ConventionList.Api.Extensions;
 using ConventionList.Api.Middleware;
-using ConventionList.Repository;
+using ConventionList.Core.Interfaces;
+using ConventionList.Infrastructure;
 using ConventionList.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
@@ -23,7 +24,7 @@ builder
     .AddGeocodingService()
     .AddAppAuthentication(builder.Configuration)
     .AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly))
-    .AddAutoMapper(typeof(IConventionRepository))
+    .AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies())
     .AddHttpClient()
     .AddGoogleMapsSearchClient(builder.Configuration)
     .AddConventionSceneSync()
