@@ -41,12 +41,12 @@ export default function ManageConventionsPage() {
   }
 
   function handleNextPageParam(lastPage) {
-    return lastPage.currentPage === lastPage.totalPages
+    return lastPage.data.length < apiService.pageSize
       ? undefined
       : lastPage.currentPage + 1;
   }
 
-  const { data, error, fetchNextPage, hasNextPage, /*isFetching,*/ isLoading } =
+  const { data, error, fetchNextPage, hasNextPage, isLoading } =
     useInfiniteQuery({
       queryKey: ["user/conventions"],
       queryFn: fetchConventions,

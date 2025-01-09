@@ -2,7 +2,9 @@
 using AutoMapper;
 using ConventionList.Core;
 using ConventionList.Core.Interfaces;
+using ConventionList.Core.Mapping;
 using ConventionList.Core.Models;
+using ConventionList.Core.Specifications;
 using ConventionList.Services.Mapping.FanCons;
 using HtmlAgilityPack;
 using Microsoft.Extensions.DependencyInjection;
@@ -29,7 +31,7 @@ public sealed class FanConsSyncService(
         try
         {
             using var scope = scopeFactory.CreateScope();
-            var repo = scope.ServiceProvider.GetRequiredService<IConventionRepository>();
+            var repo = scope.ServiceProvider.GetRequiredService<IRepository<Convention>>();
             var fanconsConventions = await GetFanConsConventions();
 
             foreach (var fanConsCon in fanconsConventions)
@@ -40,8 +42,9 @@ public sealed class FanConsSyncService(
                 {
                     Geocoordinate? position = null;
                     fanConsCon.Name = HttpUtility.HtmlDecode(fanConsCon.Name);
-                    var existingCon = await repo.GetLatestConventionByName(fanConsCon.Name);
-                    if (existingCon == null || existingCon.StartDate >= fanConsCon.StartDate)
+                    var spec = new GetConventionsInStartDateOrderSpecification(fanConsCon.Name);
+                    var existingCon = await repo.FirstOrDefaultAsync(spec);
+                    if (existingCon == null && fanConsCon.EndDate >= DateTime.UtcNow.Date)
                     {
                         try
                         {
@@ -59,10 +62,12 @@ public sealed class FanConsSyncService(
                         fanConsCon.Category = Category.Unlisted;
                         await PoulateConventionUrl(fanConsCon);
                         fanConsCon.IsApproved = true;
-                        await repo.Add(fanConsCon, position);
+                        fanConsCon.Position = PointFactory.CreatePoint(position);
+                        await repo.AddAsync(fanConsCon);
                     }
                     else if (
-                        UserIds.FanConsSyncUserId == existingCon.SubmitterId
+                        existingCon is not null
+                        && UserIds.FanConsSyncUserId == existingCon.SubmitterId
                         && string.IsNullOrWhiteSpace(existingCon.Editor)
                     )
                     {
@@ -78,10 +83,8 @@ public sealed class FanConsSyncService(
                         }
                         autoMapper.Map(fanConsCon, existingCon);
                         existingCon.Category ??= Category.Unlisted;
-                        repo.Update(existingCon);
+                        await repo.UpdateAsync(existingCon);
                     }
-
-                    await repo.SaveChangesAsync();
                 }
                 catch (Exception ex)
                 {

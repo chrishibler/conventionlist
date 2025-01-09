@@ -3,6 +3,7 @@ using ConventionList.Api.Auth;
 using ConventionList.Api.Extensions;
 using ConventionList.Api.Middleware;
 using ConventionList.Core.Interfaces;
+using ConventionList.Core.Models;
 using ConventionList.Infrastructure;
 using ConventionList.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -15,7 +16,7 @@ builder.Configuration.AddEnvironmentVariables();
 
 builder
     .Services.AddSingleton<IAuthorizationHandler, HasPermissionHandler>()
-    .AddScoped<IConventionRepository, ConventionRepository>()
+    .AddScoped<IRepository<Convention>, EfRepository<Convention>>()
     .AddDb(builder.Configuration)
     .AddAppAuthorization(builder.Configuration)
     .AddCorsPolicy()

@@ -1,5 +1,7 @@
+using AutoMapper;
 using ConventionList.Core.Interfaces;
 using ConventionList.Core.Models;
+using ConventionList.Core.Specifications;
 using MediatR;
 
 namespace ConventionList.Api.Queries;
@@ -10,19 +12,22 @@ public record GetAdminConventionsQuery(
     SearchParams? SearchParams = null
 ) : IRequest<ConventionsResult>;
 
-public class GetAdminConventionsHandler(IConventionRepository repo)
+public class GetAdminConventionsHandler(IRepository<Convention> repo, IMapper mapper)
     : IRequestHandler<GetAdminConventionsQuery, ConventionsResult>
 {
-    public Task<ConventionsResult> Handle(
+    public async Task<ConventionsResult> Handle(
         GetAdminConventionsQuery request,
         CancellationToken cancellationToken
     )
     {
-        return repo.GetAdminConventions(
-            request.SearchParams,
+        var spec = new GetAdminConventionsSpecification(
+            mapper,
             request.Page,
             request.PageSize,
-            cancellationToken
+            request.SearchParams
         );
+        var cons = await repo.ListAsync(spec, cancellationToken);
+
+        return new ConventionsResult(request.Page, request.PageSize, cons.ToList());
     }
 }

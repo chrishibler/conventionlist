@@ -1,5 +1,7 @@
+using AutoMapper;
 using ConventionList.Core.Interfaces;
 using ConventionList.Core.Models;
+using ConventionList.Core.Specifications;
 using MediatR;
 
 namespace ConventionList.Api.Queries;
@@ -12,21 +14,25 @@ public record GetConventionsQuery(
     SearchParams? SearchParams = null
 ) : IRequest<ConventionsResult>;
 
-public class GetConventionsHandler(IConventionRepository repo)
+public class GetConventionsHandler(IRepository<Convention> repo, IMapper mapper)
     : IRequestHandler<GetConventionsQuery, ConventionsResult>
 {
-    public Task<ConventionsResult> Handle(
+    public async Task<ConventionsResult> Handle(
         GetConventionsQuery request,
         CancellationToken cancellationToken
     )
     {
-        return repo.GetConventions(
-            request.SearchParams,
-            request.Lon,
-            request.Lat,
+        var spec = new GetConventionsSpecification(
+            mapper,
             request.Page,
             request.PageSize,
-            cancellationToken
+            request.Lat,
+            request.Lon,
+            request.SearchParams
         );
+
+        var cons = await repo.ListAsync(spec, cancellationToken);
+
+        return new ConventionsResult(request.Page, request.PageSize, cons);
     }
 }

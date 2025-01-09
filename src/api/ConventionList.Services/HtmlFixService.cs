@@ -1,5 +1,7 @@
 using System.Web;
 using ConventionList.Core.Interfaces;
+using ConventionList.Core.Models;
+using ConventionList.Core.Specifications;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
@@ -19,15 +21,16 @@ public class HtmlFixService(IServiceScopeFactory scopeFactory, ILogger<HtmlFixSe
         try
         {
             using var scope = scopeFactory.CreateScope();
-            var repo = scope.ServiceProvider.GetRequiredService<IConventionRepository>();
-            var consToFix = await repo.GetHtmlFixableConventions();
+            var repo = scope.ServiceProvider.GetRequiredService<IRepository<Convention>>();
+            var spec = new GetHtmlFixableConventionsSpecification();
+            var consToFix = await repo.ListAsync(spec);
             foreach (var con in consToFix)
             {
                 logger.LogInformation("Fixing {ConName}", con.Name);
                 try
                 {
                     con.Name = HttpUtility.HtmlDecode(con.Name);
-                    await repo.SaveChangesAsync();
+                    await repo.UpdateAsync(con);
                 }
                 catch (Exception ex)
                 {

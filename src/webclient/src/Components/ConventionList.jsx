@@ -20,7 +20,7 @@ export default function ConventionList({ searchInfo }) {
   }
 
   function handleNextPageParam(lastPage) {
-    return lastPage.currentPage === lastPage.totalPages
+    return lastPage.conventions.length < apiService.pageSize
       ? undefined
       : lastPage.currentPage + 1;
   }

@@ -1,8 +1,10 @@
 using System.Security.Claims;
+using AutoMapper;
 using ConventionList.Api.Auth;
 using ConventionList.Api.Events;
 using ConventionList.Core.Interfaces;
 using ConventionList.Core.Models;
+using ConventionList.Core.Specifications;
 using MediatR;
 
 namespace ConventionList.Api.Queries;
@@ -14,7 +16,7 @@ public record GetUserConventionsQuery(
     SearchParams? SearchParams = null
 ) : IRequest<(IEvent Result, ConventionsResult? conventions)>;
 
-public class GetUserConventionsHandler(IConventionRepository repo)
+public class GetUserConventionsHandler(IRepository<Convention> repo, IMapper mapper)
     : IRequestHandler<GetUserConventionsQuery, (IEvent Result, ConventionsResult? conventions)>
 {
     public async Task<(IEvent Result, ConventionsResult? conventions)> Handle(
@@ -28,20 +30,16 @@ public class GetUserConventionsHandler(IConventionRepository repo)
             return (new InvalidUserEvent(), null);
         }
 
-        var cons = await repo.GetUserConventions(
+        var spec = new GetUserConventionsSpecification(
             request.SearchParams,
+            mapper,
             userId,
             request.PageSize,
-            request.Page,
-            cancellationToken
+            request.Page
         );
 
-        int totalCount = cons.Count;
-        int totalPages = (int)Math.Ceiling((double)totalCount / request.PageSize);
+        var cons = await repo.ListAsync(spec, cancellationToken);
 
-        return (
-            new SuccessEvent(),
-            new ConventionsResult(totalCount, totalPages, request.Page, request.PageSize, cons)
-        );
+        return (new SuccessEvent(), new ConventionsResult(request.Page, request.PageSize, cons));
     }
 }

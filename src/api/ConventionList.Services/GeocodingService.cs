@@ -1,4 +1,7 @@
 using ConventionList.Core.Interfaces;
+using ConventionList.Core.Mapping;
+using ConventionList.Core.Models;
+using ConventionList.Core.Specifications;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
@@ -19,8 +22,9 @@ public class GeocodingService(
     protected override async Task DoWork(object? state)
     {
         using var scope = scopeFactory.CreateScope();
-        var repo = scope.ServiceProvider.GetRequiredService<IConventionRepository>();
-        var consToGeocode = await repo.GetConventionsToGeocode();
+        var repo = scope.ServiceProvider.GetRequiredService<IRepository<Convention>>();
+        var spec = new GetConventionsToGeocodeSpecification();
+        var consToGeocode = await repo.ListAsync(spec);
 
         foreach (var con in consToGeocode)
         {
@@ -28,8 +32,8 @@ public class GeocodingService(
             try
             {
                 var position = await geocoder.Geocode(con);
-                repo.Update(con, position);
-                await repo.SaveChangesAsync();
+                con.Position = PointFactory.CreatePoint(position);
+                await repo.UpdateAsync(con);
             }
             catch (Exception ex)
             {

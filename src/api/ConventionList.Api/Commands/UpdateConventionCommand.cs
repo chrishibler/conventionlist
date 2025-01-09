@@ -10,7 +10,7 @@ namespace ConventionList.Api.Commands;
 public record UpdateConventionCommand(Guid Id, ApiConvention UpdatedCon, ClaimsPrincipal? User)
     : IRequest<IEvent>;
 
-public class UpdateConventionHandler(IConventionRepository repo)
+public class UpdateConventionHandler(IRepository<Convention> repo)
     : IRequestHandler<UpdateConventionCommand, IEvent>
 {
     public async Task<IEvent> Handle(
@@ -18,19 +18,20 @@ public class UpdateConventionHandler(IConventionRepository repo)
         CancellationToken cancellationToken
     )
     {
-        var submitterId = await repo.GetSubmitterId(request.Id);
-        if (submitterId == null)
+        var con = await repo.GetByIdAsync(request.Id, cancellationToken);
+        string? submitterId = con?.SubmitterId;
+        if (con == null)
         {
             return new ConventionNotFoundEvent();
         }
 
         var user = request.User;
-        if (user == null || !user.IsSubmitterOrAdmin(submitterId))
+        if (user is null || submitterId is null || !user.IsSubmitterOrAdmin(submitterId))
         {
             return new InvalidUserEvent();
         }
 
-        await repo.UpdateConvention(request.UpdatedCon, submitterId, cancellationToken);
+        await repo.UpdateAsync(con, cancellationToken);
 
         return new SuccessEvent();
     }

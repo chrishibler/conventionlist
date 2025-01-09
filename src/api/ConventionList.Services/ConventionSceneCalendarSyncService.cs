@@ -1,7 +1,9 @@
 using System.Web;
 using AutoMapper;
 using ConventionList.Core.Interfaces;
+using ConventionList.Core.Mapping;
 using ConventionList.Core.Models;
+using ConventionList.Core.Specifications;
 using Ical.Net;
 using Ical.Net.CalendarComponents;
 using Microsoft.Extensions.DependencyInjection;
@@ -30,8 +32,7 @@ public sealed class ConventinSceneCalendarSyncService(
         try
         {
             using IServiceScope scope = scopeFactory.CreateScope();
-            IConventionRepository repo =
-                scope.ServiceProvider.GetRequiredService<IConventionRepository>();
+            var repo = scope.ServiceProvider.GetRequiredService<IRepository<Convention>>();
             Calendar calendar = await LoadCalendar();
             foreach (CalendarEvent evnt in calendar.Events)
             {
@@ -41,8 +42,10 @@ public sealed class ConventinSceneCalendarSyncService(
                 {
                     var conventionSceneCon = autoMapper.Map<Convention>(evnt);
                     conventionSceneCon.Name = HttpUtility.HtmlDecode(conventionSceneCon.Name);
-
-                    var existingCon = await repo.GetLatestConventionByName(conventionSceneCon.Name);
+                    var spec = new GetConventionsInStartDateOrderSpecification(
+                        conventionSceneCon.Name
+                    );
+                    var existingCon = await repo.FirstOrDefaultAsync(spec);
                     if (existingCon == null && conventionSceneCon.EndDate >= DateTime.UtcNow.Date)
                     {
                         try
@@ -58,11 +61,10 @@ public sealed class ConventinSceneCalendarSyncService(
                             );
                         }
                         conventionSceneCon.Name = HttpUtility.HtmlDecode(conventionSceneCon.Name);
-
                         conventionSceneCon.Category ??= Category.Unlisted;
-
                         conventionSceneCon.IsApproved = true;
-                        await repo.Add(conventionSceneCon, position);
+                        conventionSceneCon.Position = PointFactory.CreatePoint(position);
+                        await repo.AddAsync(conventionSceneCon);
                     }
                     else if (
                         existingCon is not null
@@ -70,10 +72,8 @@ public sealed class ConventinSceneCalendarSyncService(
                     )
                     {
                         autoMapper.Map(conventionSceneCon, existingCon);
-
                         existingCon.Category ??= Category.Unlisted;
-
-                        repo.Update(existingCon);
+                        await repo.UpdateAsync(existingCon);
                     }
 
                     await repo.SaveChangesAsync();

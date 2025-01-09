@@ -5,6 +5,7 @@ export const ApiServiceContext = createContext(null);
 
 class ApiService {
   constructor(client) {
+    this.pageSize = 20;
     this.conventionsUrl = "conventions";
     this.userConventionsUrl = "user/conventions";
     this.client = client;
@@ -39,7 +40,7 @@ class ApiService {
     let currentPage = 1;
 
     while (hasMore) {
-      let url = `${this.conventionsUrl}/bounds?${boundsQuery}&page=${currentPage}`;
+      let url = `${this.conventionsUrl}/bounds?${boundsQuery}&page=${currentPage}&pageSize=${this.pageSize}`;
       const consResponse = await this.client.get(url);
       if (consResponse.status !== 200) {
         throw Error(
@@ -47,7 +48,7 @@ class ApiService {
         );
       }
       results.push(...consResponse.data.conventions);
-      hasMore = currentPage < consResponse.data.totalPages;
+      hasMore = consResponse.data.length < this.pageSize;
       currentPage = currentPage + 1;
     }
     return results;
