@@ -1,6 +1,5 @@
 using System.Reflection;
 using System.Security.Claims;
-using AutoMapper;
 using ConventionList.Api.Auth;
 using ConventionList.Core.Interfaces;
 using ConventionList.Infrastructure;
@@ -22,57 +21,19 @@ public static class ServiceCollectionExtensions
 
     public static IServiceCollection AddGeocodingService(this IServiceCollection services)
     {
-        _ = services.AddHostedService(
-            (serviceProvider) =>
-            {
-                GeocodingService service =
-                    new(
-                        serviceProvider.GetRequiredService<IGeocoder>(),
-                        serviceProvider.GetRequiredService<ILogger<GeocodingService>>(),
-                        serviceProvider.GetRequiredService<IServiceScopeFactory>()
-                    );
-                return service;
-            }
-        );
+        services.AddHostedService<GeocodingService>();
         return services;
     }
 
     public static IServiceCollection AddConventionSceneSync(this IServiceCollection services)
     {
-        services.AddHostedService(
-            (serviceProvider) =>
-            {
-                ConventinSceneCalendarSyncService service =
-                    new(
-                        serviceProvider.GetRequiredService<
-                            ILogger<ConventinSceneCalendarSyncService>
-                        >(),
-                        serviceProvider.GetRequiredService<IHttpClientFactory>(),
-                        serviceProvider.GetRequiredService<IMapper>(),
-                        serviceProvider.GetRequiredService<IGeocoder>(),
-                        serviceProvider.GetRequiredService<IServiceScopeFactory>()
-                    );
-                return service;
-            }
-        );
+        services.AddHostedService<ConventinSceneCalendarSyncService>();
         return services;
     }
 
     public static IServiceCollection AddFanConsSync(this IServiceCollection services)
     {
-        services.AddHostedService(
-            (serviceProvider) =>
-            {
-                FanConsSyncService service =
-                    new(
-                        serviceProvider.GetRequiredService<ILogger<FanConsSyncService>>(),
-                        serviceProvider.GetRequiredService<IServiceScopeFactory>(),
-                        serviceProvider.GetRequiredService<IMapper>(),
-                        serviceProvider.GetRequiredService<IGeocoder>()
-                    );
-                return service;
-            }
-        );
+        services.AddHostedService<FanConsSyncService>();
         return services;
     }
 
@@ -94,13 +55,7 @@ public static class ServiceCollectionExtensions
 
     public static IServiceCollection AddHtmlFixService(this IServiceCollection services)
     {
-        services.AddHostedService(
-            (factory) =>
-                new HtmlFixService(
-                    factory.GetRequiredService<IServiceScopeFactory>(),
-                    factory.GetRequiredService<ILogger<HtmlFixService>>()
-                )
-        );
+        services.AddHostedService<HtmlFixService>();
         return services;
     }
 
