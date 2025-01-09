@@ -1,14 +1,8 @@
 using System.ComponentModel.DataAnnotations;
-using Microsoft.EntityFrameworkCore;
 using NetTopologySuite.Geometries;
 
 namespace ConventionList.Core.Models;
 
-[Index(nameof(Name))]
-[Index(nameof(VenueName))]
-[Index(nameof(City))]
-[Index(nameof(StartDate))]
-[Index(nameof(IsApproved))]
 public class Convention
 {
     public Guid Id { get; set; }
