@@ -4,8 +4,8 @@ on:
   push:
     branches:
       - main
-    paths:
-      - src/api/**
+    # paths:
+    #   - src/api/**
 
 jobs:
   backend:
@@ -20,9 +20,9 @@ jobs:
         with:
           dotnet-version: "9.0.x"
 
-      - name: Restore dependencies
-        run: dotnet restore
-        working-directory: ./src/api
+      # - name: Restore dependencies
+      #   run: dotnet restore
+      #   working-directory: ./src/api
 
       - name: Update appsettings.Production.json
         run: |
