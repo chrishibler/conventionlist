@@ -20,9 +20,12 @@ jobs:
         with:
           dotnet-version: "9.0.x"
 
-      # - name: Restore dependencies
-      #   run: dotnet restore
-      #   working-directory: ./src/api
+      - name: List files
+        run: ls -lA src/api
+
+      - name: Restore dependencies
+        run: dotnet restore
+        working-directory: ./src/api
 
       - name: Update appsettings.Production.json
         run: |
@@ -32,9 +35,6 @@ jobs:
       - name: Build the project
         run: dotnet publish -c Release -o out
         working-directory: ./src/api
-
-      - name: List files
-        run: ls -lA ./src/api/out
 
       - name: Copy files via SSH
         uses: appleboy/scp-action@v0.1.1
