@@ -42,7 +42,9 @@ public sealed class FanConsSyncService(
                 {
                     Geocoordinate? position = null;
                     fanConsCon.Name = HttpUtility.HtmlDecode(fanConsCon.Name);
-                    var spec = new GetConventionsInStartDateOrderSpecification(fanConsCon.Name);
+                    var spec = new GetConventionsInStartDateOrderSpecification(
+                        HttpUtility.HtmlDecode(fanConsCon.Name)
+                    );
                     var existingCon = await repo.FirstOrDefaultAsync(spec);
                     if (existingCon == null && fanConsCon.EndDate >= DateTime.UtcNow.Date)
                     {

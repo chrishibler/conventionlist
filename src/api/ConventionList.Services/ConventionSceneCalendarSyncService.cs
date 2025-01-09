@@ -43,7 +43,7 @@ public sealed class ConventinSceneCalendarSyncService(
                     var conventionSceneCon = autoMapper.Map<Convention>(evnt);
                     conventionSceneCon.Name = HttpUtility.HtmlDecode(conventionSceneCon.Name);
                     var spec = new GetConventionsInStartDateOrderSpecification(
-                        conventionSceneCon.Name
+                        HttpUtility.HtmlDecode(conventionSceneCon.Name)
                     );
                     var existingCon = await repo.FirstOrDefaultAsync(spec);
                     if (existingCon == null && conventionSceneCon.EndDate >= DateTime.UtcNow.Date)

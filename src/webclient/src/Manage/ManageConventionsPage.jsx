@@ -41,7 +41,7 @@ export default function ManageConventionsPage() {
   }
 
   function handleNextPageParam(lastPage) {
-    return lastPage.data.length < apiService.pageSize
+    return lastPage.conventions.length < apiService.pageSize
       ? undefined
       : lastPage.currentPage + 1;
   }
