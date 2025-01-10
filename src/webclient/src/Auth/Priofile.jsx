@@ -44,7 +44,6 @@ const Profile = () => {
         )}
       </button>
       {isOpen && (
-        /* TODO: Figure out why this style works but not when moved to css file */
         <div
           style={{
             position: "absolute",
@@ -57,6 +56,7 @@ const Profile = () => {
             {options.map((option, index) => (
               <li key={index} className="profile-menu-li">
                 <a
+                  className="profile-menu-link"
                   href="#"
                   onClick={(e) => {
                     e.preventDefault();

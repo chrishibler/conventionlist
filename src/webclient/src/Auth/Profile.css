@@ -16,8 +16,15 @@
   padding: 6px;
   border-radius: 12px;
   display: inline-block;
+  list-style: none;
 }
 
 .profile-menu-li {
   margin-bottom: 6px;
+  display: block;
+  text-align: left;
+}
+
+.profile-menu-link {
+  text-align: left;
 }
