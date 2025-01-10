@@ -22,11 +22,11 @@ public class ConventionProfile : Profile
                 opt => opt.MapFrom(src => src.EndDate.ToUniversalTime())
             );
 
-        CreateMap<Point, Geocoordinate>().ConvertUsing(typeof(PointTypeConverter));
+        CreateMap<Point?, Geocoordinate?>().ConvertUsing<PointTypeConverter>();
 
         CreateMap<Convention, ApiConvention>();
 
-        CreateMap<Geocoordinate, Point>().ConvertUsing(typeof(GeocoordinateTypeConverter));
+        CreateMap<Geocoordinate, Point?>().ConvertUsing<GeocoordinateTypeConverter>();
 
         CreateMap<ApiConvention, Convention>()
             .ForMember(

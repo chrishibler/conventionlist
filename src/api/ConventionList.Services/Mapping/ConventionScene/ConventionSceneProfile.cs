@@ -38,18 +38,19 @@ public class ConventionSceneProfile : Profile
             .ForMember(dest => dest.Position, opt => opt.Ignore());
     }
 
-    public string GetConventionName(CalendarEvent calEvent) =>
+    public static string GetConventionName(CalendarEvent calEvent) =>
         GetLocationPart(calEvent, LocationPart.ConName) ?? "Unkown Name";
 
-    public string? GetVenueName(CalendarEvent calEvent) =>
+    public static string? GetVenueName(CalendarEvent calEvent) =>
         GetLocationPart(calEvent, LocationPart.VenueName);
 
-    public string? GetCity(CalendarEvent calEvent) => GetLocationPart(calEvent, LocationPart.City);
+    public static string? GetCity(CalendarEvent calEvent) =>
+        GetLocationPart(calEvent, LocationPart.City);
 
-    public string? GetCountry(CalendarEvent calEvent) =>
+    public static string? GetCountry(CalendarEvent calEvent) =>
         GetLocationPart(calEvent, LocationPart.Country);
 
-    public Category GetCategory(CalendarEvent calEvent)
+    public static Category GetCategory(CalendarEvent calEvent)
     {
         //"summary": "Comic Book Convention at Beyond Comicon",
         if (string.IsNullOrWhiteSpace(calEvent.Summary))
@@ -93,7 +94,7 @@ public class ConventionSceneProfile : Profile
         }
     }
 
-    public string? GetState(CalendarEvent calEvent)
+    public static string? GetState(CalendarEvent calEvent)
     {
         // "Location: California. "
         // "Location: Germany. "
@@ -119,9 +120,9 @@ public class ConventionSceneProfile : Profile
         return null;
     }
 
-    public string GetExternalId(CalendarEvent calEvent) => calEvent.Uid;
+    public static string GetExternalId(CalendarEvent calEvent) => calEvent.Uid;
 
-    public string GetExternalSource() => "conventionscene.com";
+    public static string GetExternalSource() => "conventionscene.com";
 
     private static string? GetLocationPart(CalendarEvent calEvent, LocationPart locationPart)
     {

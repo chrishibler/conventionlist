@@ -12,13 +12,4 @@ static class PointExtensions
 
         return new Geocoordinate(point.Y, point.X);
     }
-
-    public static Point? ToPoint(this Geocoordinate? coord)
-    {
-        if (coord is null)
-            return null;
-
-        Coordinate c = new(coord.Longitude, coord.Latitude);
-        return new Point(c);
-    }
 }
