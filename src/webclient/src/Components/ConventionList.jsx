@@ -1,20 +1,25 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { useEffect, useMemo, useContext } from "react";
+import { useEffect, useMemo, useContext, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import "./ConventionList.css";
 import PropTypes from "prop-types";
 import ConventionItem from "./ConventionItem";
 import { ApiServiceContext } from "../Services/ApiService";
+import { LocatorContext } from "../Services/Locator";
 import Loader from "./Loader";
 
 export default function ConventionList({ searchInfo }) {
   const apiService = useContext(ApiServiceContext);
+  const [location, setLocation] = useState();
+  const locator = useContext(LocatorContext);
   const [ref, inView] = useInView({
     triggerOnce: true,
   });
 
   async function fetchConventions({ pageParam = 1 }) {
     searchInfo.page = pageParam;
+    searchInfo.lat = location ? location.latitude : null;
+    searchInfo.lon = location ? location.longitude : null;
     const response = await apiService.getConventions(searchInfo);
     return response;
   }
@@ -35,6 +40,14 @@ export default function ConventionList({ searchInfo }) {
       queryFn: fetchConventions,
       getNextPageParam: handleNextPageParam,
     });
+
+  useEffect(() => {
+    async function getSetLocation() {
+      let location = await locator.getLocation();
+      setLocation(location);
+    }
+    getSetLocation();
+  }, [locator]);
 
   useEffect(() => {
     if (inView && hasNextPage) {
