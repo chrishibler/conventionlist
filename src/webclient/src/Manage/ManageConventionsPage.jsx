@@ -72,16 +72,16 @@ export default function ManageConventionsPage() {
       </div>
     );
 
+  if (error) {
+    console.error(error);
+  }
+
   if (error)
     return (
       <div>
         <h3>Uh oh! An error occurred.</h3>
       </div>
     );
-
-  if (error) {
-    console.error(error);
-  }
 
   return (
     <Page>
