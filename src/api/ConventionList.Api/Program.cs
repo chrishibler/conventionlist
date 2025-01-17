@@ -18,7 +18,7 @@ builder
     .Services.AddSingleton<IAuthorizationHandler, HasPermissionHandler>()
     .AddScoped<IRepository<Convention>, EfRepository<Convention>>()
     .AddDb(builder.Configuration)
-    .AddAppAuthorization(builder.Configuration)
+    .AddAppAuthorization()
     .AddCorsPolicy()
     .AddAppLogging()
     .AddTransient<IGeocoder, Geocoder>()

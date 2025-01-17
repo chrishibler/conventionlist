@@ -122,10 +122,7 @@ public static class ServiceCollectionExtensions
         return services;
     }
 
-    public static IServiceCollection AddAppAuthorization(
-        this IServiceCollection services,
-        ConfigurationManager config
-    )
+    public static IServiceCollection AddAppAuthorization(this IServiceCollection services)
     {
         _ = services
             .AddSingleton<IAuthorizationHandler, HasPermissionHandler>()
@@ -134,20 +131,14 @@ public static class ServiceCollectionExtensions
                 Permissions.ManageMyConventions,
                 policy =>
                     policy.Requirements.Add(
-                        new HasPermissionRequirement(
-                            Permissions.ManageMyConventions,
-                            config[AuthDomainKey]!
-                        )
+                        new HasPermissionRequirement(Permissions.ManageMyConventions)
                     )
             )
             .AddPolicy(
                 Permissions.ManageAllConventions,
                 policy =>
                     policy.Requirements.Add(
-                        new HasPermissionRequirement(
-                            Permissions.ManageAllConventions,
-                            config[AuthDomainKey]!
-                        )
+                        new HasPermissionRequirement(Permissions.ManageAllConventions)
                     )
             );
 

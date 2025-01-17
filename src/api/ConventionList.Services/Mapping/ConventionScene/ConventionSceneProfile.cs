@@ -59,39 +59,28 @@ public class ConventionSceneProfile : Profile
         }
 
         string[] parts = calEvent.Summary.Split("at");
-        string categoryString = parts.ElementAtOrDefault(0)?.Trim() ?? "";
-        if (categoryString.Contains("Anime", StringComparison.OrdinalIgnoreCase))
+        string categoryString = parts[0].Trim();
+
+        return categoryString switch
         {
-            return Category.Anime;
-        }
-        else if (categoryString.Contains("Science", StringComparison.OrdinalIgnoreCase))
-        {
-            return Category.ScienceFictionAndFantasy;
-        }
-        else if (categoryString.Contains("Gaming", StringComparison.OrdinalIgnoreCase))
-        {
-            return Category.Gaming;
-        }
-        else if (categoryString.Contains("Comic", StringComparison.OrdinalIgnoreCase))
-        {
-            return Category.Comics;
-        }
-        else if (categoryString.Contains("Book", StringComparison.OrdinalIgnoreCase))
-        {
-            return Category.Book;
-        }
-        else if (categoryString.Contains("Collect", StringComparison.OrdinalIgnoreCase))
-        {
-            return Category.Collectibles;
-        }
-        else if (categoryString.Contains("Sports", StringComparison.OrdinalIgnoreCase))
-        {
-            return Category.Sports;
-        }
-        else
-        {
-            return Category.Unlisted;
-        }
+            _ when categoryString.Contains("Comic", StringComparison.OrdinalIgnoreCase) =>
+                Category.Comics,
+            _ when categoryString.Contains("Anime", StringComparison.OrdinalIgnoreCase) =>
+                Category.Anime,
+            _ when categoryString.Contains("Science", StringComparison.OrdinalIgnoreCase) =>
+                Category.ScienceFictionAndFantasy,
+            _ when categoryString.Contains("Gaming", StringComparison.OrdinalIgnoreCase) =>
+                Category.Gaming,
+            _ when categoryString.Contains("Comic", StringComparison.OrdinalIgnoreCase) =>
+                Category.Comics,
+            _ when categoryString.Contains("Book", StringComparison.OrdinalIgnoreCase) =>
+                Category.Book,
+            _ when categoryString.Contains("Collect", StringComparison.OrdinalIgnoreCase) =>
+                Category.Collectibles,
+            _ when categoryString.Contains("Sports", StringComparison.OrdinalIgnoreCase) =>
+                Category.Sports,
+            _ => Category.Unlisted,
+        };
     }
 
     public static string? GetState(CalendarEvent calEvent)
@@ -172,20 +161,15 @@ public class ConventionSceneProfile : Profile
                     // ConName, City, Country
                     return parts[1].Trim();
                 }
-                if (parts.Length == 4)
-                {
-                    return AddressUtils.IsStateAbbreviation(parts[^2]) ? parts[^3] : parts[^2];
-                    // LOCATION:Anime Milwaukee\, Milwaukee\, WI\, US
-                    //  ConName, City, State, Country
-                    // ConName, VenueName, City, Country
-                }
                 else
                 {
+                    // LOCATION:Anime Milwaukee\, Milwaukee\, WI\, US
+                    // ConName, City, State, Country
+                    // ConName, VenueName, City, Country
                     // Blah Blah, Blah, Blah, Blah, City, State, Country
                     // Blah Blah, Blah, Blah, Blah, City, Country
                     return AddressUtils.IsStateAbbreviation(parts[^2]) ? parts[^3] : parts[^2];
                 }
-
             default:
                 break;
         }
@@ -195,11 +179,8 @@ public class ConventionSceneProfile : Profile
 
     private static string? GetUrl(CalendarEvent evnt)
     {
-        if (evnt.Url.ToString().Contains("http://www.conventionscene.com"))
-        {
-            return null;
-        }
-        return evnt.Url.ToString();
+        string url = evnt.Url.ToString();
+        return url.Contains("http://www.conventionscene.com") ? null : url;
     }
 
     private enum LocationPart

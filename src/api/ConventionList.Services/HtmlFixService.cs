@@ -30,6 +30,7 @@ public class HtmlFixService(IServiceScopeFactory scopeFactory, ILogger<HtmlFixSe
                 try
                 {
                     con.Name = HttpUtility.HtmlDecode(con.Name);
+                    // Executing Update each time b/c it's more important that the data is fixed than performance
                     await repo.UpdateAsync(con);
                 }
                 catch (Exception ex)

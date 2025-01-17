@@ -11,8 +11,11 @@ public class HasPermissionHandler : AuthorizationHandler<HasPermissionRequiremen
     {
         var permissions = context.User.Claims.FirstOrDefault(c => c.Type == "permissions");
         if (
-            permissions is not null && permissions.Value.Contains(requirement.Permission)
-            || permissions!.Value.Contains(Permissions.ManageAllConventions)
+            permissions is not null
+            && (
+                permissions.Value.Contains(requirement.Permission)
+                || permissions.Value.Contains(Permissions.ManageAllConventions)
+            )
         )
         {
             context.Succeed(requirement);

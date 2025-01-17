@@ -28,6 +28,6 @@ public class GetAdminConventionsHandler(IRepository<Convention> repo, IMapper ma
         );
         var cons = await repo.ListAsync(spec, cancellationToken);
 
-        return new ConventionsResult(request.Page, request.PageSize, cons.ToList());
+        return new ConventionsResult(request.Page, request.PageSize, cons);
     }
 }
