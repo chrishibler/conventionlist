@@ -41,10 +41,10 @@ builder
 var app = builder.Build();
 app.ConfigureExceptionHandler(app.Logger);
 app.Migrate();
-app.UseMiddleware<RequestLoggingMiddleware>();
-app.UseCors();
-app.UseAuthentication();
 app.UseRouting();
+app.UseCors();
+app.UseMiddleware<RequestLoggingMiddleware>();
+app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 
