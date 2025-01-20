@@ -3,6 +3,7 @@ import ConventionList from "../Components/ConventionList";
 import NavBar from "../Components/NavBar";
 import SearchField from "../Components/SearchField";
 import Logo from "../Components/Logo";
+import Footer from "../Components/Footer";
 
 export default function Home() {
   const [search, setSearch] = useState("");
@@ -32,6 +33,7 @@ export default function Home() {
           }}
         />
       </div>
+      <Footer />
     </div>
   );
 }

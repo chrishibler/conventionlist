@@ -1,5 +1,6 @@
 import NavBar from "../Components/NavBar";
 import Logo from "../Components/Logo";
+import Footer from "./Footer";
 
 export default function Page({ children }) {
   return (
@@ -10,6 +11,7 @@ export default function Page({ children }) {
         </NavBar>
       </header>
       <div className="body-container">{children}</div>
+      <Footer />
     </div>
   );
 }
