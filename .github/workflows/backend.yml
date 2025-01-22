@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - src/api/**
+      - src/asp/**
 
 jobs:
   backend:
@@ -21,11 +21,11 @@ jobs:
           dotnet-version: "9.0.x"
 
       - name: List files
-        run: ls -lA src/api
+        run: ls -lA src/asp
 
       - name: Restore dependencies
         run: dotnet restore
-        working-directory: ./src/api
+        working-directory: ./src/asp
 
       - name: Update appsettings.Production.json
         run: |
@@ -42,7 +42,7 @@ jobs:
           host: ${{ secrets.DIGITALOCEAN_HOST }}
           username: ${{ secrets.DIGITALOCEAN_USER }}
           key: ${{ secrets.DIGITALOCEAN_SSH_KEY }}
-          source: "./src/api/out/*"
+          source: "./src/asp/out/*"
           target: "/var/www/conventionlist" # Change this to your desired location on the Droplet
           strip_components: 3
 
