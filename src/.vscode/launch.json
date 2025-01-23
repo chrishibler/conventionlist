@@ -1,0 +1,20 @@
+{
+  "configurations": [
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "Launch Chrome against localhost",
+      "url": "https://localhost:5173",
+      "webRoot": "${workspaceFolder}/src/reactclient",
+      "sourceMaps": true,
+      "skipFiles": ["<node_internals>/**"]
+    },
+    {
+      "name": "Vite App Debug",
+      "type": "chrome",
+      "request": "launch",
+      "url": "https://localhost:5173",
+      "webRoot": "${workspaceFolder}/src/reactclient"
+    }
+  ]
+}
